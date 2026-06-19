@@ -214,8 +214,9 @@
 @media (max-width: 768px) {
     .gr-hero {
         padding: 32px 16px !important;
-        margin: 16px auto !important;
-        width: calc(100% - 32px) !important;
+        margin: 16px !important;
+        width: auto !important;
+        box-sizing: border-box !important;
         box-shadow: 4px 4px 0px var(--primary) !important;
         border-width: 1px !important;
         border-radius: 8px;
@@ -225,8 +226,9 @@
         padding: 32px 16px !important;
         gap: 32px;
         text-align: center;
-        margin: 32px auto 0 !important;
-        width: calc(100% - 32px) !important;
+        margin: 32px 16px 0 !important;
+        width: auto !important;
+        box-sizing: border-box !important;
         border-radius: 8px;
     }
     .gr-cta-upgraded h2 {
