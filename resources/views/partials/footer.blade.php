@@ -3,8 +3,10 @@
     <div class="gr-footer-inner">
         {{-- Brand --}}
         <div>
-            <div style="display: flex; align-items: center; justify-content: center; height: 52px; width: 185px; overflow: hidden; margin-bottom: 16px; border-radius: 6px; background: #fff; padding: 4px 8px; box-shadow: 0 0 0 2px #c8102e, 0 4px 14px rgba(200,16,46,0.3);">
-                <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover;">
+            <div
+                style="display: flex; align-items: center; justify-content: flex-start; height: 50px; width: 180px; overflow: hidden; margin-bottom: 15px; border-radius: 4px;">
+                <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
+                    style="width: 100%; height: auto; object-fit: cover;">
             </div>
             <p class="gr-footer-tagline">Premium Menswear. EST. 2004.</p>
         </div>

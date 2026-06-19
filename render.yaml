@@ -1,0 +1,62 @@
+services:
+  - type: web
+    name: getready-store
+    runtime: php
+    plan: free
+    buildCommand: "chmod +x ./build.sh && ./build.sh"
+    startCommand: "php -S 0.0.0.0:$PORT -t public"
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: "GET READY"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: getready-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: getready-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: getready-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: getready-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: getready-db
+          property: password
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: FILESYSTEM_DISK
+        value: public
+      - key: RAZORPAY_KEY
+        sync: false
+      - key: RAZORPAY_SECRET
+        sync: false
+      - key: MAIL_MAILER
+        value: log
+
+databases:
+  - name: getready-db
+    plan: free
+    databaseName: getready_store
