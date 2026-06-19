@@ -111,11 +111,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     //Orders
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/orders/requests', [AdminOrderRequestsController::class, 'index'])->name('admin.orders.requests');
     Route::get('/orders/{orderId}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
     Route::put('/orders/{order}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
-
-    // Order Cancellation & Return Requests
-    Route::get('/orders/requests', [AdminOrderRequestsController::class, 'index'])->name('admin.orders.requests');
     Route::post('/orders/{id}/requests/approve', [AdminOrderRequestsController::class, 'approve'])->name('admin.orders.requests.approve');
     Route::post('/orders/{id}/requests/reject', [AdminOrderRequestsController::class, 'reject'])->name('admin.orders.requests.reject');
 
