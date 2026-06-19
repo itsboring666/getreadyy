@@ -2,8 +2,8 @@
 <header class="gr-header">
     <div class="gr-header-inner">
         {{-- Logo --}}
-        <a href="{{ url('/') }}" class="gr-logo" aria-label="GET READY Home" style="display: flex; align-items: center; justify-content: center; height: 40px; width: 160px; overflow: hidden; border-radius: 4px;">
-            <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <a href="{{ url('/') }}" class="gr-logo" aria-label="GET READY Home" style="display: flex; align-items: center; justify-content: center; height: 42px; width: 170px; overflow: hidden; border-radius: 6px; background: #fff; padding: 4px 8px; box-shadow: 0 0 0 2px #c8102e, 0 4px 16px rgba(200,16,46,0.35); transition: box-shadow 0.3s ease, transform 0.3s ease;" onmouseover="this.style.boxShadow='0 0 0 2px #c8102e, 0 6px 24px rgba(200,16,46,0.55)'; this.style.transform='scale(1.04)'" onmouseout="this.style.boxShadow='0 0 0 2px #c8102e, 0 4px 16px rgba(200,16,46,0.35)'; this.style.transform='scale(1)'">
+            <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover;">
         </a>
 
         {{-- Desktop Navigation --}}
@@ -76,7 +76,7 @@
     <div id="grOverlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.7);"></div>
     <div style="position:absolute; top:0; right:0; bottom:0; width:300px; background:#161616; display:flex; flex-direction:column; border-left: 1px solid var(--border);">
         <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--border-light);">
-            <div style="display: flex; align-items: center; justify-content: center; height: 35px; width: 140px; overflow: hidden; border-radius: 4px;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 38px; width: 150px; overflow: hidden; border-radius: 6px; background: #fff; padding: 3px 6px; box-shadow: 0 0 0 2px #c8102e, 0 3px 10px rgba(200,16,46,0.3);">
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover;">
             </div>
             <button id="grDrawerClose" style="background:none; border:none; font-size:18px; cursor:pointer; color:var(--text); padding:5px;" aria-label="Close menu">
