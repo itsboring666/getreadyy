@@ -1,6 +1,7 @@
 FROM php:8.3-apache
 
-# Install system dependencies
+# Cache bust - version 1
+ENV FORCE_REBUILD=1
 RUN apt-get update && apt-get install -y \
     git \
     curl \
