@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title', 'GET READY — Premium Menswear EST. \'04')
-@section('meta_description', 'Shop premium menswear at GET READY. Tees, shirts, jeans, jackets and more. Heavy fabrics. Honest stitching. EST. 2004.')
+@section('meta_description', 'Shop premium menswear at GET READY. Heavy fabrics. Honest stitching. EST. 2004. Men\'s clothing store.')
 
 @section('content')
 <style>
@@ -224,7 +224,7 @@ $heroImg2 = 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=form
             <em>long</em>&nbsp;&nbsp;HAUL.
         </h1>
         <p class="gr-hero-subtitle">
-            Heavyweight tees, raw selvage denim, and trucker jackets cut for the road less marketed.
+            Premium menswear. Made for the road. EST. 2004.
         </p>
         <div class="gr-hero-btns">
             <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>

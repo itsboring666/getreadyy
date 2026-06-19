@@ -6,7 +6,7 @@
             <div style="display: flex; align-items: center; justify-content: flex-start; height: 50px; width: 180px; overflow: hidden; margin-bottom: 15px; border-radius: 4px;">
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover;">
             </div>
-            <p class="gr-footer-tagline">Heavy fabrics. Honest stitching. Pieces that earn their fade. EST. 2004.</p>
+            <p class="gr-footer-tagline">Premium Menswear. EST. 2004.</p>
         </div>
 
         {{-- Shop --}}
