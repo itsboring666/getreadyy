@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'   => 'required|string|max:255',
-            'image'  => 'required|image|max:2048',
+            'image'  => 'required|image|max:5120',
             'status' => 'required|in:active,inactive',
         ]);
 
@@ -44,7 +44,7 @@ class CategoryController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:5120',
             'status' => 'required|in:active,inactive',
         ]);
 

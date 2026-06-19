@@ -56,6 +56,18 @@
     </table>
 </div>
 
+@if($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            CategoryModal.openAdd();
+        });
+    </script>
+    <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" data-aos="fade-down">
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline">Please check the form for errors.</span>
+    </div>
+@endif
+
 <!-- Add Category Modal -->
 <div id="addCategoryModal" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center hidden z-50">
     <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
