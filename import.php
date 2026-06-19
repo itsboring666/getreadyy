@@ -1,0 +1,1 @@
+<?php $pdo = new PDO('mysql:host=127.0.0.1;dbname=outfit_818', 'root', 'kathir'); $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); $sql = file_get_contents('outfit_818.sql'); $pdo->exec($sql); echo 'Done';

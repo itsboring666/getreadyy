@@ -2,8 +2,8 @@
 <header class="gr-header">
     <div class="gr-header-inner">
         {{-- Logo --}}
-        <a href="{{ url('/') }}" class="gr-logo" aria-label="GET READY Home">
-            <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="height: 35px; width: auto; object-fit: contain;">
+        <a href="{{ url('/') }}" class="gr-logo" aria-label="GET READY Home" style="display: flex; align-items: center; justify-content: center; height: 40px; width: 160px; overflow: hidden; border-radius: 4px;">
+            <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         </a>
 
         {{-- Desktop Navigation --}}
@@ -76,7 +76,9 @@
     <div id="grOverlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.7);"></div>
     <div style="position:absolute; top:0; right:0; bottom:0; width:300px; background:#161616; display:flex; flex-direction:column; border-left: 1px solid var(--border);">
         <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--border-light);">
-            <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="height: 25px; width: auto; object-fit: contain; margin-left: 10px;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 35px; width: 140px; overflow: hidden; border-radius: 4px;">
+                <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 100%; height: auto; object-fit: cover;">
+            </div>
             <button id="grDrawerClose" style="background:none; border:none; font-size:18px; cursor:pointer; color:var(--text); padding:5px;" aria-label="Close menu">
                 <i class="fas fa-times" aria-hidden="true"></i>
             </button>
