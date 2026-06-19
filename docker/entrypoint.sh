@@ -14,6 +14,9 @@ sed -i "s/*:10000/*:$PORT/g" /etc/apache2/sites-available/000-default.conf
 
 echo ">>> Apache will listen on port $PORT"
 
+# Ensure we don't use a cached .env file (force Render's injected environment variables)
+rm -f .env
+
 # Clear any stale cached config (env vars are injected at runtime by Render)
 php artisan config:clear 2>/dev/null || true
 php artisan cache:clear 2>/dev/null || true
