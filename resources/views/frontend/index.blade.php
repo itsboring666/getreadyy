@@ -213,44 +213,76 @@
 
 @media (max-width: 768px) {
     .gr-hero {
-        padding: 24px 16px !important;
-        margin: 20px 10px !important;
+        padding: 32px 16px !important;
+        margin: 16px 8px !important;
         box-shadow: 4px 4px 0px var(--primary) !important;
+        border-width: 1px !important;
+        border-radius: 8px;
     }
     .gr-cta-upgraded {
         grid-template-columns: 1fr;
-        padding: 32px 20px !important;
+        padding: 32px 16px !important;
         gap: 32px;
         text-align: center;
+        margin: 32px 8px 0 !important;
+        border-radius: 8px;
     }
     .gr-cta-upgraded h2 {
-        font-size: clamp(28px, 6vw, 36px) !important;
+        font-size: clamp(24px, 7vw, 32px) !important;
     }
     .gr-hero-heading {
-        font-size: clamp(36px, 10vw, 50px) !important;
-        margin-bottom: 20px;
+        font-size: clamp(32px, 12vw, 48px) !important;
+        margin-bottom: 16px;
+        letter-spacing: 1px;
     }
-    .gr-hero-images {
-        min-height: 400px;
-        margin-top: 24px;
+    .gr-hero-subtitle {
+        font-size: 13px !important;
+        margin-bottom: 24px !important;
+    }
+    .gr-hero-btns {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
+        width: 100%;
+    }
+    .gr-hero-btn-primary, .gr-hero-btn-outline {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 16px !important;
+    }
+    .gr-hero-images {
+        min-height: auto;
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
     .gr-hero-img-1, .gr-hero-img-2 {
         position: relative !important;
         width: 100% !important;
-        height: auto !important;
+        height: 100% !important;
+        aspect-ratio: 4/5 !important;
         left: 0 !important;
         right: 0 !important;
         top: 0 !important;
         bottom: 0 !important;
         transform: none !important;
         animation: none !important;
-        box-shadow: 4px 4px 0px rgba(0,0,0,0.2) !important;
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.2) !important;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .gr-hero-img-1 img, .gr-hero-img-2 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     .gr-hero-circle-badge {
         display: none !important; /* Hide badge on mobile to avoid clutter */
+    }
+    .gr-editorial-inner {
+        flex-direction: column !important;
     }
 }
 </style>
