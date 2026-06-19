@@ -214,22 +214,26 @@
 @media (max-width: 768px) {
     .gr-hero {
         padding: 32px 16px !important;
-        margin: 16px !important;
-        width: auto !important;
+        margin: 0 !important;
+        width: 100% !important;
         box-sizing: border-box !important;
-        box-shadow: 4px 4px 0px var(--primary) !important;
-        border-width: 1px !important;
-        border-radius: 8px;
+        box-shadow: none !important; /* Remove shadow if it's flush to edges */
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 0 !important;
     }
     .gr-cta-upgraded {
         grid-template-columns: 1fr;
-        padding: 32px 16px !important;
+        padding: 40px 16px !important;
         gap: 32px;
         text-align: center;
-        margin: 32px 16px 0 !important;
-        width: auto !important;
+        margin: 32px 0 0 !important;
+        width: 100% !important;
         box-sizing: border-box !important;
-        border-radius: 8px;
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
     }
     .gr-cta-upgraded h2 {
         font-size: clamp(24px, 7vw, 32px) !important;
@@ -273,7 +277,7 @@
         bottom: 0 !important;
         transform: none !important;
         animation: none !important;
-        box-shadow: 2px 2px 0px rgba(0,0,0,0.2) !important;
+        box-shadow: none !important;
         border-radius: 4px;
         overflow: hidden;
     }
