@@ -230,18 +230,35 @@
         font-size: clamp(36px, 10vw, 50px) !important;
         margin-bottom: 20px;
     }
-    .gr-editorial-inner {
-        flex-direction: column !important;
+    .gr-hero-images {
+        min-height: 400px;
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .gr-hero-img-1, .gr-hero-img-2 {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        transform: none !important;
+        animation: none !important;
+        box-shadow: 4px 4px 0px rgba(0,0,0,0.2) !important;
+    }
+    .gr-hero-circle-badge {
+        display: none !important; /* Hide badge on mobile to avoid clutter */
     }
 }
 </style>
 
 {{-- ─── LANDING HERO ───────────────────────────────────────── --}}
 @php
-$heroImg1 = (isset($carousels) && $carousels->count()) 
-    ? asset('storage/' . $carousels->first()->image_path) 
-    : 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80';
-$heroImg2 = 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80';
+$heroImg1 = asset('assets/images/hero1.jpg');
+$heroImg2 = asset('assets/images/hero2.jpg');
 @endphp
 
 <section class="gr-hero">
