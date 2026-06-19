@@ -211,7 +211,23 @@
     align-items: center;
 }
 
+html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
 @media (max-width: 768px) {
+    .gr-wardrobe-card {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    .gr-wardrobe {
+        padding: 0 16px 40px !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
     .gr-hero {
         padding: 32px 16px !important;
         margin: 0 !important;
