@@ -1,6 +1,6 @@
 @extends('layouts.front')
-@section('title', 'GET READY — Premium Menswear EST. \'04')
-@section('meta_description', 'Shop premium menswear at GET READY. Heavy fabrics. Honest stitching. EST. 2004. Men\'s clothing store.')
+@section('title', 'GET READY — Premium Menswear')
+@section('meta_description', 'Shop premium menswear at GET READY. Heavy fabrics. Honest stitching. Men\'s clothing store.')
 
 @section('content')
 <style>
@@ -202,6 +202,38 @@
 .gr-hero-btn-primary:hover, .gr-editorial-btn:hover, .gr-cta-btn:hover {
     box-shadow: 0 8px 16px rgba(26,26,26,0.15);
 }
+
+/* 9. Mobile Responsive Fixes */
+.gr-cta-upgraded {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .gr-hero {
+        padding: 24px 16px !important;
+        margin: 20px 10px !important;
+        box-shadow: 4px 4px 0px var(--primary) !important;
+    }
+    .gr-cta-upgraded {
+        grid-template-columns: 1fr;
+        padding: 32px 20px !important;
+        gap: 32px;
+        text-align: center;
+    }
+    .gr-cta-upgraded h2 {
+        font-size: clamp(28px, 6vw, 36px) !important;
+    }
+    .gr-hero-heading {
+        font-size: clamp(36px, 10vw, 50px) !important;
+        margin-bottom: 20px;
+    }
+    .gr-editorial-inner {
+        flex-direction: column !important;
+    }
+}
 </style>
 
 {{-- ─── LANDING HERO ───────────────────────────────────────── --}}
@@ -213,32 +245,27 @@ $heroImg2 = 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=form
 @endphp
 
 <section class="gr-hero">
-    {{-- Giant outlined background text --}}
-    <div style="-webkit-text-stroke: 1px rgba(26,26,26,0.05); color: transparent; font-size: clamp(80px, 12vw, 150px); position: absolute; top: 15px; left: 24px; font-family: var(--font-heading); z-index: 0; line-height: 1; user-select: none; pointer-events: none;">EST. 2004</div>
+    {{-- Giant outlined background text removed as per request --}}
 
     <div class="gr-hero-text">
         <div class="gr-hero-label">FALL / WINTER '26 — VOL. III</div>
-        <h1 class="gr-hero-heading">
-            BUILT<br>
-            FOR THE<br>
-            <em>long</em>&nbsp;&nbsp;HAUL.
+        <h1 class="gr-hero-heading" style="text-transform: uppercase;">
+            MEN'S<br>
+            CLOTHING<br>
+            <em>store</em>
         </h1>
         <p class="gr-hero-subtitle">
-            Premium menswear. Made for the road. EST. 2004.
+            Premium menswear. Made for the road.
         </p>
         <div class="gr-hero-btns">
             <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
             <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
         </div>
         
-        {{-- Vintage Barcode stamp --}}
-        <div class="gr-hero-barcode" style="margin-top: 40px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: var(--text-light); z-index: 3;">
-            <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
-            <div>SPEC-818 // LOT-OUTFIT</div>
-        </div>
+        {{-- Vintage Barcode stamp removed as per request --}}
     </div>
     <div class="gr-hero-images">
-        <div class="gr-hero-tag">NO. 047</div>
+        {{-- Hero tag removed --}}
         <div class="gr-hero-img-1">
             <img src="{{ $heroImg1 }}" 
                  alt="Lifestyle editorial" loading="eager">
@@ -257,40 +284,40 @@ $heroImg2 = 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=form
 <div class="gr-marquee">
     <div class="gr-marquee-track">
         <div class="gr-marquee-content">
-            <span class="gr-marquee-item">Vintage Americana</span>
+            <span class="gr-marquee-item">Street wear</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Heavyweight Cotton</span>
+            <span class="gr-marquee-item">vintage style</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Made for the Road</span>
+            <span class="gr-marquee-item">casuals</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Get Ready</span>
+            <span class="gr-marquee-item">formulas</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Free Shipping over ₹3,000</span>
+            <span class="gr-marquee-item">Street wear</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Vintage Americana</span>
+            <span class="gr-marquee-item">vintage style</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Heavyweight Cotton</span>
+            <span class="gr-marquee-item">casuals</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Made for the Road</span>
+            <span class="gr-marquee-item">formulas</span>
             <span class="gr-marquee-dot">✦</span>
         </div>
         {{-- Duplicate for seamless loop --}}
         <div class="gr-marquee-content">
-            <span class="gr-marquee-item">Vintage Americana</span>
+            <span class="gr-marquee-item">Street wear</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Heavyweight Cotton</span>
+            <span class="gr-marquee-item">vintage style</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Made for the Road</span>
+            <span class="gr-marquee-item">casuals</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Get Ready</span>
+            <span class="gr-marquee-item">formulas</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Free Shipping over ₹3,000</span>
+            <span class="gr-marquee-item">Street wear</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Vintage Americana</span>
+            <span class="gr-marquee-item">vintage style</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Heavyweight Cotton</span>
+            <span class="gr-marquee-item">casuals</span>
             <span class="gr-marquee-dot">✦</span>
-            <span class="gr-marquee-item">Made for the Road</span>
+            <span class="gr-marquee-item">formulas</span>
             <span class="gr-marquee-dot">✦</span>
         </div>
     </div>
@@ -414,7 +441,7 @@ $phs = [
         </div>
         <div class="gr-product-card-body" style="padding: 12px 2px 0 2px;">
             <div style="font-family: var(--font); font-size: 8px; color: var(--text-light); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; display: flex; justify-content: space-between;">
-                <span>SPEC-818 // LOT-0{{ $product->id }}</span>
+                <span>ITEM-0{{ $product->id }}</span>
                 <span>ORIGINAL SHAPE</span>
             </div>
             <div class="gr-product-name" style="font-family: var(--font-serif); font-weight: 700; font-size: 15px; margin-bottom: 6px; color: var(--text);">{{ $product->name }}</div>
@@ -462,7 +489,7 @@ $phs = [
 </section>
 
 {{-- ─── SPIN THE OUTFIT WHEEL (CTA) ───────────────────────── --}}
-<section class="gr-cta-upgraded" style="display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: center; border: 1px solid var(--border); padding: 48px; background: var(--surface); box-shadow: 6px 6px 0px rgba(153,27,27,0.4); margin: 64px auto 0; max-width: var(--max-width); box-sizing: border-box;">
+<section class="gr-cta-upgraded" style="border: 1px solid var(--border); padding: 48px; background: var(--surface); box-shadow: 6px 6px 0px rgba(153,27,27,0.4); margin: 64px auto 0; max-width: var(--max-width); box-sizing: border-box;">
     <!-- Left side info -->
     <div>
         <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">SYSTEM DEPLOYMENT — VOL. III</div>

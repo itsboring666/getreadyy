@@ -8,7 +8,7 @@
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
                     style="width: 100%; height: auto; object-fit: cover;">
             </div>
-            <p class="gr-footer-tagline">Premium Menswear. EST. 2004.</p>
+            <p class="gr-footer-tagline">Premium Menswear.</p>
         </div>
 
         {{-- Shop --}}
@@ -34,6 +34,6 @@
 
     <div class="gr-footer-bottom">
         <p>&copy; {{ date('Y') }} GET READY. All rights reserved.</p>
-        <p>EST. 2004 — Premium Menswear</p>
+        <p>Premium Menswear</p>
     </div>
 </footer>
