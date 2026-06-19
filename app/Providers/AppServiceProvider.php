@@ -23,8 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Route::aliasMiddleware('admin', AdminMiddleware::class);
         
-        if (config('app.env') === 'production') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
-        }
+        // Force HTTPS for all routes and assets (fixes Mixed Content on Render)
+        \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }
