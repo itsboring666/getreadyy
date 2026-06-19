@@ -3,7 +3,7 @@
     <div class="gr-footer-inner">
         {{-- Brand --}}
         <div>
-            <div class="gr-footer-brand-text">GET READY.</div>
+            <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 15px;">
             <p class="gr-footer-tagline">Heavy fabrics. Honest stitching. Pieces that earn their fade. EST. 2004.</p>
         </div>
 
