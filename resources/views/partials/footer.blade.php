@@ -11,10 +11,6 @@
         <div class="gr-footer-col">
             <h4>Shop</h4>
             <ul>
-                <li><a href="{{ url('tshirts') }}">Tees</a></li>
-                <li><a href="{{ url('shirts') }}">Shirts</a></li>
-                <li><a href="{{ url('jeans') }}">Jeans</a></li>
-                <li><a href="{{ url('jackets') }}">Jackets</a></li>
                 <li><a href="{{ route('products.all') }}">All Items</a></li>
             </ul>
         </div>

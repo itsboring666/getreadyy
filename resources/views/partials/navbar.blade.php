@@ -10,10 +10,7 @@
         {{-- Desktop Navigation --}}
         <nav class="gr-nav" aria-label="Main Navigation">
             <a href="{{ route('products.all') }}" class="gr-nav-link {{ request()->routeIs('products.all') ? 'active' : '' }}">Shop</a>
-            <a href="{{ url('tshirts') }}" class="gr-nav-link {{ request()->is('tshirts') ? 'active' : '' }}">Tees</a>
-            <a href="{{ url('shirts') }}" class="gr-nav-link {{ request()->is('shirts') ? 'active' : '' }}">Shirts</a>
-            <a href="{{ url('jeans') }}" class="gr-nav-link {{ request()->is('jeans') ? 'active' : '' }}">Jeans</a>
-            <a href="{{ url('jackets') }}" class="gr-nav-link {{ request()->is('jackets') ? 'active' : '' }}">Jackets</a>
+
             <a href="{{ route('outfit-builder') }}" class="gr-nav-link {{ request()->routeIs('outfit-builder') ? 'active' : '' }}">Outfit Builder</a>
         </nav>
 
@@ -89,10 +86,7 @@
         <div style="padding:20px; flex:1; overflow-y:auto;">
             <nav style="display:flex; flex-direction:column; gap:0;">
                 <a href="{{ route('products.all') }}" style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Shop</a>
-                <a href="{{ url('tshirts') }}" style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Tees</a>
-                <a href="{{ url('shirts') }}" style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Shirts</a>
-                <a href="{{ url('jeans') }}" style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Jeans</a>
-                <a href="{{ url('jackets') }}" style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Jackets</a>
+
                 <a href="{{ route('outfit-builder') }}" style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Outfit Builder</a>
             </nav>
         </div>
