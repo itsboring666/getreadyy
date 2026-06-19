@@ -1,0 +1,102 @@
+@extends('admin.layout')
+
+@section('content')
+<section class="mt-8" data-aos="fade-down">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">📦 Order #{{ $order->order_id }}</h2>
+        <a href="{{ route('admin.orders.index') }}" class="bg-gray-200 text-gray-800 px-4 py-2 rounded shadow hover:bg-gray-300">
+            &larr; Back to Orders
+        </a>
+    </div>
+
+    @if(session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Order Summary & Items -->
+        <div class="md:col-span-2 space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-lg font-bold mb-4 border-b pb-2">Order Items</h3>
+                <div class="space-y-4">
+                    @foreach($order->items as $item)
+                        @php $product = $item->product; @endphp
+                        <div class="flex gap-4 items-center border-b pb-4 last:border-0 last:pb-0">
+                            @if($product)
+                            <img src="{{ asset('storage/' . $product->image) }}" class="w-16 h-20 object-cover rounded shadow-sm">
+                            @else
+                            <div class="w-16 h-20 bg-gray-100 rounded flex items-center justify-center"><i class="fas fa-image text-gray-400"></i></div>
+                            @endif
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-800">{{ $item->product_name }}</h4>
+                                <p class="text-sm text-gray-600">Size: {{ $item->size }} | Qty: {{ $item->quantity }}</p>
+                            </div>
+                            <div class="font-bold text-gray-800">
+                                ₹{{ number_format($item->price * $item->quantity, 2) }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="150">
+                <h3 class="text-lg font-bold mb-4 border-b pb-2">Customer & Shipping Info</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div>
+                        <p class="font-semibold text-gray-900">{{ $order->name }}</p>
+                        <p>{{ $order->email }}</p>
+                        <p>{{ $order->phone }}</p>
+                    </div>
+                    <div>
+                        <p>{{ $order->address }}</p>
+                        <p>{{ $order->city }}, {{ $order->state }} - {{ $order->zip }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tracking & Status Update -->
+        <div class="space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-lg font-bold mb-4 border-b pb-2">Order Status</h3>
+                
+                <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Status</label>
+                        <select name="status" class="w-full border-gray-300 rounded shadow-sm focus:ring-[#536451] focus:border-[#536451]">
+                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="paid" {{ $order->status == 'paid' ? 'selected' : '' }}>Paid</option>
+                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                            <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Tracking Number / AWB</label>
+                        <input type="text" name="tracking_number" value="{{ $order->tracking_number }}" placeholder="e.g. BLUDART12345" class="w-full border-gray-300 rounded shadow-sm focus:ring-[#536451] focus:border-[#536451]">
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#536451] text-[#f3e9d5] py-2 rounded shadow hover:opacity-90 font-bold transition">
+                        Update Order
+                    </button>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="250">
+                <h3 class="text-lg font-bold mb-4 border-b pb-2">Financials</h3>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between text-gray-600"><span>Subtotal:</span> <span>₹{{ number_format($order->total_amount, 2) }}</span></div>
+                    <div class="flex justify-between text-gray-600"><span>Shipping:</span> <span>Free</span></div>
+                    <div class="flex justify-between font-bold text-lg text-gray-800 border-t pt-2 mt-2"><span>Total:</span> <span>₹{{ number_format($order->total_amount, 2) }}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
