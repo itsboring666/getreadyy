@@ -313,8 +313,14 @@ html, body {
 
 {{-- ─── LANDING HERO ───────────────────────────────────────── --}}
 @php
-$heroImg1 = asset('assets/images/hero1.jpg');
-$heroImg2 = asset('assets/images/hero2.jpg');
+$activeCarousels = \App\Models\Carousel::where('is_active', true)->latest()->take(2)->get();
+$heroImg1 = $activeCarousels->count() > 0 && $activeCarousels[0]->image_path ? asset('storage/' . $activeCarousels[0]->image_path) : asset('assets/images/hero1.jpg');
+$heroImg2 = $activeCarousels->count() > 1 && $activeCarousels[1]->image_path ? asset('storage/' . $activeCarousels[1]->image_path) : asset('assets/images/hero2.jpg');
+
+$heroTitle = $activeCarousels->count() > 0 && $activeCarousels[0]->title ? $activeCarousels[0]->title : "MEN'S<br>CLOTHING<br><em>store</em>";
+$heroSubtitle = $activeCarousels->count() > 0 && $activeCarousels[0]->description ? $activeCarousels[0]->description : "Premium menswear. Made for the road.";
+$heroBtnText = $activeCarousels->count() > 0 && $activeCarousels[0]->button_text ? $activeCarousels[0]->button_text : "SHOP THE DROP →";
+$heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link ? $activeCarousels[0]->button_link : route('products.all');
 @endphp
 
 <section class="gr-hero">
@@ -323,15 +329,13 @@ $heroImg2 = asset('assets/images/hero2.jpg');
     <div class="gr-hero-text">
         <div class="gr-hero-label">FALL / WINTER '26 — VOL. III</div>
         <h1 class="gr-hero-heading" style="text-transform: uppercase;">
-            MEN'S<br>
-            CLOTHING<br>
-            <em>store</em>
+            {!! $heroTitle !!}
         </h1>
         <p class="gr-hero-subtitle">
-            Premium menswear. Made for the road.
+            {{ $heroSubtitle }}
         </p>
         <div class="gr-hero-btns">
-            <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
+            <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary">{{ $heroBtnText }}</a>
             <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
         </div>
         
@@ -531,30 +535,47 @@ $phs = [
     @endforelse
 </div>
 
-{{-- ─── CUT FROM HONEST CLOTH (Editorial) ──────────────────── --}}
+{{-- ─── CUT FROM HONEST CLOTH (Editorial / Featured Product) ─── --}}
+@php
+$featuredProduct = \App\Models\FeaturedProduct::where('is_active', true)->latest()->first();
+$featTagline = $featuredProduct->tagline ?? "FIELD NOTES — VOL. III";
+$featTitle = $featuredProduct->title ?? "CUT FROM<br><em>honest</em> CLOTH.";
+$featDesc = $featuredProduct->description ?? "We build clothes for men who don't chase trends. Heavy fabrics. Honest stitching. Pieces that earn their fade.\n\nEvery piece in the GET READY catalog is made in small batches, washed twice, and tested by people who actually wear them. That's the whole story.";
+$featBtnText = $featuredProduct->button_text ?? "READ THE MANIFESTO →";
+$featBtnLink = $featuredProduct->button_link ?? route('manifesto');
+$featImg1 = $featuredProduct && $featuredProduct->image_path ? asset('storage/' . $featuredProduct->image_path) : "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=700&q=80";
+$featImg2 = "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80";
+@endphp
+
 <section class="gr-editorial">
     <div class="gr-editorial-inner">
         <div class="gr-editorial-text">
-            <div class="gr-editorial-label">FIELD NOTES — VOL. III</div>
+            <div class="gr-editorial-label">{{ $featTagline }}</div>
             <h2 class="gr-editorial-heading">
-                CUT FROM<br>
-                <em>honest</em> CLOTH.
+                {!! $featTitle !!}
             </h2>
-            <p class="gr-editorial-body">
-                We build clothes for men who don't chase trends. Heavy fabrics. Honest stitching. Pieces that earn their fade.
-            </p>
-            <p class="gr-editorial-body-regular">
-                Every piece in the GET READY catalog is made in small batches, washed twice, and tested by people who actually wear them. That's the whole story.
-            </p>
-            <a href="{{ route('manifesto') }}" class="gr-editorial-btn">READ THE MANIFESTO →</a>
+            <div class="gr-editorial-body" style="white-space: pre-line;">
+                {{ $featDesc }}
+            </div>
+            
+            @if($featuredProduct && $featuredProduct->discounted_price > 0)
+            <div style="margin-top: 16px; margin-bottom: 24px;">
+                <span style="font-family: var(--font-heading); font-size: 24px; color: var(--accent);">₹{{ number_format($featuredProduct->discounted_price) }}</span>
+                @if($featuredProduct->original_price > $featuredProduct->discounted_price)
+                <span style="text-decoration: line-through; color: var(--text-muted); font-size: 14px; margin-left: 8px;">₹{{ number_format($featuredProduct->original_price) }}</span>
+                @endif
+            </div>
+            @endif
+
+            <a href="{{ $featBtnLink }}" class="gr-editorial-btn">{{ $featBtnText }}</a>
         </div>
         <div class="gr-editorial-images">
             <div class="gr-editorial-img-1">
-                <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=700&q=80" 
-                     alt="Man wearing printed shirt" loading="lazy">
+                <img src="{{ $featImg1 }}" 
+                     alt="Featured Product" loading="lazy">
             </div>
             <div class="gr-editorial-img-2">
-                <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80" 
+                <img src="{{ $featImg2 }}" 
                      alt="Vintage clothing rack" loading="lazy">
             </div>
         </div>
