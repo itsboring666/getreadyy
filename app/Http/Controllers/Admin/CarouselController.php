@@ -25,8 +25,8 @@ class CarouselController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'image' => $request->isMethod('post')
-                ? 'required|image|mimes:jpg,jpeg,png|max:2048'
-                : 'sometimes|image|mimes:jpg,jpeg,png|max:2048', // for update
+                ? 'required|image|mimes:jpg,jpeg,png,webp,avif|max:5120'
+                : 'sometimes|image|mimes:jpg,jpeg,png,webp,avif|max:5120', // for update
             'button_text' => 'required|string|max:255',
             'button_link' => 'required|url|max:2048',
         ]);
@@ -56,13 +56,10 @@ class CarouselController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'tagline' => 'required|string|max:255',
             'description' => 'required|string',
             'button_text' => 'required|string|max:255',
             'button_link' => 'required|url|max:2048',
-            'original_price' => 'required|numeric|min:0',
-            'discounted_price' => 'required|numeric|min:0|lte:original_price',
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,avif|max:5120',
         ]);
 
         if ($request->hasFile('image')) {
