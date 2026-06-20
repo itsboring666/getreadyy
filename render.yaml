@@ -53,7 +53,21 @@ services:
       - key: RAZORPAY_SECRET
         sync: false
       - key: MAIL_MAILER
-        value: log
+        value: smtp
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: 465
+      - key: MAIL_USERNAME
+        value: tamilkumaran1672@gmail.com
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_ENCRYPTION
+        value: ssl
+      - key: MAIL_FROM_ADDRESS
+        value: tamilkumaran1672@gmail.com
+      - key: MAIL_FROM_NAME
+        value: "GET READY"
 
 databases:
   - name: getready-db
