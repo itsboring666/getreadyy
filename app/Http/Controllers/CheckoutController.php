@@ -12,6 +12,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Mail\OrderConfirmationMail;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Services\WhatsAppService;
 
 class CheckoutController extends Controller
 {
@@ -216,6 +217,9 @@ class CheckoutController extends Controller
                 Log::error('Order Confirmation Email Failed: ' . $e->getMessage());
             }
 
+            // Send WhatsApp Invoice
+            (new WhatsAppService())->sendInvoice($order);
+
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])->with('success', 'Order placed successfully via Cash on Delivery.');
         }
 
@@ -252,6 +256,9 @@ class CheckoutController extends Controller
             } catch (\Exception $e) {
                 Log::error('Order Confirmation Email Failed: ' . $e->getMessage());
             }
+
+            // Send WhatsApp Invoice
+            (new WhatsAppService())->sendInvoice($order);
 
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])
                              ->with('success', 'Payment successful (Simulated for testing).');
@@ -334,6 +341,9 @@ class CheckoutController extends Controller
                 } catch (\Exception $e) {
                     Log::error('Order Confirmation Email Failed: ' . $e->getMessage());
                 }
+
+                // Send WhatsApp Invoice
+                (new WhatsAppService())->sendInvoice($order);
             }
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])->with('success', 'Payment successful and order placed.');
         }
@@ -520,6 +530,9 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             Log::error('Order Confirmation Email Failed: ' . $e->getMessage());
         }
+
+        // Send WhatsApp Invoice
+        (new WhatsAppService())->sendInvoice($order);
 
         return redirect()->route('checkout.thankyou', ['orderId' => $orderId])
             ->with('success', $isMock ? 'Razorpay sandbox payment successful!' : 'Razorpay payment successful!');
