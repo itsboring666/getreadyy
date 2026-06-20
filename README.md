@@ -94,7 +94,7 @@ A fully functional e-commerce clothing website built with Laravel PHP Framework,
 ## 👤 Admin Access
 
 - **Email:** team.818x@gmail.com
-- **Password:** Team@345t
+- **Password:** Team@345
 
 ## 📧 Email Setup Guide
 

@@ -10,15 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class WhatsAppService
 {
-    protected $sid;
+    protected $instanceId;
     protected $token;
-    protected $twilioNumber;
 
     public function __construct()
     {
-        $this->sid = config('services.twilio.sid') ?: env('TWILIO_SID');
-        $this->token = config('services.twilio.token') ?: env('TWILIO_TOKEN');
-        $this->twilioNumber = config('services.twilio.whatsapp_from') ?: env('TWILIO_WHATSAPP_NUMBER');
+        $this->instanceId = config('services.ultramsg.instance_id') ?: env('ULTRAMSG_INSTANCE_ID');
+        $this->token = config('services.ultramsg.token') ?: env('ULTRAMSG_TOKEN');
     }
 
     /**
@@ -29,8 +27,8 @@ class WhatsAppService
      */
     public function sendInvoice(Order $order)
     {
-        if (!$this->sid || !$this->token || !$this->twilioNumber) {
-            Log::warning('WhatsAppService: Twilio credentials not configured.');
+        if (!$this->instanceId || !$this->token) {
+            Log::warning('WhatsAppService: UltraMsg credentials not configured.');
             return false;
         }
 
@@ -49,8 +47,6 @@ class WhatsAppService
             $filename = 'invoices/invoice_' . $order->order_id . '.pdf';
             Storage::disk('public')->put($filename, $pdf->output());
             
-            // Get the full public URL of the saved PDF
-            // Note: In local dev, asset() might return localhost which Twilio cannot reach.
             $mediaUrl = asset('storage/' . $filename);
 
             // 3. Compose the WhatsApp message body
@@ -61,15 +57,14 @@ class WhatsAppService
             $body .= "We have attached your official invoice to this message.\n\n";
             $body .= "Track your order on our website. Stay stylish! 😎";
 
-            // 4. Send the WhatsApp message via Twilio REST API
-            $response = Http::withBasicAuth($this->sid, $this->token)
-                ->asForm()
-                ->post("https://api.twilio.com/2010-04-01/Accounts/{$this->sid}/Messages.json", [
-                    'From' => "whatsapp:" . $this->twilioNumber,
-                    'To' => "whatsapp:" . $phone,
-                    'Body' => $body,
-                    'MediaUrl' => $mediaUrl,
-                ]);
+            // 4. Send the WhatsApp message via UltraMsg REST API
+            $response = Http::asForm()->post("https://api.ultramsg.com/{$this->instanceId}/messages/document", [
+                'token' => $this->token,
+                'to' => $phone,
+                'document' => $mediaUrl,
+                'filename' => "invoice_{$order->order_id}.pdf",
+                'caption' => $body,
+            ]);
 
             if ($response->successful()) {
                 Log::info("WhatsApp invoice sent successfully to {$phone} for Order {$order->order_id}");
