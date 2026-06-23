@@ -7,14 +7,31 @@
 /* Wishlist heart display on hover */
 .gr-product-card:hover .o-product-wishlist { opacity: 1; }
 
-/* Hero section neat block layout */
+/* Hero section retro block layout */
 .gr-hero {
-    border: 2px solid var(--border) !important;
-    background: var(--surface) !important;
-    box-shadow: 6px 6px 0px var(--primary) !important;
+    position: relative;
+    border: 3px solid var(--border) !important;
+    background-color: var(--surface) !important;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px) !important;
+    background-size: 24px 24px !important;
+    box-shadow: 10px 10px 0px var(--primary) !important;
     margin: 40px auto !important;
     padding: 48px !important;
     box-sizing: border-box !important;
+    overflow: hidden;
+}
+/* Retro CRT scanline effect overlay */
+.gr-hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+.gr-hero-text, .gr-hero-images {
+    position: relative;
+    z-index: 2;
 }
 
 /* ─── Premium Home Page Animations & Styling ─── */
@@ -177,12 +194,18 @@
     animation-delay: 4s;
 }
 
-/* 7. Hover effects on trust card icons */
+/* 7. Hover effects on trust card icons - Retro styling */
 .gr-trust-card {
-    transition: transform var(--transition), border-color var(--transition);
+    background: var(--surface);
+    border: 2px solid var(--border);
+    box-shadow: 5px 5px 0px var(--primary);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 2;
 }
 .gr-trust-card:hover {
-    transform: translateY(-4px);
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px var(--accent);
     border-color: var(--border) !important;
 }
 .gr-trust-card i {
@@ -400,6 +423,33 @@ $heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link
     </div>
 </div>
 
+{{-- ─── STORE FEATURES (Cards at the top) ─────────────────── --}}
+<section class="gr-trust-features" style="padding: 40px 24px 20px; max-width: var(--max-width); margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+        <div class="gr-trust-card" style="padding: 24px; text-align: center;">
+            <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
+                <i class="fas fa-truck-moving" style="font-size: 18px; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">FAST METRO DELIVERY</h3>
+            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">Free shipping on orders above ₹999. Orders dispatched within 24 hours.</p>
+        </div>
+        <div class="gr-trust-card" style="padding: 24px; text-align: center;">
+            <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
+                <i class="fas fa-medal" style="font-size: 18px; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">PREMIUM QUALITY</h3>
+            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">Hand-picked fabrics and honest stitching. Built for men who demand the best.</p>
+        </div>
+        <div class="gr-trust-card" style="padding: 24px; text-align: center;">
+            <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
+                <i class="fas fa-undo-alt" style="font-size: 18px; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">7-DAY EASY RETURNS</h3>
+            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">Return or exchange within 7 days of purchase. Simplified returns process.</p>
+        </div>
+    </div>
+</section>
+
 {{-- ─── THE WARDROBE (Category Grid) ──────────────────────── --}}
 @php
 $wardrobeImgs = [
@@ -610,31 +660,6 @@ $featImg2 = "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=f
     </div>
 </section>
 
-{{-- ─── TRUST FOOTER BADGES ───────────────────────────────── --}}
-<section class="gr-trust-footer" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 56px 0; margin-top: 60px;">
-    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; max-width: var(--max-width); margin: 0 auto; padding: 0 24px;">
-        <div class="gr-trust-card" style="padding: 24px; border-right: 1px solid var(--border-light); text-align: center;">
-            <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                <i class="fas fa-truck-moving" style="font-size: 18px; color: var(--accent);"></i>
-            </div>
-            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">FAST METRO DELIVERY</h3>
-            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Free shipping on orders above ₹999. Orders dispatched within 24 hours.</p>
-        </div>
-        <div class="gr-trust-card" style="padding: 24px; border-right: 1px solid var(--border-light); text-align: center;">
-            <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                <i class="fas fa-recycle" style="font-size: 18px; color: var(--accent);"></i>
-            </div>
-            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">SMALL BATCH CREATIONS</h3>
-            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Limited release runs made responsibly with organic, extra-long staple cotton.</p>
-        </div>
-        <div class="gr-trust-card" style="padding: 24px; text-align: center;">
-            <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                <i class="fas fa-undo-alt" style="font-size: 18px; color: var(--accent);"></i>
-            </div>
-            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">7-DAY EASY RETURNS</h3>
-            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange within 7 days of purchase. Simplified returns process.</p>
-        </div>
-    </div>
-</section>
+{{-- Trust badges moved to the top of the home screen --}}
 
 @endsection
