@@ -21,7 +21,7 @@
         $product->image_3 ?? null,
         $product->image_4 ?? null,
     ]));
-    $fb = 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=80';
+    $fb = asset('assets/images/logo.png');
     @endphp
 
     <div class="o-pdp-gallery">

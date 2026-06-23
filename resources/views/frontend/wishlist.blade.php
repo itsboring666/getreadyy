@@ -34,7 +34,7 @@
                 <a href="{{ route('product.view', $product->id) }}" style="text-decoration: none;">
                     <div class="gr-product-card-img" style="aspect-ratio: 3/4;">
                         <img src="{{ asset('storage/' . $product->image) }}" 
-                             onerror="this.src='https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=600&q=80'" 
+                             onerror="this.src='{{ asset('assets/images/logo.png') }}'" 
                              alt="{{ $product->name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div class="gr-product-card-body" style="padding: 16px 8px 8px;">

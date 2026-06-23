@@ -72,10 +72,10 @@
 
         @php
         $phs = [
-            'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=500&q=80',
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
         ];
         @endphp
 

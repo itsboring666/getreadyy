@@ -94,9 +94,9 @@
         <div class="gr-product-grid gr-product-grid-3">
             @php
             $phs = [
-                'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80',
+                asset('assets/images/logo.png'),
+                asset('assets/images/logo.png'),
+                asset('assets/images/logo.png'),
             ];
             @endphp
 

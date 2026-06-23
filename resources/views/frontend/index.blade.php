@@ -568,11 +568,11 @@
     {{-- ─── THE WARDROBE (Category Grid) ──────────────────────── --}}
     @php
         $wardrobeImgs = [
-            'https://images.unsplash.com/photo-1622445275576-721325763afe?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80',
+            asset('assets/images/official-logo.jpg'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
         ];
         $wardrobeNames = ['TEES', 'JEANS', 'SHIRTS', 'JACKETS', 'ACCESSORIES'];
     @endphp
@@ -633,14 +633,14 @@
     {{-- ─── FRESH OFF THE PRESS ────────────────────────────────── --}}
     @php
         $phs = [
-            'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=500&q=80',
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
+            asset('assets/images/logo.png'),
         ];
     @endphp
 
@@ -725,8 +725,8 @@
         $featDesc = $featuredProduct->description ?? "We build clothes for men who don't chase trends. Heavy fabrics. Honest stitching. Pieces that earn their fade.\n\nEvery piece in the GET READY catalog is made in small batches, washed twice, and tested by people who actually wear them. That's the whole story.";
         $featBtnText = $featuredProduct->button_text ?? "READ THE MANIFESTO →";
         $featBtnLink = $featuredProduct->button_link ?? route('manifesto');
-        $featImg1 = $featuredProduct && $featuredProduct->image_path ? asset('storage/' . $featuredProduct->image_path) : "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=700&q=80";
-        $featImg2 = "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80";
+        $featImg1 = $featuredProduct && $featuredProduct->image_path ? asset('storage/' . $featuredProduct->image_path) : asset('assets/images/official-logo.jpg');
+        $featImg2 = asset('assets/images/logo.png');
     @endphp
 
     <section class="gr-editorial">
