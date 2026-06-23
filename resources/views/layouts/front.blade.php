@@ -61,7 +61,9 @@
     /* ── Global Background Image ── */
     body {
         background: transparent !important;
+        position: relative;
     }
+    /* The Image */
     body::before {
         content: '';
         position: fixed;
@@ -70,8 +72,27 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        filter: blur(6px) brightness(0.35);
-        z-index: -1;
+        /* A gritty, high-contrast, slightly desaturated look instead of a muddy blur */
+        filter: brightness(0.35) contrast(1.2) grayscale(0.2);
+        z-index: -100;
+        pointer-events: none;
+    }
+    /* The Premium Overlay Effects */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        /* CRT scanlines effect */
+        background: repeating-linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0.25) 3px,
+            rgba(0, 0, 0, 0.25) 4px
+        );
+        /* Deep cinematic vignette on the edges */
+        box-shadow: inset 0 0 15vw rgba(0,0,0,0.95);
+        z-index: -99;
         pointer-events: none;
     }
     </style>
