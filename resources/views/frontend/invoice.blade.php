@@ -145,7 +145,7 @@
 
     {{-- ── HEADER ── --}}
     <div class="invoice-header">
-        <img src="{{ public_path('assets/images/official-logo.jpg') }}" alt="GET READY">
+        <img src="{{ $logoBase64 }}" alt="GET READY">
     </div>
     <div class="header-address">
         NO 19/1 TMS SCHOOL (OPP) 2<sup>ND</sup> MAINROAD 2<sup>ND</sup> CROSS STREET , RAILNAGAR ,<br>

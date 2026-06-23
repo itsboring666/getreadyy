@@ -37,7 +37,10 @@ class OrderController extends Controller
             ->with('items')
             ->firstOrFail();
 
-        $pdf = Pdf::loadView('orders.invoice', compact('order'));
+        $logoPath = public_path('assets/images/official-logo.jpg');
+        $logoBase64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoPath));
+
+        $pdf = Pdf::loadView('orders.invoice', compact('order', 'logoBase64'));
         return $pdf->download('Invoice_' . $order->order_id . '.pdf');
     }
 

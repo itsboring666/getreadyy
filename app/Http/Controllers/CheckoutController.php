@@ -372,7 +372,10 @@ class CheckoutController extends Controller
     {
         $order = Order::with(['items.product'])->where('order_id', $orderId)->firstOrFail();
 
-        $pdf = Pdf::loadView('frontend.invoice', compact('order'));
+        $logoPath = public_path('assets/images/official-logo.jpg');
+        $logoBase64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoPath));
+
+        $pdf = Pdf::loadView('frontend.invoice', compact('order', 'logoBase64'));
 
         return $pdf->download('invoice_' . $orderId . '.pdf');
     }
