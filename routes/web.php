@@ -28,6 +28,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ContactController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'index']);
@@ -45,8 +46,9 @@ Route::post('/otp/resend', [OtpController::class, 'resend'])
 
 // Contact Us Page
 Route::get('/contact', function () {
-    return view('frontend.contact'); 
+    return view('frontend.contact');
 })->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 // Logout
