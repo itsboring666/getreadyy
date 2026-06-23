@@ -15,7 +15,7 @@
         <p style="margin-bottom: 32px;">We ship worldwide. International shipping rates are calculated at checkout based on destination and package weight. Customers are responsible for any customs duties or import taxes levied by their country.</p>
 
         <h3 style="font-size: 14px; font-weight: bold; color: var(--text); margin-bottom: 12px; text-transform: uppercase;">3. Return Policy</h3>
-        <p style="margin-bottom: 12px;">We accept returns on unworn, unwashed items with original tags attached within 14 days of delivery. Raw denim must not be soaked or altered.</p>
+        <p style="margin-bottom: 12px;">We accept returns on unworn, unwashed items with original tags attached within 7 days of delivery. Raw denim must not be soaked or altered.</p>
         <p style="margin-bottom: 32px;">To initiate a return, please contact our support team with your order number. A return shipping fee of ₹150 will be deducted from your refund for domestic orders.</p>
 
         <h3 style="font-size: 14px; font-weight: bold; color: var(--text); margin-bottom: 12px; text-transform: uppercase;">4. Exchanges</h3>

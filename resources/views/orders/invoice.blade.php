@@ -1,139 +1,250 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Invoice - {{ $order->order_id }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; color: #1a1a1a; line-height: 1.5; }
-        .invoice-container { max-width: 700px; margin: 0 auto; padding: 40px 30px; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; color: #1a1a1a; line-height: 1.5; background-color: #fff; }
+        .invoice-container { max-width: 800px; margin: 0 auto; background: #fff; }
 
-        /* Header */
-        .invoice-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #536451; }
-        .brand-name { font-size: 28px; font-weight: 900; letter-spacing: 2px; color: #536451; }
-        .brand-sub { font-size: 10px; color: #999; letter-spacing: 1px; margin-top: 2px; }
-        .invoice-title { text-align: right; }
-        .invoice-title h1 { font-size: 22px; font-weight: 700; color: #536451; letter-spacing: 1px; text-transform: uppercase; }
-        .invoice-title p { font-size: 12px; color: #666; margin-top: 4px; }
+        /* Header Area */
+        .header-section {
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+            position: relative;
+        }
+        .header-title {
+            font-family: 'Arial Black', Impact, sans-serif;
+            font-size: 64px;
+            color: #e53e3e; /* Red color */
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+        .header-subtitle {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        .header-address {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
 
-        /* Info Sections */
-        .info-grid { display: flex; justify-content: space-between; margin-bottom: 30px; gap: 20px; }
-        .info-block { flex: 1; }
-        .info-block h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #536451; margin-bottom: 8px; font-weight: 700; }
-        .info-block p { font-size: 13px; color: #333; margin-bottom: 2px; }
-        .info-block .value { font-weight: 600; color: #1a1a1a; }
+        /* Content Area */
+        .content-section {
+            padding: 40px 50px;
+        }
+
+        .invoice-label {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        /* Top Details */
+        .details-grid {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .details-grid td {
+            vertical-align: top;
+            width: 50%;
+        }
+        .block-title {
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
 
         /* Table */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 30px; }
-        thead th { background-color: #536451; color: #f3e9d5; padding: 10px 12px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        tbody td { border-bottom: 1px solid #eee; padding: 12px; font-size: 13px; }
-        tbody tr:last-child td { border-bottom: none; }
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
+        table.items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        table.items-table th, table.items-table td {
+            padding: 12px 5px;
+            text-align: left;
+        }
+        table.items-table th {
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+        table.items-table .text-right { text-align: right; }
+        table.items-table .text-center { text-align: center; }
 
-        /* Totals */
-        .totals { width: 280px; margin-left: auto; margin-bottom: 40px; }
-        .totals-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; color: #555; }
-        .totals-row.grand { border-top: 2px solid #536451; padding-top: 12px; margin-top: 8px; font-size: 16px; font-weight: 700; color: #1a1a1a; }
+        /* Total Section */
+        .total-section {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 12px 5px;
+            margin-bottom: 10px;
+        }
+        .total-label {
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .grand-total {
+            text-align: right;
+            padding-right: 5px;
+            font-size: 14px;
+            margin-bottom: 60px;
+        }
 
         /* Footer */
-        .invoice-footer { text-align: center; padding-top: 30px; border-top: 1px solid #eee; }
-        .invoice-footer p { font-size: 12px; color: #999; }
-        .invoice-footer .brand { font-weight: 700; color: #536451; }
+        .footer-section {
+            position: relative;
+            margin-top: 60px;
+        }
+        .contact-info {
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .qr-box {
+            width: 80px;
+            height: 80px;
+            background: #eee;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .qr-label {
+            font-size: 9px;
+            font-weight: bold;
+        }
+        .thank-you {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-top: -30px; /* pull up alongside QR */
+        }
     </style>
 </head>
-
 <body>
     <div class="invoice-container">
-        {{-- Header --}}
-        <div class="invoice-header">
-            <div>
-                <div class="brand-name">GET READY</div>
-                <div class="brand-sub">PREMIUM MENSWEAR — EST. 2004</div>
-            </div>
-            <div class="invoice-title">
-                <h1>Invoice</h1>
-                <p>{{ $order->created_at->setTimezone('Asia/Kolkata')->format('d M Y, h:i A') }}</p>
-            </div>
-        </div>
-
-        {{-- Order & Customer Info --}}
-        <div class="info-grid">
-            <div class="info-block">
-                <h3>Order Details</h3>
-                <p><strong>Order ID:</strong> <span class="value">{{ $order->order_id }}</span></p>
-                <p><strong>Date:</strong> {{ $order->created_at->setTimezone('Asia/Kolkata')->format('d M Y') }}</p>
-                <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
-            </div>
-            <div class="info-block">
-                <h3>Billing / Shipping</h3>
-                <p class="value">{{ $order->name }}</p>
-                <p>{{ $order->address }}</p>
-                <p>{{ $order->city }}, {{ $order->state }} — {{ $order->zip }}</p>
-                <p>Phone: {{ $order->phone }}</p>
-                <p>Email: {{ $order->email }}</p>
+        
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="header-title">GET READY</h1>
+            <div class="header-subtitle">MEN'S CLOTHING STORE</div>
+            <div class="header-address">
+                NO 19/1 TMS SCHOOL (OPP) 2ND MAINROAD 2ND CROSS STREET, RAILNAGAR, <br>
+                MARAMALAINAGAR, CHENGALPATTU TAMILNADU 603203
             </div>
         </div>
 
-        {{-- Items Table --}}
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 40%;">Product</th>
-                    <th class="text-center">Size</th>
-                    <th class="text-center">Qty</th>
-                    <th class="text-right">Unit Price</th>
-                    <th class="text-right">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($order->items as $item)
-                <tr>
-                    <td>{{ $item->product_name }}</td>
-                    <td class="text-center">{{ $item->size }}</td>
-                    <td class="text-center">{{ $item->quantity }}</td>
-                    <td class="text-right">₹{{ number_format($item->price, 2) }}</td>
-                    <td class="text-right" style="font-weight:600;">₹{{ number_format($item->price * $item->quantity, 2) }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="content-section">
+            <div class="invoice-label">INVOICE</div>
 
-        {{-- Totals --}}
-        @php
-            $shipping = $order->shipping_fee ?? 0.00;
-            $discount = $order->discount_amount ?? 0.00;
-            $subtotal = $order->total_amount - $shipping + $discount;
-        @endphp
-        <div class="totals">
-            <div class="totals-row">
-                <span>Subtotal</span>
-                <span>₹{{ number_format($subtotal, 2) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>Shipping</span>
-                <span>{{ $shipping > 0 ? '₹' . number_format($shipping, 2) : 'Free' }}</span>
-            </div>
-            @if($discount > 0)
-            <div class="totals-row" style="color: #c2410c;">
-                <span>Discount ({{ $order->coupon_code }})</span>
-                <span>-₹{{ number_format($discount, 2) }}</span>
-            </div>
+            <table class="details-grid">
+                <tr>
+                    <td>
+                        <div class="block-title">ISSUED TO:</div>
+                        <div>{{ $order->name }}</div>
+                        <div>{{ $order->address }}</div>
+                        <div>{{ $order->city }}, {{ $order->state }} - {{ $order->zip }}</div>
+                    </td>
+                    <td>
+                        <div style="margin-bottom: 15px;">
+                            <span class="block-title">INVOICE NO:</span> {{ $order->order_id }}
+                        </div>
+                        <div>
+                            <span class="block-title">DATE:</span> {{ $order->created_at->setTimezone('Asia/Kolkata')->format('d/m/Y') }}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">DESCRIPTION</th>
+                        <th class="text-right">UNIT PRICE</th>
+                        <th class="text-center">QTY</th>
+                        <th class="text-right">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($order->items as $item)
+                    <tr>
+                        <td>{{ $item->product_name }} - {{ $item->size }}</td>
+                        <td class="text-right">₹{{ number_format($item->price, 2) }}</td>
+                        <td class="text-center">{{ $item->quantity }}</td>
+                        <td class="text-right">₹{{ number_format($item->price * $item->quantity, 2) }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            @php
+                $shipping = $order->shipping_fee ?? 0.00;
+                $discount = $order->discount_amount ?? 0.00;
+            @endphp
+
+            @if($shipping > 0 || $discount > 0)
+                <div style="text-align: right; padding-right: 5px; margin-bottom: 10px; font-size: 12px;">
+                    @if($shipping > 0)
+                        <div>Shipping: ₹{{ number_format($shipping, 2) }}</div>
+                    @endif
+                    @if($discount > 0)
+                        <div>Discount: -₹{{ number_format($discount, 2) }}</div>
+                    @endif
+                </div>
             @endif
-            <div class="totals-row grand">
-                <span>Total</span>
-                <span>₹{{ number_format($order->total_amount, 2) }}</span>
-            </div>
-        </div>
 
-        {{-- Footer --}}
-        <div class="invoice-footer">
-            <p><span class="brand">GET READY</span> — Premium Menswear EST. 2004</p>
-            <p style="margin-top: 6px;">Thank you for shopping with us!</p>
-            <p style="margin-top: 12px; font-size: 10px; color: #bbb;">This is a computer-generated invoice and does not require a signature.</p>
+            <div class="total-section">
+                <span class="total-label">TOTAL</span>
+            </div>
+            
+            <div class="grand-total">
+                Total &nbsp;&nbsp;&nbsp; ₹{{ number_format($order->total_amount, 2) }}
+            </div>
+
+            <div class="footer-section">
+                <div class="contact-info">CONTACT : 9080253885</div>
+                <div>
+                    <!-- Optional: You can place a real QR code image here if you have one -->
+                    <div class="qr-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.instagram.com/_getreadyyyy" alt="QR Code">
+                    </div>
+                    <div class="qr-label">_GETREADYYYY</div>
+                </div>
+
+                <div class="thank-you">
+                    THANKYOU FOR PURCHASING.
+                </div>
+            </div>
         </div>
     </div>
 </body>
-
 </html>

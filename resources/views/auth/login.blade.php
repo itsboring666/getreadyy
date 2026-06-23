@@ -14,7 +14,7 @@
         <div style="background: #161616; border: 1px solid var(--border); box-shadow: 5px 5px 0px rgba(153,27,27,0.35); padding: 40px; margin-bottom: 32px;">
             
             <div style="background: var(--bg); border: 1px dashed var(--text); padding: 16px; margin-bottom: 32px; font-family: monospace; font-size: 12px; line-height: 1.5; color: var(--text-secondary); text-align: center;">
-                <span>LOT: OUTFIT-818 // SIGN IN PROTOCOL</span><br>
+                <span>LOT: GET READY // SIGN IN PROTOCOL</span><br>
                 <span>Clearance yields order tracking & fast checkout.</span>
             </div>
 

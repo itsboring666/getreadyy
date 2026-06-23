@@ -631,8 +631,8 @@ $featImg2 = "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=f
             <div style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                 <i class="fas fa-undo-alt" style="font-size: 18px; color: var(--accent);"></i>
             </div>
-            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">14-DAY EASY RETURNS</h3>
-            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange within 14 days of purchase. Simplified returns process.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">7-DAY EASY RETURNS</h3>
+            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange within 7 days of purchase. Simplified returns process.</p>
         </div>
     </div>
 </section>

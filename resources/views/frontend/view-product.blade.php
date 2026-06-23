@@ -48,7 +48,7 @@
 
     {{-- Info --}}
     <div class="o-pdp-info">
-        <span class="o-pdp-cat">{{ $product->category->name ?? 'Outfit 818' }}</span>
+        <span class="o-pdp-cat">{{ $product->category->name ?? 'GET READY' }}</span>
         <h1 class="o-pdp-title">{{ $product->name }}</h1>
         
         @php

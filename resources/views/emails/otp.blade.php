@@ -6,7 +6,7 @@
 </head>
 <body style="font-family: Arial, sans-serif; padding: 20px;">
     <h2>Hello {{ $user->name }},</h2>
-    <p>Thank you for registering with <strong>Outfit 818</strong>.</p>
+    <p>Thank you for registering with <strong>GET READY</strong>.</p>
     <p>Your One-Time Password (OTP) for email verification is:</p>
 
     <div style="font-size: 28px; font-weight: bold; margin: 20px 0;">
@@ -18,6 +18,6 @@
     <p>If you didn’t create this account, you can ignore this message.</p>
 
     <br><br>
-    <p>— Outfit 818 Team</p>
+    <p>— GET READY Team</p>
 </body>
 </html>

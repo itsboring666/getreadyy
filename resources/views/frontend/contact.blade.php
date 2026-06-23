@@ -33,14 +33,14 @@
             <div style="display:flex; flex-direction:column; gap:32px; font-family: var(--font);">
                 <div>
                     <strong style="display:block; font-size:12px; color:var(--text); margin-bottom:8px; text-transform: uppercase; letter-spacing: 0.1em;">Direct Line</strong>
-                    <a href="mailto:support@getready.com" style="font-size:16px; color:var(--accent); text-decoration:none; display:block; margin-bottom:4px;">support@getready.com</a>
+                    <a href="mailto:tamilkumaran1672@gmail.com" style="font-size:16px; color:var(--accent); text-decoration:none; display:block; margin-bottom:4px;">tamilkumaran1672@gmail.com</a>
                     <p style="font-size:11px; color:var(--text-muted); font-style: italic;">Dispatch guaranteed within 24 hours.</p>
                 </div>
 
                 <div>
                     <strong style="display:block; font-size:12px; color:var(--text); margin-bottom:8px; text-transform: uppercase; letter-spacing: 0.1em;">Voice</strong>
-                    <a href="tel:+15551234567" style="font-size:16px; color:var(--text); text-decoration:none; display:block; margin-bottom:4px;">+1 (555) 123-4567</a>
-                    <p style="font-size:11px; color:var(--text-muted); font-style: italic;">Mon-Fri 09:00 — 18:00 EST.</p>
+                    <a href="tel:+919080253885" style="font-size:16px; color:var(--text); text-decoration:none; display:block; margin-bottom:4px;">+91 9080253885</a>
+                    <p style="font-size:11px; color:var(--text-muted); font-style: italic;">Mon-Fri 09:00 — 18:00 IST.</p>
                 </div>
 
                 <div>

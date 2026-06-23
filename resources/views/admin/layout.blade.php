@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel - Outfit 818</title>
+    <title>Admin Panel - GET READY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
@@ -27,7 +27,7 @@
             <!-- Logo or Hamburger -->
             <div id="sidebar-header" class="flex items-center justify-between px-4 py-6 text-2xl font-bold text-primary transition-all duration-300">
                 <a href="{{ url('/') }}" id="sidebar-title" class="text-primary hover:underline logo" style="text-decoration: none;">
-                    Outfit 818
+                    GET READY
                 </a>
 
                 <button onclick="toggleSidebar()" class="text-2xl focus:outline-none logo" id="toggle-btn-sidebar">

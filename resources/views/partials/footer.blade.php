@@ -30,6 +30,16 @@
                 <li><a href="{{ route('shipping') }}">Shipping & Returns</a></li>
             </ul>
         </div>
+
+        {{-- Contact --}}
+        <div class="gr-footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="mailto:tamilkumaran1672@gmail.com">tamilkumaran1672@gmail.com</a></li>
+                <li><a href="tel:+919080253885">+91 9080253885</a></li>
+                <li><a href="https://www.instagram.com/_getreadyyyy?igsh=NXZlZDViaTZ2ODVl" target="_blank">Instagram</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="gr-footer-bottom">
