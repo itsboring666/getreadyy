@@ -14,28 +14,13 @@
             position: relative;
             border: 3px solid var(--border) !important;
             background-color: var(--surface) !important;
-            background-image: url('{{ asset('assets/images/banner.png') }}') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px) !important;
+            background-size: 24px 24px !important;
             box-shadow: 10px 10px 0px var(--primary) !important;
             margin: 40px auto !important;
             padding: 48px !important;
             box-sizing: border-box !important;
             overflow: hidden;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-        }
-        /* Overlay for better contrast */
-        .gr-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
-            z-index: 0;
         }
 
         /* Retro CRT scanline effect overlay */
@@ -506,31 +491,10 @@
             });
         </script>
 
-        <div class="gr-hero-text">
-            <div class="gr-hero-label">FALL / WINTER '26 — VOL. III</div>
-            <h1 class="gr-hero-heading" style="text-transform: uppercase;">
-                {!! $heroTitle !!}
-            </h1>
-            <p class="gr-hero-subtitle">
-                {{ $heroSubtitle }}
-            </p>
-            <div class="gr-hero-btns">
-                <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary">{{ $heroBtnText }}</a>
-                <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
-            </div>
-
-            {{-- Vintage Barcode stamp removed as per request --}}
-        </div>
-        <div class="gr-hero-images">
-            {{-- Hero tag removed --}}
-            <div class="gr-hero-img-1">
-                <img src="{{ $heroImg1 }}" alt="Lifestyle editorial" loading="eager">
-            </div>
-            <div class="gr-hero-img-2">
-                <img src="{{ $heroImg2 }}" alt="Street style fashion" loading="eager">
-            </div>
-            <div class="gr-hero-circle-badge">
-                <span>NEW DROP<br>•<br>LIMITED<br>STOCK</span>
+        <div class="gr-hero-text" style="width: 100%; text-align: center; margin-bottom: 20px;">
+            <div class="gr-hero-btns" style="justify-content: center;">
+                <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary" style="font-size: 14px; padding: 16px 36px; background: var(--primary); border: none;">{{ $heroBtnText }}</a>
+                <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="font-size: 14px; padding: 16px 36px; background: rgba(0,0,0,0.5); color: #fff; border-color: #fff;">OUTFIT BUILDER</a>
             </div>
         </div>
     </section>
