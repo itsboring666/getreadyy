@@ -115,6 +115,22 @@ const ProductModal = {
             });
         }
 
+        const baseStorageUrl = "/storage/";
+        const imageKeys = ['image', 'image_2', 'image_3', 'image_4'];
+        imageKeys.forEach((key, index) => {
+            const previewId = index === 0 ? 'editImagePreview' : `editImage${index + 1}Preview`;
+            const previewEl = document.getElementById(previewId);
+            if (previewEl) {
+                if (product[key]) {
+                    previewEl.src = baseStorageUrl + product[key];
+                    previewEl.classList.remove('hidden');
+                } else {
+                    previewEl.classList.add('hidden');
+                    previewEl.src = '';
+                }
+            }
+        });
+
         ['S', 'M', 'L', 'XL'].forEach(size => {
             const priceInput = document.getElementById(`editSize_${size}_price`);
             const stockInput = document.getElementById(`editSize_${size}_stock`);

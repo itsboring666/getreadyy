@@ -255,23 +255,27 @@
 
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-1">Image</label>
+                <img id="editImagePreview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
                 <input type="file" name="image" class="w-full">
             </div>
 
             <!-- Optional: let admin re-upload or skip -->
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Additional Image 1</label>
+                <label class="block text-sm font-medium mb-1">Additional Image 2</label>
+                <img id="editImage2Preview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
                 <input type="file" name="image_2" accept="image/*" class="w-full" />
             </div>
 
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Additional Image 1</label>
+                <label class="block text-sm font-medium mb-1">Additional Image 3</label>
+                <img id="editImage3Preview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
                 <input type="file" name="image_3" accept="image/*" class="w-full" />
             </div>
 
             <!-- Optional: let admin re-upload or skip -->
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Additional Image 1</label>
+                <label class="block text-sm font-medium mb-1">Additional Image 4</label>
+                <img id="editImage4Preview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
                 <input type="file" name="image_4" accept="image/*" class="w-full" />
             </div>
 

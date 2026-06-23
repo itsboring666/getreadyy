@@ -349,6 +349,42 @@ $heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link
 <section class="gr-hero">
     {{-- Giant outlined background text removed as per request --}}
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slideshows = document.querySelectorAll('.hover-slideshow');
+            slideshows.forEach(img => {
+                let images = [];
+                try { images = JSON.parse(img.getAttribute('data-images')); } catch(e){}
+                
+                if (images.length > 1) {
+                    let interval;
+                    let currentIndex = 0;
+                    let originalSrc = img.src;
+
+                    // Preload images for smooth sliding
+                    images.forEach(src => {
+                        const preload = new Image();
+                        preload.src = src;
+                    });
+
+                    img.closest('.gr-product-card').addEventListener('mouseenter', () => {
+                        originalSrc = img.src; // save original
+                        interval = setInterval(() => {
+                            currentIndex = (currentIndex + 1) % images.length;
+                            img.src = images[currentIndex];
+                        }, 600); // Fast sliding (600ms per image)
+                    });
+
+                    img.closest('.gr-product-card').addEventListener('mouseleave', () => {
+                        clearInterval(interval);
+                        currentIndex = 0;
+                        img.src = originalSrc;
+                    });
+                }
+            });
+        });
+    </script>
+
     <div class="gr-hero-text">
         <div class="gr-hero-label">FALL / WINTER '26 — VOL. III</div>
         <h1 class="gr-hero-heading" style="text-transform: uppercase;">
@@ -536,8 +572,14 @@ $phs = [
             @elseif($i === 2 || $i === 5)
                 <span class="gr-badge gr-badge-bestseller">Bestseller</span>
             @endif
+            @php
+                $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
+                $imageUrls = array_map(function($img) { return asset('storage/' . $img); }, array_values($validImages));
+            @endphp
             <img src="{{ asset('storage/' . $product->image) }}" 
                  onerror="this.src='{{ $phs[$i % 8] }}'" 
+                 data-images='@json($imageUrls)'
+                 class="hover-slideshow"
                  alt="{{ $product->name }}" loading="lazy">
             <span class="gr-product-view-btn">VIEW →</span>
         </div>
