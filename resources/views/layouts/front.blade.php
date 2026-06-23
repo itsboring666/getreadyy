@@ -57,6 +57,20 @@
     .gr-toast-close:hover { opacity: 1; }
     .gr-toast-progress { position: absolute; bottom: 0; left: 0; height: 2px; background: currentColor; opacity: 0.35; animation: gr-toast-shrink 4.5s linear forwards; }
     @keyframes gr-toast-shrink { from { width: 100%; } to { width: 0%; } }
+
+    /* ── Global Background Image ── */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url('/assets/images/banner.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: blur(6px) brightness(0.35);
+        z-index: -100;
+        pointer-events: none;
+    }
     </style>
     @yield('head')
 </head>
