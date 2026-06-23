@@ -3,26 +3,28 @@
     <div class="gr-footer-inner">
         {{-- Brand --}}
         <div>
-            <div style="margin-bottom: 16px; width: 160px; height: auto;">
+            <div style="margin-bottom: 20px; display: inline-block; position: relative;">
+                <div style="position: absolute; inset: -4px; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0)); border-radius: 50%; animation: gr-spin-slow 8s linear infinite; pointer-events: none;"></div>
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                    style="width: 100%; height: auto; display: block; border-radius: 4px;">
+                    style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.05) rotate(5deg)';" onmouseout="this.style.transform='scale(1) rotate(0deg)';">
             </div>
-            <p class="gr-footer-tagline" style="max-width: 180px; line-height: 1.6;">Premium Men's Clothing. Chengalpattu, Tamil Nadu.</p>
+            <p class="gr-footer-tagline" style="max-width: 180px; line-height: 1.6;">Premium Men's Clothing.
+                Chengalpattu, Tamil Nadu.</p>
             {{-- Social Icons --}}
             <div style="display: flex; gap: 10px; margin-top: 16px;">
                 <a href="https://www.instagram.com/_getreadyyyy?igsh=NXZlZDViaTZ2ODVl" target="_blank"
-                   style="width:36px; height:36px; background: linear-gradient(45deg,#f09433,#cc2366); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-decoration:none;"
-                   title="Instagram">
+                    style="width:36px; height:36px; background: linear-gradient(45deg,#f09433,#cc2366); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-decoration:none;"
+                    title="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
                 <a href="https://wa.me/919080253885" target="_blank"
-                   style="width:36px; height:36px; background:#25D366; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-decoration:none;"
-                   title="WhatsApp">
+                    style="width:36px; height:36px; background:#25D366; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-decoration:none;"
+                    title="WhatsApp">
                     <i class="fab fa-whatsapp"></i>
                 </a>
                 <a href="mailto:tamilkumaran1672@gmail.com"
-                   style="width:36px; height:36px; background:#ea4335; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-decoration:none;"
-                   title="Email">
+                    style="width:36px; height:36px; background:#ea4335; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-decoration:none;"
+                    title="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
@@ -35,8 +37,8 @@
                 <li><a href="{{ route('products.all') }}">All Products</a></li>
                 <li><a href="{{ route('outfit-builder') }}">Outfit Builder</a></li>
                 @auth
-                <li><a href="{{ route('wishlist.index') }}">My Wishlist</a></li>
-                <li><a href="{{ route('orders.index') }}">My Orders</a></li>
+                    <li><a href="{{ route('wishlist.index') }}">My Wishlist</a></li>
+                    <li><a href="{{ route('orders.index') }}">My Orders</a></li>
                 @endauth
             </ul>
         </div>
@@ -69,7 +71,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.instagram.com/_getreadyyyy?igsh=NXZlZDViaTZ2ODVl" target="_blank" style="display:flex; align-items:center; gap:6px;">
+                    <a href="https://www.instagram.com/_getreadyyyy?igsh=NXZlZDViaTZ2ODVl" target="_blank"
+                        style="display:flex; align-items:center; gap:6px;">
                         <i class="fab fa-instagram" style="font-size:11px; flex-shrink:0;"></i>
                         @_getreadyyyy
                     </a>
@@ -87,9 +90,11 @@
     <div class="gr-footer-bottom">
         <p>&copy; {{ date('Y') }} GET READY. All rights reserved.</p>
         <p style="display:flex; align-items:center; gap:8px;">
-            <a href="{{ route('shipping') }}" style="color: var(--text-muted); text-decoration:none; font-size:11px;">Shipping & Returns</a>
+            <a href="{{ route('shipping') }}"
+                style="color: var(--text-muted); text-decoration:none; font-size:11px;">Shipping & Returns</a>
             <span style="color:var(--border);">|</span>
-            <a href="{{ route('contact') }}" style="color: var(--text-muted); text-decoration:none; font-size:11px;">Contact</a>
+            <a href="{{ route('contact') }}"
+                style="color: var(--text-muted); text-decoration:none; font-size:11px;">Contact</a>
         </p>
     </div>
 </footer>

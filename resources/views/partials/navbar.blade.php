@@ -1,8 +1,13 @@
 <style>
-@media (max-width: 768px) {
-    .gr-desktop-search { display: none !important; }
-    .gr-logo { width: 120px !important; }
-}
+    @media (max-width: 768px) {
+        .gr-desktop-search {
+            display: none !important;
+        }
+
+        .gr-logo {
+            width: 120px !important;
+        }
+    }
 </style>
 <header class="gr-header">
     <div class="gr-header-inner">
@@ -10,7 +15,7 @@
         <a href="{{ url('/') }}" class="gr-logo" aria-label="GET READY Home"
             style="display: flex; align-items: center; justify-content: center; height: 40px; width: 160px; overflow: hidden; border-radius: 4px;">
             <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                style="width: 100%; height: auto; object-fit: contain; transition: transform 0.3s ease;"
+                style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;"
                 onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         </a>
 
@@ -24,7 +29,7 @@
 
             <a href="{{ route('orders.index') }}"
                 class="gr-nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">Order History</a>
-                
+
             <a href="{{ route('contact') }}"
                 class="gr-nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact Us</a>
 
@@ -36,7 +41,8 @@
         <div class="gr-nav-icons" style="display: flex; align-items: center; gap: 16px;">
 
             {{-- Global Search Bar --}}
-            <form action="{{ route('products.all') }}" method="GET" id="nav-search-form" class="gr-nav-search gr-desktop-search"
+            <form action="{{ route('products.all') }}" method="GET" id="nav-search-form"
+                class="gr-nav-search gr-desktop-search"
                 style="position: relative; display: flex; align-items: center; background: #161616; border: 1px solid var(--border); border-radius: 0; padding: 4px 12px; margin-right: 8px;">
                 <input type="text" id="nav-search-input" name="search" placeholder="Search products..."
                     value="{{ request('search') }}" autocomplete="off"
@@ -110,7 +116,7 @@
             <div
                 style="display: flex; align-items: center; justify-content: center; height: 35px; width: 140px; overflow: hidden; border-radius: 4px;">
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                    style="width: 100%; height: auto; object-fit: contain;">
+                    style="width: 100%; height: auto; object-fit: cover;">
             </div>
             <button id="grDrawerClose"
                 style="background:none; border:none; font-size:18px; cursor:pointer; color:var(--text); padding:5px;"
@@ -125,23 +131,28 @@
                     style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Shop</a>
 
                 <a href="{{ route('outfit-builder') }}"
-                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Outfit Builder</a>
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Outfit
+                    Builder</a>
 
                 <a href="{{ route('orders.index') }}"
-                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Order History</a>
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Order
+                    History</a>
 
                 <a href="{{ route('contact') }}"
-                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Contact Us</a>
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Contact
+                    Us</a>
 
                 <a href="{{ route('wishlist.index') }}"
-                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">My Wishlist</a>
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">My
+                    Wishlist</a>
             </nav>
-            
-            <form action="{{ route('products.all') }}" method="GET" style="margin-top: 24px; display: flex; align-items: center; background: #111; border: 1px solid var(--border); padding: 8px 12px;">
-                <input type="text" name="search" placeholder="Search..."
-                    value="{{ request('search') }}"
+
+            <form action="{{ route('products.all') }}" method="GET"
+                style="margin-top: 24px; display: flex; align-items: center; background: #111; border: 1px solid var(--border); padding: 8px 12px;">
+                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}"
                     style="background: transparent; border: none; outline: none; font-family: var(--font); font-size: 13px; width: 100%; color: var(--text);">
-                <button type="submit" aria-label="Search" style="background: transparent; border: none; color: var(--text-secondary);">
+                <button type="submit" aria-label="Search"
+                    style="background: transparent; border: none; color: var(--text-secondary);">
                     <i class="fas fa-search" aria-hidden="true"></i>
                 </button>
             </form>
