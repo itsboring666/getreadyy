@@ -21,6 +21,15 @@
 
             <a href="{{ route('outfit-builder') }}"
                 class="gr-nav-link {{ request()->routeIs('outfit-builder') ? 'active' : '' }}">Outfit Builder</a>
+
+            <a href="{{ route('orders.index') }}"
+                class="gr-nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">Order History</a>
+                
+            <a href="{{ route('contact') }}"
+                class="gr-nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact Us</a>
+
+            <a href="{{ route('wishlist.index') }}"
+                class="gr-nav-link {{ request()->routeIs('wishlist.index') ? 'active' : '' }}">My Wishlist</a>
         </nav>
 
         {{-- Right Icons & Search --}}
@@ -116,8 +125,16 @@
                     style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Shop</a>
 
                 <a href="{{ route('outfit-builder') }}"
-                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Outfit
-                    Builder</a>
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Outfit Builder</a>
+
+                <a href="{{ route('orders.index') }}"
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Order History</a>
+
+                <a href="{{ route('contact') }}"
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">Contact Us</a>
+
+                <a href="{{ route('wishlist.index') }}"
+                    style="font-family:var(--font); font-size:11px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:0.06em; padding:14px 0; border-bottom:1px solid var(--border-light); text-decoration:none;">My Wishlist</a>
             </nav>
             
             <form action="{{ route('products.all') }}" method="GET" style="margin-top: 24px; display: flex; align-items: center; background: #111; border: 1px solid var(--border); padding: 8px 12px;">
