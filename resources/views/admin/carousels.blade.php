@@ -119,7 +119,7 @@
     {{-- Title --}}
     <div class="mb-4">
         <label class="block text-sm font-medium">Title</label>
-        <input type="text" name="title" id="editTitle" value="{{ old('title', $carousel->title) }}"
+        <input type="text" name="title" id="editTitle" value=""
             class="w-full border-gray-300 rounded p-2 mt-1 @error('title') border-red-500 @enderror">
         @error('title')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -130,7 +130,7 @@
     <div class="mb-4">
         <label class="block text-sm font-medium">Description</label>
         <textarea name="description" id="editDescription" rows="3"
-            class="w-full border-gray-300 rounded p-2 mt-1 @error('description') border-red-500 @enderror">{{ old('description', $carousel->description) }}</textarea>
+            class="w-full border-gray-300 rounded p-2 mt-1 @error('description') border-red-500 @enderror"></textarea>
         @error('description')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
@@ -140,7 +140,7 @@
     <div class="mb-4">
         <label class="block text-sm font-medium">Button Text</label>
         <input type="text" name="button_text" id="edit_button_text"
-            value="{{ old('button_text', $carousel->button_text) }}"
+            value=""
             class="w-full border-gray-300 rounded p-2 mt-1 @error('button_text') border-red-500 @enderror">
         @error('button_text')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -151,7 +151,7 @@
     <div class="mb-4">
         <label class="block text-sm font-medium">Button Link</label>
         <input type="url" name="button_link" id="edit_button_link"
-            value="{{ old('button_link', $carousel->button_link) }}"
+            value=""
             class="w-full border-gray-300 rounded p-2 mt-1 @error('button_link') border-red-500 @enderror">
         @error('button_link')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -161,6 +161,7 @@
     {{-- Image --}}
     <div class="mb-4">
         <label class="block text-sm font-medium">Change Image (optional)</label>
+        <img id="editCarouselImagePreview" src="" class="w-24 h-16 object-cover mb-2 hidden rounded" />
         <input type="file" name="image" accept="image/*"
             class="w-full mt-1 @error('image') border-red-500 @enderror">
         @error('image')
@@ -172,7 +173,6 @@
     <div class="mb-4">
         <label class="inline-flex items-center">
             <input type="checkbox" name="is_active" id="editIsActive" value="1"
-                {{ old('is_active', $carousel->is_active) ? 'checked' : '' }}
                 class="mr-2">
             Active
         </label>

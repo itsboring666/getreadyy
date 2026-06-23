@@ -19,6 +19,21 @@ const CarouselModal = {
         document.getElementById('editCarouselForm').action = `${baseUpdateUrl.carousels}/${carousel.id}`;
         document.getElementById('editTitle').value = carousel.title;
         document.getElementById('editDescription').value = carousel.description;
+        
+        if (document.getElementById('edit_button_text')) document.getElementById('edit_button_text').value = carousel.button_text || '';
+        if (document.getElementById('edit_button_link')) document.getElementById('edit_button_link').value = carousel.button_link || '';
+        
+        const previewEl = document.getElementById('editCarouselImagePreview');
+        if (previewEl) {
+            if (carousel.image_path) {
+                previewEl.src = "/storage/" + carousel.image_path;
+                previewEl.classList.remove('hidden');
+            } else {
+                previewEl.classList.add('hidden');
+                previewEl.src = '';
+            }
+        }
+        
         document.getElementById('editIsActive').checked = !!carousel.is_active;
         this.toggleEdit();
     }

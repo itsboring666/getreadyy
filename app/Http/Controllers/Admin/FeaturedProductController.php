@@ -24,7 +24,7 @@ class FeaturedProductController extends Controller
             'description' => 'nullable|string',
             'original_price' => 'required|numeric|min:0',
             'discounted_price' => 'required|numeric|min:0',
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp,avif|max:5120',
+            'image' => 'required|image|max:20480',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|url|max:255',
         ]);
@@ -57,7 +57,7 @@ class FeaturedProductController extends Controller
             'discounted_price' => 'required|numeric|lt:original_price',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|url|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,avif|max:5120',
+            'image' => 'nullable|image|max:20480',
         ]);
 
         $product = FeaturedProduct::findOrFail($id);
