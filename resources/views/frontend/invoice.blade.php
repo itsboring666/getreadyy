@@ -147,11 +147,6 @@
     <div class="invoice-header">
         <img src="{{ $logoBase64 }}" alt="GET READY">
     </div>
-    <div class="header-address">
-        NO 19/1 TMS SCHOOL (OPP) 2<sup>ND</sup> MAINROAD 2<sup>ND</sup> CROSS STREET , RAILNAGAR ,<br>
-        MARAMALAINAGAR, CHENGALPATTU TAMILNADU 603203
-    </div>
-
     {{-- ── BODY ── --}}
     <div class="invoice-body">
         <div class="invoice-label">INVOICE</div>
