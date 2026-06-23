@@ -12,11 +12,9 @@
         /* Hero section retro block layout */
         .gr-hero {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.09) !important;
-            background-color: rgba(18, 18, 18, 0.72) !important;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
+            border: 3px solid var(--border) !important;
+            background-color: var(--surface) !important;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px) !important;
             background-size: 24px 24px !important;
             box-shadow: 10px 10px 0px var(--primary) !important;
             margin: 40px auto !important;
@@ -25,18 +23,17 @@
             overflow: hidden;
         }
 
-        /* CRT scanline effect disabled for text clarity and premium feel */
+        /* Retro CRT scanline effect overlay */
         .gr-hero::after {
-            display: none !important;
-        }
-
-        /* Marquee ticker frosted-glass overlay */
-        .gr-marquee {
-            background: rgba(17, 17, 17, 0.82) !important;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.15) 2px, rgba(0, 0, 0, 0.15) 4px);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .gr-hero-text,
@@ -138,12 +135,10 @@
 
         /* 6. Wardrobe Grid neat catalog borders and offset shadows */
         .gr-wardrobe-card {
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid var(--border) !important;
             box-shadow: 3px 3px 0px rgba(153, 27, 27, 0.4) !important;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            background: rgba(22, 22, 22, 0.72) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--surface) !important;
         }
 
         .gr-wardrobe-card:hover {
@@ -202,12 +197,10 @@
 
         /* 5. Product Cards Polaroid styling */
         .gr-product-card {
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid var(--border) !important;
             padding: 10px 10px 18px 10px !important;
             box-shadow: 4px 4px 0px rgba(153, 27, 27, 0.35) !important;
-            background: rgba(22, 22, 22, 0.72) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--surface) !important;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
@@ -691,7 +684,8 @@
                     @php
                         $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
                         $imageUrls = array_map(function ($img) {
-                            return asset('storage/' . $img); }, array_values($validImages));
+                            return asset('storage/' . $img);
+                        }, array_values($validImages));
                     @endphp
                     <img src="{{ asset('storage/' . $product->image) }}" onerror="this.src='{{ $phs[$i % 8] }}'"
                         data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy">
@@ -705,7 +699,8 @@
                     </div>
                     <div class="gr-product-name"
                         style="font-family: var(--font-serif); font-weight: 700; font-size: 15px; margin-bottom: 6px; color: var(--text);">
-                        {{ $product->name }}</div>
+                        {{ $product->name }}
+                    </div>
                     <div class="gr-product-meta"
                         style="margin-top: 4px; display: flex; justify-content: space-between; align-items: center;">
                         <span class="gr-product-cat"
