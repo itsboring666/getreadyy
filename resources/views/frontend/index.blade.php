@@ -42,6 +42,29 @@
             z-index: 2;
         }
 
+        /* Centered layout for when there are no carousel images */
+        .gr-hero-no-images {
+            grid-template-columns: 1fr !important;
+            text-align: center;
+            min-height: auto !important;
+            padding: 64px 48px !important;
+        }
+        .gr-hero-no-images .gr-hero-text {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 0 !important;
+        }
+        .gr-hero-no-images .gr-hero-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .gr-hero-no-images .gr-hero-btns {
+            justify-content: center;
+        }
+
         /* ─── Premium Home Page Animations & Styling ─── */
 
         /* 1. Hero Text Reveal Animation */
@@ -452,7 +475,7 @@
         $heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link ? $activeCarousels[0]->button_link : route('products.all');
     @endphp
 
-    <section class="gr-hero">
+    <section class="gr-hero {{ $activeCarousels->count() == 0 ? 'gr-hero-no-images' : '' }}">
         {{-- Giant outlined background text removed as per request --}}
 
         <script>
@@ -506,18 +529,32 @@
 
             {{-- Vintage Barcode stamp removed as per request --}}
         </div>
-        <div class="gr-hero-images">
-            {{-- Hero tag removed --}}
-            <div class="gr-hero-img-1">
-                <img src="{{ $heroImg1 }}" alt="Lifestyle editorial" loading="eager">
+        
+        @if($activeCarousels->count() > 0)
+            <div class="gr-hero-images">
+                {{-- Hero tag removed --}}
+                @if($activeCarousels->count() == 1)
+                    {{-- 1 Carousel Image: Single large clean image --}}
+                    <div style="width: 100%; height: 100%; min-height: 480px; position: relative; border: 1px solid var(--border); overflow: hidden; background: var(--cream);">
+                        <img src="{{ asset('storage/' . $activeCarousels[0]->image_path) }}" 
+                             alt="{{ $activeCarousels[0]->title }}" 
+                             style="width: 100%; height: 100%; object-fit: cover; display: block;" 
+                             loading="eager">
+                    </div>
+                @else
+                    {{-- 2+ Carousel Images: Standard double overlapping layout --}}
+                    <div class="gr-hero-img-1">
+                        <img src="{{ asset('storage/' . $activeCarousels[0]->image_path) }}" alt="Lifestyle editorial" loading="eager">
+                    </div>
+                    <div class="gr-hero-img-2">
+                        <img src="{{ asset('storage/' . $activeCarousels[1]->image_path) }}" alt="Street style fashion" loading="eager">
+                    </div>
+                @endif
+                <div class="gr-hero-circle-badge">
+                    <span>NEW DROP<br>•<br>LIMITED<br>STOCK</span>
+                </div>
             </div>
-            <div class="gr-hero-img-2">
-                <img src="{{ $heroImg2 }}" alt="Street style fashion" loading="eager">
-            </div>
-            <div class="gr-hero-circle-badge">
-                <span>NEW DROP<br>•<br>LIMITED<br>STOCK</span>
-            </div>
-        </div>
+        @endif
     </section>
 
     {{-- ─── MARQUEE TICKER ─────────────────────────────────────── --}}

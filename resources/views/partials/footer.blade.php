@@ -3,9 +3,9 @@
     <div class="gr-footer-inner">
         {{-- Brand --}}
         <div>
-            <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 16px; width: 160px; height: auto;">
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                    style="width: 120px; height: 120px; object-fit: cover; object-position: center bottom; border-radius: 4px;">
+                    style="width: 100%; height: auto; display: block; border-radius: 4px;">
             </div>
             <p class="gr-footer-tagline" style="max-width: 180px; line-height: 1.6;">Premium Men's Clothing. Chengalpattu, Tamil Nadu.</p>
             {{-- Social Icons --}}
