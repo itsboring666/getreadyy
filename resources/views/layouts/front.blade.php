@@ -172,11 +172,11 @@
             left: -2%;
             right: -2%;
             bottom: -2%;
-            background-image: url('/assets/images/banner1.png');
+            background-image: url('/assets/images/banner1.png?v=1.0.3');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            filter: blur(3px) brightness(0.24) contrast(1.1) saturate(0.85);
+            filter: grayscale(100%) blur(1px) brightness(0.4) contrast(1.2);
             z-index: -100;
             pointer-events: none;
             animation: gr-bg-pan 40s ease-in-out infinite;
@@ -191,10 +191,28 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, rgba(10, 10, 10, 0.25) 0%, rgba(5, 5, 5, 0.85) 80%),
-                        linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.95) 100%);
+            background: radial-gradient(circle at center, rgba(10, 10, 10, 0.1) 0%, rgba(5, 5, 5, 0.75) 85%),
+                        linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.9) 100%);
             z-index: -99;
             pointer-events: none;
+        }
+
+        /* ── Readability text shadows for premium legibility ── */
+        h1, h2, h3, h4, h5, h6,
+        .gr-section-title,
+        .gr-editorial-heading,
+        .gr-hero-heading,
+        .gr-logo-badge {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .gr-section-label,
+        .gr-editorial-label,
+        .gr-hero-label,
+        .gr-hero-subtitle,
+        .gr-editorial-body,
+        .gr-nav-link {
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) !important;
         }
 
         /* ── Glassmorphism Header & Footer Overrides ── */
