@@ -172,7 +172,7 @@
             left: -2%;
             right: -2%;
             bottom: -2%;
-            background-image: url('/assets/images/banner.png');
+            background-image: url('/assets/images/banner1.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
