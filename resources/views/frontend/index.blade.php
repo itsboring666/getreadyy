@@ -337,8 +337,8 @@ html, body {
 {{-- ─── LANDING HERO ───────────────────────────────────────── --}}
 @php
 $activeCarousels = \App\Models\Carousel::where('is_active', true)->latest()->take(2)->get();
-$heroImg1 = $activeCarousels->count() > 0 && $activeCarousels[0]->image_path ? asset('storage/' . $activeCarousels[0]->image_path) : asset('assets/images/hero1.jpg');
-$heroImg2 = $activeCarousels->count() > 1 && $activeCarousels[1]->image_path ? asset('storage/' . $activeCarousels[1]->image_path) : asset('assets/images/hero2.jpg');
+$heroImg1 = $activeCarousels->count() > 0 && $activeCarousels[0]->image_path ? asset('storage/' . $activeCarousels[0]->image_path) : null;
+$heroImg2 = $activeCarousels->count() > 1 && $activeCarousels[1]->image_path ? asset('storage/' . $activeCarousels[1]->image_path) : null;
 
 $heroTitle = $activeCarousels->count() > 0 && $activeCarousels[0]->title ? $activeCarousels[0]->title : "MEN'S<br>CLOTHING<br><em>store</em>";
 $heroSubtitle = $activeCarousels->count() > 0 && $activeCarousels[0]->description ? $activeCarousels[0]->description : "Premium menswear. Made for the road.";
@@ -402,14 +402,18 @@ $heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link
     </div>
     <div class="gr-hero-images">
         {{-- Hero tag removed --}}
+        @if($heroImg1)
         <div class="gr-hero-img-1">
             <img src="{{ $heroImg1 }}" 
                  alt="Lifestyle editorial" loading="eager">
         </div>
+        @endif
+        @if($heroImg2)
         <div class="gr-hero-img-2">
             <img src="{{ $heroImg2 }}" 
                  alt="Street style fashion" loading="eager">
         </div>
+        @endif
         <div class="gr-hero-circle-badge">
             <span>NEW DROP<br>•<br>LIMITED<br>STOCK</span>
         </div>

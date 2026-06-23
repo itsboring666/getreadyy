@@ -59,6 +59,9 @@
     @keyframes gr-toast-shrink { from { width: 100%; } to { width: 0%; } }
 
     /* ── Global Background Image ── */
+    body {
+        background: transparent !important;
+    }
     body::before {
         content: '';
         position: fixed;
@@ -68,7 +71,7 @@
         background-position: center;
         background-repeat: no-repeat;
         filter: blur(6px) brightness(0.35);
-        z-index: -100;
+        z-index: -1;
         pointer-events: none;
     }
     </style>
