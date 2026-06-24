@@ -99,8 +99,8 @@
                     if ($order->tracking_number) {
                         $whatsappMessage .= "Tracking AWB: *{$order->tracking_number}*\n\n";
                     }
-                    $whatsappMessage .= "You can view your official invoice here: " . route('invoice.generate', $order->id) . "\n\n";
-                    $whatsappMessage .= "Track your order on our website. Stay stylish! 😎";
+                    $whatsappMessage .= "You can view your order details in your account here: " . route('orders.show', $order->order_id) . "\n\n";
+                    $whatsappMessage .= "Stay stylish! 😎";
                     
                     $whatsappUrl = "https://wa.me/{$whatsappPhone}?text=" . urlencode($whatsappMessage);
                 @endphp
