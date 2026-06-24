@@ -19,6 +19,8 @@ class ContactController extends Controller
         ]);
 
         try {
+            \App\Models\ContactMessage::create($validated);
+
             Mail::send([], [], function ($mail) use ($validated) {
                 $mail->to('tamilkumaran1672@gmail.com')
                      ->replyTo($validated['email'], $validated['name'])

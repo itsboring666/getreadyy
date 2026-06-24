@@ -111,6 +111,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/emails/send', [EmailController::class, 'send'])->name('admin.emails.send');
     Route::delete('/emails/{email}', [EmailController::class, 'destroy'])->name('admin.emails.destroy');
 
+    // Contact Messages
+    Route::get('/contact-messages', [\App\Http\Controllers\Admin\ContactMessageController::class, 'index'])->name('admin.contact-messages.index');
+    Route::get('/contact-messages/{contactMessage}', [\App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('admin.contact-messages.show');
+    Route::delete('/contact-messages/{contactMessage}', [\App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('admin.contact-messages.destroy');
+
     //Orders
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/orders/requests', [AdminOrderRequestsController::class, 'index'])->name('admin.orders.requests');

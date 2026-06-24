@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="mb-8" data-aos="fade-down">
-    <h1 class="text-3xl font-bold text-gray-800">📧 Email Subscribers</h1>
-    <p class="text-gray-500 mt-1">Send updates, offers, or news to all opted-in users.</p>
+    <h1 class="text-3xl font-bold text-gray-800">📧 Email All Users</h1>
+    <p class="text-gray-500 mt-1">Send updates, offers, or news to all registered users.</p>
 </div>
 
 <!-- Send Mail Form -->
@@ -28,7 +28,7 @@
     </div>
 
     <button type="submit" class="bg-[#536451] text-[#f3e9d5] hover:bg-[#f3e9d5] hover:text-[#536451] hover:scale-105 transition-transform duration-200 px-4 py-2 rounded">
-        📩 Send to All Subscribers
+        📩 Send to All Users
     </button>
 </form>
 
@@ -40,28 +40,22 @@
         <thead class="bg-[#536451] text-[#f3e9d5] uppercase text-sm">
             <tr>
                 <th class="py-3 px-6 text-left">#</th>
+                <th class="py-3 px-6 text-left">Name</th>
                 <th class="py-3 px-6 text-left">Email Address</th>
-                <th class="py-3 px-6 text-left">Subscribed At</th>
-                <th class="py-3 px-6 text-right">Actions</th>
+                <th class="py-3 px-6 text-left">Registered At</th>
             </tr>
         </thead>
         <tbody class="text-gray-700 text-sm">
-            @forelse ($emails as $index => $email)
+            @forelse ($emails as $index => $user)
             <tr class="border-b hover:bg-gray-50" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                 <td class="py-3 px-6">{{ $index + 1 }}</td>
-                <td class="py-3 px-6">{{ $email->email }}</td>
-                <td class="py-3 px-6">{{ $email->created_at->format('Y-m-d H:i') }}</td>
-                <td class="py-3 px-6 text-right">
-                    <form action="{{ route('admin.emails.destroy', $email) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="text-red-500 hover:underline text-sm">Delete</button>
-                    </form>
-                </td>
+                <td class="py-3 px-6">{{ $user->name }}</td>
+                <td class="py-3 px-6">{{ $user->email }}</td>
+                <td class="py-3 px-6">{{ $user->created_at->format('Y-m-d H:i') }}</td>
             </tr>
             @empty
             <tr data-aos="fade-up">
-                <td colspan="4" class="text-center text-gray-500 py-4">No subscribers yet.</td>
+                <td colspan="4" class="text-center text-gray-500 py-4">No users registered yet.</td>
             </tr>
             @endforelse
         </tbody>

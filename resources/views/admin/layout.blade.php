@@ -62,6 +62,10 @@
                     <span class="text-2xl">📧</span>
                     <span class="nav-text">Emails</span>
                 </a>
+                <a href="#" data-url="{{ url('admin/contact-messages') }}" onclick="loadAdminPage(event, this)" class="flex items-center gap-3 py-3 px-4 hover:bg-[#f3e9d5] hover:text-[#536451] {{ request()->is('admin/contact-messages') ? 'bg-[#536451] font-semibold' : '' }}">
+                    <span class="text-2xl">📨</span>
+                    <span class="nav-text">Contact Messages</span>
+                </a>
                 <a href="#" data-url="{{ url('admin/orders') }}" onclick="loadAdminPage(event, this)"
                     class="flex items-center gap-3 py-3 px-4 hover:bg-[#f3e9d5] hover:text-[#536451] {{ request()->is('admin/orders') ? 'bg-[#536451] font-semibold' : '' }}">
                     <span class="text-2xl">📦</span>

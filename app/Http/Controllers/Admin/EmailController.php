@@ -12,7 +12,8 @@ class EmailController extends Controller
 {
     public function index()
     {
-        $emails = Email::latest()->get(); // Fetch all subscribed emails
+        // Fetch all registered users
+        $emails = \App\Models\User::latest()->get(); 
         return view('admin.emails', compact('emails'));
     }
 
@@ -23,18 +24,19 @@ class EmailController extends Controller
             'message' => 'required|string',
         ]);
 
-        $subscribers = Email::pluck('email')->toArray();
+        // Get all unique emails from users
+        $subscribers = \App\Models\User::pluck('email')->unique()->toArray();
 
         foreach ($subscribers as $email) {
-            Mail::to($email)->queue(new AdminBulkEmail($request->subject, $request->message));
+            Mail::to($email)->send(new AdminBulkEmail($request->subject, $request->message));
         }
 
-        return redirect()->back()->with('success', 'Email sent to all subscribers.');
+        return redirect()->back()->with('success', 'Email sent to all ' . count($subscribers) . ' registered users.');
     }
 
-    public function destroy(Email $email)
+    public function destroy($id)
     {
-        $email->delete();
-        return redirect()->back()->with('success', 'Subscriber deleted.');
+        // Removed delete functionality as this is now a list of all users, not just subscriptions.
+        return redirect()->back()->with('error', 'Action disabled.');
     }
 }
