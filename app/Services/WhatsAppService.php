@@ -10,67 +10,79 @@ use Illuminate\Support\Facades\Log;
 
 class WhatsAppService
 {
-    protected $instanceId;
-    protected $token;
+    protected $phoneNumberId;
+    protected $accessToken;
+    protected $templateName;
 
     public function __construct()
     {
-        $this->instanceId = config('services.ultramsg.instance_id') ?: env('ULTRAMSG_INSTANCE_ID');
-        $this->token = config('services.ultramsg.token') ?: env('ULTRAMSG_TOKEN');
+        $this->phoneNumberId = env('WHATSAPP_PHONE_NUMBER_ID');
+        $this->accessToken = env('WHATSAPP_ACCESS_TOKEN');
+        $this->templateName = env('WHATSAPP_TEMPLATE_NAME', 'order_update'); // The template name approved in Meta
     }
 
-    /**
-     * Send order confirmation and invoice via WhatsApp
-     *
-     * @param Order $order
     public function sendUpdateWithInvoice(Order $order)
     {
-        if (!$this->instanceId || !$this->token) {
-            Log::warning('WhatsAppService: UltraMsg credentials not configured.');
+        if (!$this->phoneNumberId || !$this->accessToken) {
+            Log::warning('WhatsAppService: Meta Cloud API credentials not configured in .env');
             return false;
         }
 
         try {
-            // 1. Format the customer's phone number
-            $phone = $order->phone;
+            // 1. Format the customer's phone number (Meta requires country code without the + symbol)
+            $phone = preg_replace('/[^0-9]/', '', $order->phone);
             if (strlen($phone) == 10) {
-                $phone = '+91' . $phone;
-            } elseif (!str_starts_with($phone, '+')) {
-                $phone = '+' . $phone;
+                $phone = '91' . $phone;
             }
 
             // 2. Generate PDF Invoice
             $pdf = Pdf::loadView('frontend.invoice', compact('order'));
-            
             $filename = 'invoices/invoice_' . $order->order_id . '.pdf';
             Storage::disk('public')->put($filename, $pdf->output());
-            
             $mediaUrl = asset('storage/' . $filename);
 
-            // 3. Compose the WhatsApp message body based on status
-            $body = "Hi {$order->name},\n\n";
-            $body .= "Thank you for shopping with GET READY! 🛍️\n";
-            $body .= "Your order *{$order->order_id}* is currently: *" . strtoupper($order->status) . "*.\n\n";
-            if ($order->tracking_number) {
-                $body .= "Tracking AWB: *{$order->tracking_number}*\n\n";
-            }
-            $body .= "We have attached your official invoice to this message.\n\n";
-            $body .= "Track your order on our website. Stay stylish! 😎";
-
-            // 4. Send the WhatsApp message via UltraMsg REST API
-            $response = Http::asForm()->post("https://api.ultramsg.com/{$this->instanceId}/messages/document", [
-                'token' => $this->token,
-                'to' => $phone,
-                'document' => $mediaUrl,
-                'filename' => "invoice_{$order->order_id}.pdf",
-                'caption' => $body,
-            ]);
+            // 3. Send the WhatsApp Template message via Meta Cloud API
+            $response = Http::withToken($this->accessToken)
+                ->post("https://graph.facebook.com/v20.0/{$this->phoneNumberId}/messages", [
+                    'messaging_product' => 'whatsapp',
+                    'to' => $phone,
+                    'type' => 'template',
+                    'template' => [
+                        'name' => $this->templateName,
+                        'language' => [
+                            'code' => 'en'
+                        ],
+                        'components' => [
+                            [
+                                'type' => 'header',
+                                'parameters' => [
+                                    [
+                                        'type' => 'document',
+                                        'document' => [
+                                            'link' => $mediaUrl,
+                                            'filename' => "Invoice_{$order->order_id}.pdf"
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type' => 'body',
+                                'parameters' => [
+                                    ['type' => 'text', 'text' => $order->name],
+                                    ['type' => 'text', 'text' => $order->order_id],
+                                    ['type' => 'text', 'text' => strtoupper($order->status)],
+                                    ['type' => 'text', 'text' => $order->tracking_number ?? 'Pending']
+                                ]
+                            ]
+                        ]
+                    ]
+                ]);
 
             if ($response->successful()) {
-                Log::info("WhatsApp update sent successfully to {$phone} for Order {$order->order_id}");
+                Log::info("Meta WhatsApp update sent successfully to {$phone} for Order {$order->order_id}");
                 return true;
             } else {
-                Log::error("WhatsAppService API Error for Order {$order->order_id}: " . $response->body());
+                Log::error("Meta WhatsApp API Error for Order {$order->order_id}: " . $response->body());
                 return false;
             }
 
