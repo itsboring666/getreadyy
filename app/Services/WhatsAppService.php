@@ -27,56 +27,7 @@ class WhatsAppService
      */
     public function sendInvoice(Order $order)
     {
-        if (!$this->instanceId || !$this->token) {
-            Log::warning('WhatsAppService: UltraMsg credentials not configured.');
-            return false;
-        }
-
-        try {
-            // 1. Format the customer's phone number
-            $phone = $order->phone;
-            if (strlen($phone) == 10) {
-                $phone = '+91' . $phone;
-            } elseif (!str_starts_with($phone, '+')) {
-                $phone = '+' . $phone;
-            }
-
-            // 2. Generate PDF Invoice
-            $pdf = Pdf::loadView('frontend.invoice', compact('order'));
-            
-            $filename = 'invoices/invoice_' . $order->order_id . '.pdf';
-            Storage::disk('public')->put($filename, $pdf->output());
-            
-            $mediaUrl = asset('storage/' . $filename);
-
-            // 3. Compose the WhatsApp message body
-            $body = "Hi {$order->name},\n\n";
-            $body .= "Thank you for shopping with GET READY! 🛍️\n";
-            $body .= "Your order *{$order->order_id}* has been confirmed.\n\n";
-            $body .= "Total Amount: ₹" . number_format($order->total_amount, 2) . "\n";
-            $body .= "We have attached your official invoice to this message.\n\n";
-            $body .= "Track your order on our website. Stay stylish! 😎";
-
-            // 4. Send the WhatsApp message via UltraMsg REST API
-            $response = Http::asForm()->post("https://api.ultramsg.com/{$this->instanceId}/messages/document", [
-                'token' => $this->token,
-                'to' => $phone,
-                'document' => $mediaUrl,
-                'filename' => "invoice_{$order->order_id}.pdf",
-                'caption' => $body,
-            ]);
-
-            if ($response->successful()) {
-                Log::info("WhatsApp invoice sent successfully to {$phone} for Order {$order->order_id}");
-                return true;
-            } else {
-                Log::error("WhatsAppService API Error for Order {$order->order_id}: " . $response->body());
-                return false;
-            }
-
-        } catch (\Exception $e) {
-            Log::error("WhatsAppService Error for Order {$order->order_id}: " . $e->getMessage());
-            return false;
-        }
+        // Disabled UltraMsg API per user request to use free Click-to-Chat instead.
+        return false;
     }
 }

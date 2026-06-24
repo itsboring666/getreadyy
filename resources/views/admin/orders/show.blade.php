@@ -86,6 +86,30 @@
                         Update Order
                     </button>
                 </form>
+
+                @php
+                    $whatsappPhone = $order->phone;
+                    if (strlen($whatsappPhone) == 10) {
+                        $whatsappPhone = '91' . $whatsappPhone;
+                    }
+                    $whatsappPhone = preg_replace('/[^0-9]/', '', $whatsappPhone);
+
+                    $whatsappMessage = "Hi {$order->name},\n\nThank you for shopping with GET READY! 🛍️\n";
+                    $whatsappMessage .= "Your order *{$order->order_id}* is currently: *".strtoupper($order->status)."*.\n\n";
+                    if ($order->tracking_number) {
+                        $whatsappMessage .= "Tracking AWB: *{$order->tracking_number}*\n\n";
+                    }
+                    $whatsappMessage .= "You can view your official invoice here: " . route('invoice.generate', $order->id) . "\n\n";
+                    $whatsappMessage .= "Track your order on our website. Stay stylish! 😎";
+                    
+                    $whatsappUrl = "https://wa.me/{$whatsappPhone}?text=" . urlencode($whatsappMessage);
+                @endphp
+
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <a href="{{ $whatsappUrl }}" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-2 rounded shadow hover:bg-[#20b858] font-bold transition">
+                        <i class="fab fa-whatsapp text-lg"></i> Notify Customer via WhatsApp
+                    </a>
+                </div>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="250">
