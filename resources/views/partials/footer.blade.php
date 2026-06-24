@@ -4,9 +4,9 @@
         {{-- Brand --}}
         <div>
             <div style="margin-bottom: 20px; display: inline-block; position: relative;">
-                <div style="position: absolute; inset: -4px; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0)); border-radius: 50%; animation: gr-spin-slow 8s linear infinite; pointer-events: none;"></div>
+                <div style="position: absolute; inset: -2px; background: linear-gradient(45deg, rgba(255,255,255,0.15), rgba(255,255,255,0)); border-radius: 6px; pointer-events: none;"></div>
                 <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                    style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.05) rotate(5deg)';" onmouseout="this.style.transform='scale(1) rotate(0deg)';">
+                    style="width: 140px; height: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
             </div>
             <p class="gr-footer-tagline" style="max-width: 180px; line-height: 1.6;">Premium Men's Clothing.
                 Chengalpattu, Tamil Nadu.</p>

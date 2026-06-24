@@ -751,7 +751,6 @@
                     </div>
                 @endif
 
-                <a href="{{ $featBtnLink }}" class="gr-editorial-btn">{{ $featBtnText }}</a>
             </div>
             <div class="gr-editorial-images">
                 <div class="gr-editorial-img-1">
@@ -764,64 +763,7 @@
         </div>
     </section>
 
-    {{-- ─── QUICK ACTIONS (Navigation) ────────────────────────── --}}
-    <section class="gr-quick-actions" style="padding: 40px 24px 20px; max-width: var(--max-width); margin: 60px auto 0;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
 
-            <a href="{{ route('outfit-builder') }}" class="gr-trust-card"
-                style="padding: 24px 16px; text-align: center; text-decoration: none; display: block;">
-                <div
-                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
-                    <i class="fas fa-layer-group" style="font-size: 18px; color: var(--accent);"></i>
-                </div>
-                <h3
-                    style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px; color: var(--text); letter-spacing: 0.5px; text-transform: uppercase;">
-                    OUTFIT BUILDER</h3>
-                <p style="font-family: var(--font); font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Spin
-                    the wheel for a curated look.</p>
-            </a>
-
-            <a href="{{ route('orders.index') }}" class="gr-trust-card"
-                style="padding: 24px 16px; text-align: center; text-decoration: none; display: block;">
-                <div
-                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
-                    <i class="fas fa-box-open" style="font-size: 18px; color: var(--accent);"></i>
-                </div>
-                <h3
-                    style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px; color: var(--text); letter-spacing: 0.5px; text-transform: uppercase;">
-                    ORDER HISTORY</h3>
-                <p style="font-family: var(--font); font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Track
-                    and manage past orders.</p>
-            </a>
-
-            <a href="{{ route('contact') }}" class="gr-trust-card"
-                style="padding: 24px 16px; text-align: center; text-decoration: none; display: block;">
-                <div
-                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
-                    <i class="fas fa-headset" style="font-size: 18px; color: var(--accent);"></i>
-                </div>
-                <h3
-                    style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px; color: var(--text); letter-spacing: 0.5px; text-transform: uppercase;">
-                    CONTACT US</h3>
-                <p style="font-family: var(--font); font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Get
-                    support via email or WhatsApp.</p>
-            </a>
-
-            <a href="{{ route('wishlist.index') }}" class="gr-trust-card"
-                style="padding: 24px 16px; text-align: center; text-decoration: none; display: block;">
-                <div
-                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid #000;">
-                    <i class="fas fa-heart" style="font-size: 18px; color: var(--accent);"></i>
-                </div>
-                <h3
-                    style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px; color: var(--text); letter-spacing: 0.5px; text-transform: uppercase;">
-                    MY WISHLIST</h3>
-                <p style="font-family: var(--font); font-size: 11px; color: var(--text-secondary); line-height: 1.5;">View
-                    your saved premium items.</p>
-            </a>
-
-        </div>
-    </section>
 
     {{-- ─── SPIN THE OUTFIT WHEEL (CTA) ───────────────────────── --}}
     <section class="gr-cta-upgraded"

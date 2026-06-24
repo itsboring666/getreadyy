@@ -220,7 +220,7 @@
 
     {{-- ── Premium Floating Logo Badge ── --}}
     <div class="gr-floating-badge" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: rgba(5, 5, 5, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); cursor: pointer; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.1) translateY(-5px)'; this.style.borderColor='rgba(255,255,255,0.4)';" onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.borderColor='rgba(255,255,255,0.15)';">
-        <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 54px; height: 54px; object-fit: cover; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.5s ease;" onmouseover="this.style.transform='rotate(360deg)';" onmouseout="this.style.transform='rotate(0deg)';">
+        <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY" style="width: 54px; height: 54px; object-fit: contain; background: #0a0a0a; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.5s ease;" onmouseover="this.style.transform='rotate(360deg)';" onmouseout="this.style.transform='rotate(0deg)';">
         
         {{-- Circular Rotating Text Ring --}}
         <div style="position: absolute; inset: -18px; animation: gr-spin-slow 12s linear infinite; pointer-events: none; opacity: 0.85;">
