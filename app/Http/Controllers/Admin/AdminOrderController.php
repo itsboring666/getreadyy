@@ -52,6 +52,9 @@ class AdminOrderController extends Controller
             }
         }
 
+        // Automatically send WhatsApp update with invoice
+        (new \App\Services\WhatsAppService())->sendUpdateWithInvoice($order);
+
         return redirect()->back()->with('success', 'Order status updated successfully.');
     }
 }

@@ -218,7 +218,7 @@ class CheckoutController extends Controller
             }
 
             // Send WhatsApp Invoice
-            (new WhatsAppService())->sendInvoice($order);
+            (new WhatsAppService())->sendUpdateWithInvoice($order);
 
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])->with('success', 'Order placed successfully via Cash on Delivery.');
         }
@@ -258,7 +258,7 @@ class CheckoutController extends Controller
             }
 
             // Send WhatsApp Invoice
-            (new WhatsAppService())->sendInvoice($order);
+            (new WhatsAppService())->sendUpdateWithInvoice($order);
 
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])
                              ->with('success', 'Payment successful (Simulated for testing).');
@@ -343,7 +343,7 @@ class CheckoutController extends Controller
                 }
 
                 // Send WhatsApp Invoice
-                (new WhatsAppService())->sendInvoice($order);
+                (new WhatsAppService())->sendUpdateWithInvoice($order);
             }
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])->with('success', 'Payment successful and order placed.');
         }
@@ -535,7 +535,7 @@ class CheckoutController extends Controller
         }
 
         // Send WhatsApp Invoice
-        (new WhatsAppService())->sendInvoice($order);
+        (new WhatsAppService())->sendUpdateWithInvoice($order);
 
         return redirect()->route('checkout.thankyou', ['orderId' => $orderId])
             ->with('success', $isMock ? 'Razorpay sandbox payment successful!' : 'Razorpay payment successful!');
