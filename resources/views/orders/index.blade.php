@@ -17,17 +17,17 @@
         </div>
 
         @if ($orders->isEmpty())
-        <div style="text-align: center; padding: 80px 20px; background: var(--white); border: 1px solid var(--border-light);">
+        <div style="text-align: center; padding: 80px 20px; background: var(--surface); border: 1px solid var(--border);">
             <i class="fas fa-box-open" aria-hidden="true" style="font-size: 48px; color: var(--border); margin-bottom: 24px;"></i>
-            <h3 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 12px;">NO RECORD FOUND</h3>
-            <p style="color: var(--text-muted); font-family: var(--font); font-size: 14px; max-width: 400px; margin: 0 auto 24px;">You haven't placed any orders with us yet. When you do, they will be logged here.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 12px; color: var(--text);">NO RECORD FOUND</h3>
+            <p style="color: var(--text-secondary); font-family: var(--font); font-size: 14px; max-width: 400px; margin: 0 auto 24px;">You haven't placed any orders with us yet. When you do, they will be logged here.</p>
             <a href="{{ route('products.all') }}" class="gr-hero-btn-primary" style="display: inline-flex;">BEGIN DEPLOYMENT</a>
         </div>
         @else
-        <div style="background: var(--white); border: 1px solid var(--border-light); overflow: hidden;">
+        <div style="background: var(--surface); border: 1px solid var(--border); overflow: hidden;">
             <div style="overflow-x: auto;">
                 <table style="width: 100%; text-align: left; border-collapse: collapse; min-width: 800px;">
-                    <thead style="background: var(--bg); border-bottom: 1px solid var(--border-light);">
+                    <thead style="background: var(--bg); border-bottom: 1px solid var(--border);">
                         <tr>
                             <th style="padding: 16px 24px; font-family: var(--font); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);">Order ID</th>
                             <th style="padding: 16px 24px; font-family: var(--font); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);">Date</th>
@@ -38,7 +38,7 @@
                     </thead>
                     <tbody>
                         @foreach ($orders as $order)
-                        <tr style="border-bottom: 1px solid var(--border-light); transition: background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='transparent'">
+                        <tr style="border-bottom: 1px solid var(--border); transition: background 0.2s;" onmouseover="this.style.background='var(--bg-card)'" onmouseout="this.style.background='transparent'">
                             <td style="padding: 24px; font-family: monospace; font-weight: 600; color: var(--text); font-size: 14px;">{{ $order->order_id }}</td>
                             <td style="padding: 24px; color: var(--text-secondary); font-size: 14px;">{{ $order->created_at->setTimezone('Asia/Kolkata')->format('d M Y') }}</td>
                             <td style="padding: 24px; font-weight: 600; font-size: 15px;">₹{{ number_format($order->total_amount, 2) }}</td>
