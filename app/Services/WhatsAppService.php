@@ -48,7 +48,7 @@ class WhatsAppService
                     'to' => $phone,
                     'type' => 'template',
                     'template' => [
-                        'name' => $this->templateName,
+                        'name' => env('WHATSAPP_TEMPLATE_NAME', 'order_successful'),
                         'language' => [
                             'code' => 'en'
                         ],
@@ -69,9 +69,7 @@ class WhatsAppService
                                 'type' => 'body',
                                 'parameters' => [
                                     ['type' => 'text', 'text' => $order->name],
-                                    ['type' => 'text', 'text' => $order->order_id],
-                                    ['type' => 'text', 'text' => strtoupper($order->status)],
-                                    ['type' => 'text', 'text' => $order->tracking_number ?? 'Pending']
+                                    ['type' => 'text', 'text' => $order->order_id]
                                 ]
                             ]
                         ]
