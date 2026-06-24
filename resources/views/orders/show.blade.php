@@ -56,7 +56,7 @@
         </div>
 
         {{-- Tracking Timeline --}}
-        <div style="background: var(--white); border: 1px solid var(--border-light); padding: 40px; margin-bottom: 32px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 40px; margin-bottom: 32px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
                 <h2 style="font-family: var(--font-heading); font-size: 24px;">STATUS TRACKER</h2>
                 @if($order->tracking_number)
@@ -91,7 +91,7 @@
             @else
                 <div style="display: flex; justify-content: space-between; position: relative; margin-top: 20px;">
                     <!-- Line -->
-                    <div style="position: absolute; top: 15px; left: 0; width: 100%; height: 2px; background: var(--border-light); z-index: 0;"></div>
+                    <div style="position: absolute; top: 15px; left: 0; width: 100%; height: 2px; background: var(--border); z-index: 0;"></div>
                     <div style="position: absolute; top: 15px; left: 0; height: 2px; background: var(--text); z-index: 0; transition: width 1s ease-in-out; width: {{ $currentIndex >= 0 ? ($currentIndex / (count($statuses) - 1)) * 100 : 0 }}%;"></div>
 
                     @foreach($statuses as $index => $statusText)
@@ -100,7 +100,7 @@
                             $isCurrent = $index === $currentIndex;
                         @endphp
                         <div style="display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1;">
-                            <div style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; background: {{ $isCompleted ? 'var(--text)' : 'var(--white)' }}; color: {{ $isCompleted ? 'var(--white)' : 'var(--text-secondary)' }}; border: 2px solid {{ $isCompleted ? 'var(--text)' : 'var(--border-light)' }}; margin-bottom: 12px; transition: all 0.3s;">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; background: {{ $isCompleted ? 'var(--text)' : 'var(--surface)' }}; color: {{ $isCompleted ? 'var(--surface)' : 'var(--text-secondary)' }}; border: 2px solid {{ $isCompleted ? 'var(--text)' : 'var(--border)' }}; margin-bottom: 12px; transition: all 0.3s;">
                                 @if($isCompleted) <i class="fas fa-check"></i> @else {{ $index + 1 }} @endif
                             </div>
                             <span style="font-size: 11px; font-weight: {{ $isCurrent ? '700' : '600' }}; color: {{ $isCurrent ? 'var(--text)' : 'var(--text-secondary)' }}; text-transform: uppercase; letter-spacing: 0.1em;">{{ $statusText }}</span>
@@ -113,8 +113,8 @@
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px;" class="order-grid">
             
             {{-- Items --}}
-            <div style="background: var(--white); border: 1px solid var(--border-light); padding: 40px;">
-                <h2 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light);">MANIFEST</h2>
+            <div style="background: var(--surface); border: 1px solid var(--border); padding: 40px;">
+                <h2 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">MANIFEST</h2>
                 
                 <div style="display: flex; flex-direction: column; gap: 32px;">
                     @foreach ($order->items as $item)
@@ -155,8 +155,8 @@
             {{-- Summary Sidebar --}}
             <div style="display: flex; flex-direction: column; gap: 32px;">
                 
-                <div style="background: var(--white); border: 1px solid var(--border-light); padding: 40px;">
-                    <h2 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light);">SUMMARY</h2>
+                <div style="background: var(--surface); border: 1px solid var(--border); padding: 40px;">
+                    <h2 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">SUMMARY</h2>
                     
                     @php
                         $shipping = $order->shipping_fee ?? 0.00;
@@ -186,14 +186,14 @@
                     </div>
                 </div>
 
-                <div style="background: var(--bg); border: 1px solid var(--border-light); padding: 40px;">
+                <div style="background: var(--bg); border: 1px solid var(--border); padding: 40px;">
                     <h2 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 20px;">SHIPPING DETS</h2>
                     <div style="font-family: var(--font); font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
                         <span style="display: block; font-weight: 700; color: var(--text); margin-bottom: 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">{{ $order->name }}</span>
                         <span style="display: block;">{{ $order->address }}</span>
                         <span style="display: block;">{{ $order->city }}, {{ $order->state }}</span>
                         <span style="display: block; margin-bottom: 12px;">{{ $order->zip }}</span>
-                        <span style="display: block; padding-top: 12px; border-top: 1px solid var(--border-light);">PHONE: {{ $order->phone }}</span>
+                        <span style="display: block; padding-top: 12px; border-top: 1px solid var(--border);">PHONE: {{ $order->phone }}</span>
                     </div>
                 </div>
 
