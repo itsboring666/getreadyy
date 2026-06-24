@@ -94,13 +94,9 @@
                     }
                     $whatsappPhone = preg_replace('/[^0-9]/', '', $whatsappPhone);
 
-                    $whatsappMessage = "Hi {$order->name},\n\nThank you for shopping with GET READY! 🛍️\n";
-                    $whatsappMessage .= "Your order *{$order->order_id}* is currently: *".strtoupper($order->status)."*.\n\n";
-                    if ($order->tracking_number) {
-                        $whatsappMessage .= "Tracking AWB: *{$order->tracking_number}*\n\n";
-                    }
-                    $whatsappMessage .= "You can view your order details in your account here: " . route('orders.show', $order->order_id) . "\n\n";
-                    $whatsappMessage .= "Stay stylish! 😎";
+                    $whatsappMessage = "Hi {$order->name},\n\nYour order *{$order->order_id}* was successful! 🎉\n\n";
+                    $whatsappMessage .= "You can view your order details and download your official invoice here: " . route('orders.show', $order->order_id) . "\n\n";
+                    $whatsappMessage .= "Thank you for shopping with GET READY! Stay stylish! 😎";
                     
                     $whatsappUrl = "https://wa.me/{$whatsappPhone}?text=" . urlencode($whatsappMessage);
                 @endphp
