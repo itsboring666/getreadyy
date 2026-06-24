@@ -6,6 +6,18 @@
     <p class="text-gray-500 mt-1">Send updates, offers, or news to all registered users.</p>
 </div>
 
+@if(session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6 flex items-center gap-2">
+        <span>✅</span> {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 flex items-center gap-2">
+        <span>❌</span> {{ session('error') }}
+    </div>
+@endif
+
 <!-- Send Mail Form -->
 <div class="bg-white rounded-xl shadow p-6 mb-10" data-aos="zoom-in-up">
     <form action="{{ route('admin.emails.send') }}" method="POST">
