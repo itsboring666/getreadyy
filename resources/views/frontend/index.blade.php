@@ -10,13 +10,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
-           HERO — "Dispatch" redesign
-           Concept: the hero reads like a printed zine cover / press
-           dispatch — corner stamp, hairline rule under the eyebrow,
-           tightened scanline as print-texture (not noise), and one
-           orchestrated entrance instead of three unrelated ambient
-           loops. Badge becomes a rotating ink stamp, not a generic
-           spinning circle.
+           HERO — Classic overlap box styling
            ═══════════════════════════════════════════════════════════ */
 
         .gr-hero {
@@ -29,45 +23,7 @@
             margin: 40px auto !important;
             padding: 56px 64px !important;
             box-sizing: border-box !important;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        /* Corner stamp — registration-mark style, reinforces the
-           "printed dispatch" idea without competing with the heading */
-        .gr-hero::before {
-            content: 'VOL. III';
-            position: absolute;
-            top: 18px;
-            right: 22px;
-            z-index: 3;
-            font-family: var(--font);
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.25em;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 4px 8px;
-            pointer-events: none;
-        }
-
-        /* Scanline kept, but tightened + lowered so it reads as paper
-           texture rather than a layer of noise sitting on top of copy */
-        .gr-hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg,
-                    transparent,
-                    transparent 3px,
-                    rgba(0, 0, 0, 0.05) 3px,
-                    rgba(0, 0, 0, 0.05) 4px);
-            pointer-events: none;
-            z-index: 1;
-            mix-blend-mode: multiply;
+            overflow: visible !important;
         }
 
         .gr-hero-text,
@@ -76,184 +32,52 @@
             z-index: 2;
         }
 
-        /* ─── One orchestrated entrance ───
-           Each element still fades up, but timed as a single sequence
-           (label → rule → heading → subtitle → buttons → images) so it
-           reads as one deliberate reveal, not scattered effects. */
-        @keyframes heroReveal {
+        /* 1. Hero Text Reveal Animation */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(24px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        .gr-hero-text>*,
-        .gr-hero-images {
-            animation: heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .gr-hero-text > * {
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
+        .gr-hero-text > .gr-hero-label { animation-delay: 0.1s; }
+        .gr-hero-text > .gr-hero-heading { animation-delay: 0.3s; }
+        .gr-hero-text > .gr-hero-subtitle { animation-delay: 0.5s; }
+        .gr-hero-text > .gr-hero-btns { animation-delay: 0.7s; }
+        .gr-hero-text > .gr-hero-barcode { animation-delay: 0.9s; }
 
-        .gr-hero-label {
-            animation-delay: 0.05s;
-            position: relative;
-            font-family: var(--font);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--accent);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+        /* 2. Floating Image Effect for Hero Images */
+        @keyframes floatImage1 {
+            0%, 100% { transform: translateY(0px) rotate(-1deg); }
+            50% { transform: translateY(-8px) rotate(0.5deg); }
         }
-
-        /* Hairline rule under the eyebrow — a structural device that
-           actually does something: separates "issue metadata" from
-           the headline, like a masthead rule under a dateline */
-        .gr-hero-label::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 64px;
-            height: 2px;
-            background: var(--primary);
+        @keyframes floatImage2 {
+            0%, 100% { transform: translateY(0px) rotate(1deg); }
+            50% { transform: translateY(-10px) rotate(-0.5deg); }
         }
-
-        .gr-hero-heading {
-            animation-delay: 0.18s;
-        }
-
-        .gr-hero-subtitle {
-            animation-delay: 0.32s;
-        }
-
-        .gr-hero-btns {
-            animation-delay: 0.46s;
-        }
-
-        .gr-hero-images {
-            animation-delay: 0.3s;
-        }
-
-        /* ─── Hero image composition ───
-           Two images, deliberately offset, sharing one quiet float
-           instead of two competing independent loops. */
-        .gr-hero-images {
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            min-height: 420px;
-        }
-
-        .gr-hero-img-1,
-        .gr-hero-img-2 {
-            position: relative;
-            overflow: hidden;
-            border: 2px solid var(--border);
-            box-shadow: 6px 6px 0px rgba(153, 27, 27, 0.35);
-        }
-
         .gr-hero-img-1 {
-            align-self: start;
-            margin-top: 36px;
-            aspect-ratio: 3/4;
+            animation: floatImage1 7s ease-in-out infinite;
         }
-
         .gr-hero-img-2 {
-            align-self: end;
-            margin-bottom: 36px;
-            aspect-ratio: 3/4;
-        }
-
-        .gr-hero-img-1 img,
-        .gr-hero-img-2 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        @keyframes heroImageDrift {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        .gr-hero-img-1 {
-            animation: heroImageDrift 8s ease-in-out infinite;
-        }
-
-        .gr-hero-img-2 {
-            animation: heroImageDrift 8s ease-in-out infinite;
-            animation-delay: 4s;
-        }
-
-        /* ─── Badge: rotating ink stamp ───
-           Replaces the generic spinning circle with a stamp motif that
-           matches the dispatch concept — sits on the seam between the
-           two images, looks pressed rather than floating. */
-        .gr-hero-circle-badge {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 4;
-            width: 92px;
-            height: 92px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 2px solid var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
-            animation: spinBadge 18s linear infinite, heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0s, 0.6s;
-        }
-
-        .gr-hero-circle-badge span {
-            font-family: var(--font);
-            font-size: 8px;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--white);
-            text-align: center;
-            line-height: 1.5;
-        }
-
-        @keyframes spinBadge {
-            from {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+            animation: floatImage2 7s ease-in-out infinite;
+            animation-delay: 3.5s;
         }
 
         .gr-hero-circle-badge:hover {
-            animation-play-state: paused, running;
-            transform: translate(-50%, -50%) scale(1.12);
+            animation-play-state: paused;
+            transform: scale(1.1);
         }
 
         /* Respect reduced-motion preference */
         @media (prefers-reduced-motion: reduce) {
-
             .gr-hero-text>*,
-            .gr-hero-images,
             .gr-hero-img-1,
             .gr-hero-img-2,
             .gr-hero-circle-badge {
@@ -618,19 +442,28 @@
         </script>
 
         <div class="gr-hero-text">
-            <div class="gr-hero-label">FALL / WINTER '26 — VOL. III</div>
-            <h1 class="gr-hero-heading" style="text-transform: uppercase;">
-                {!! $heroTitle !!}
+            <div class="gr-hero-label">FALL / WINTER '28 — VOL. III</div>
+            <h1 class="gr-hero-heading">
+                BUILT<br>
+                FOR THE<br>
+                <em>long</em>&nbsp;&nbsp;HAUL.
             </h1>
             <p class="gr-hero-subtitle">
-                {{ $heroSubtitle }}
+                Heavyweight tees, raw selvage denim, and trucker jackets cut for the road less marketed.
             </p>
-             <div class="gr-hero-btns">
-                <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary">{{ str_replace(['LINNEN', 'linnen'], ['LINEN', 'linen'], $heroBtnText) }}</a>
+            <div class="gr-hero-btns">
+                <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
                 <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
+            </div>
+
+            {{-- Vintage Barcode stamp --}}
+            <div class="gr-hero-barcode" style="margin-top: 40px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: var(--text-light); z-index: 3;">
+                <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
+                <div style="font-family: var(--font); font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">SPEC-818 // LOT-OUTFIT</div>
             </div>
         </div>
         <div class="gr-hero-images">
+            <div class="gr-hero-tag">NO. 847</div>
             <div class="gr-hero-img-1">
                 <img src="{{ $heroImg1 }}" onerror="this.src='{{ asset('assets/images/hero1.jpg') }}'" alt="Lifestyle editorial" loading="eager">
             </div>
@@ -638,7 +471,7 @@
                 <img src="{{ $heroImg2 }}" onerror="this.src='{{ asset('assets/images/hero2.jpg') }}'" alt="Street style fashion" loading="eager">
             </div>
             <div class="gr-hero-circle-badge">
-                <span>NEW DROP<br>•<br>LIMITED<br>STOCK</span>
+                <span>STOCK<br>LIMITED<br>•<br>RVR DROP</span>
             </div>
         </div>
     </section>
