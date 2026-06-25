@@ -23,7 +23,7 @@ class NewArrivalController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'price'       => 'required|numeric|min:0',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,webp,avif|max:5120',
+            'image'       => 'required|file|max:30720|mimes:jpg,jpeg,png,gif,webp,bmp,tiff,tif,heic,heif,avif',
             'status'      => 'required|in:active,inactive',
         ]);
 
@@ -63,7 +63,7 @@ class NewArrivalController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'price'       => 'required|numeric|min:0',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp,avif|max:5120',
+            'image'       => 'nullable|file|max:30720|mimes:jpg,jpeg,png,gif,webp,bmp,tiff,tif,heic,heif,avif',
             'status'      => 'required|in:active,inactive',
         ]);
 

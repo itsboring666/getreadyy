@@ -15,6 +15,12 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Order Summary & Items -->
         <div class="md:col-span-2 space-y-6">
@@ -31,7 +37,8 @@
                             @endif
                             <div class="flex-1">
                                 <h4 class="font-bold text-gray-800">{{ $item->product_name }}</h4>
-                                <p class="text-sm text-gray-600">Size: {{ $item->size }} | Qty: {{ $item->quantity }}</p>
+                                <p class="text-sm text-gray-600">Size: {{ $item->size }} &nbsp;|&nbsp; Qty: {{ $item->quantity }}</p>
+                                <p class="text-sm text-gray-500 mt-1">Unit Price: ₹{{ number_format($item->price, 2) }}</p>
                             </div>
                             <div class="font-bold text-gray-800">
                                 ₹{{ number_format($item->price * $item->quantity, 2) }}
@@ -45,20 +52,26 @@
                 <h3 class="text-lg font-bold mb-4 border-b pb-2">Customer & Shipping Info</h3>
                 <div class="grid grid-cols-2 gap-4 text-sm text-gray-700">
                     <div>
-                        <p class="font-semibold text-gray-900">{{ $order->name }}</p>
-                        <p>{{ $order->email }}</p>
-                        <p>{{ $order->phone }}</p>
+                        <p class="font-semibold text-gray-900 text-base">{{ $order->name }}</p>
+                        <p class="mt-1">
+                            <a href="mailto:{{ $order->email }}" class="text-blue-600 hover:underline">{{ $order->email }}</a>
+                        </p>
+                        <p class="mt-1">
+                            <a href="tel:{{ $order->phone }}" class="text-gray-700">{{ $order->phone }}</a>
+                        </p>
                     </div>
                     <div>
                         <p>{{ $order->address }}</p>
-                        <p>{{ $order->city }}, {{ $order->state }} - {{ $order->zip }}</p>
+                        <p>{{ $order->city }}, {{ $order->state }} — {{ $order->zip }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tracking & Status Update -->
+        <!-- Sidebar: Status, Actions, Financials -->
         <div class="space-y-6">
+
+            <!-- Status Update -->
             <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="200">
                 <h3 class="text-lg font-bold mb-4 border-b pb-2">Order Status</h3>
                 
@@ -69,17 +82,19 @@
                     <div class="mb-4">
                         <label class="block text-gray-700 font-medium mb-2">Status</label>
                         <select name="status" class="w-full border-gray-300 rounded shadow-sm focus:ring-[#536451] focus:border-[#536451]">
-                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="paid" {{ $order->status == 'paid' ? 'selected' : '' }}>Paid</option>
-                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                            <option value="pending"   {{ $order->status == 'pending'   ? 'selected' : '' }}>Pending</option>
+                            <option value="paid"      {{ $order->status == 'paid'      ? 'selected' : '' }}>Paid</option>
+                            <option value="shipped"   {{ $order->status == 'shipped'   ? 'selected' : '' }}>Shipped</option>
                             <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                             <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         </select>
                     </div>
 
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <label class="block text-gray-700 font-medium mb-2">Tracking Number / AWB</label>
-                        <input type="text" name="tracking_number" value="{{ $order->tracking_number }}" placeholder="e.g. BLUDART12345" class="w-full border-gray-300 rounded shadow-sm focus:ring-[#536451] focus:border-[#536451]">
+                        <input type="text" name="tracking_number" value="{{ $order->tracking_number }}"
+                            placeholder="e.g. BLUDART12345"
+                            class="w-full border-gray-300 rounded shadow-sm focus:ring-[#536451] focus:border-[#536451]">
                     </div>
 
                     <button type="submit" class="w-full bg-[#536451] text-[#f3e9d5] py-2 rounded shadow hover:opacity-90 font-bold transition">
@@ -101,19 +116,68 @@
                     $whatsappUrl = "https://wa.me/{$whatsappPhone}?text=" . urlencode($whatsappMessage);
                 @endphp
 
-                <div class="mt-4 pt-4 border-t border-gray-200">
-                    <a href="{{ $whatsappUrl }}" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-2 rounded shadow hover:bg-[#20b858] font-bold transition">
-                        <i class="fab fa-whatsapp text-lg"></i> Notify Customer via WhatsApp
+                <div class="mt-3 pt-3 border-t border-gray-200">
+                    <a href="{{ $whatsappUrl }}" target="_blank"
+                        class="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-2 rounded shadow hover:bg-[#20b858] font-bold transition">
+                        <i class="fab fa-whatsapp text-lg"></i> Notify via WhatsApp
                     </a>
                 </div>
             </div>
 
+            <!-- Send Email -->
+            <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="220">
+                <h3 class="text-lg font-bold mb-4 border-b pb-2">📧 Email Customer</h3>
+                <p class="text-sm text-gray-500 mb-4">
+                    Send a confirmation email to <strong>{{ $order->email ?: 'N/A' }}</strong> with full order details.
+                </p>
+                @if($order->email)
+                <form action="{{ route('admin.orders.sendConfirmation', $order->id) }}" method="POST"
+                      onsubmit="return confirm('Send order confirmation email to {{ $order->email }}?')">
+                    @csrf
+                    <button type="submit"
+                        class="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-2 rounded shadow hover:bg-blue-700 font-bold transition">
+                        <i class="fas fa-envelope"></i> Send Confirmation Email
+                    </button>
+                </form>
+                @else
+                <div class="text-sm text-red-500 italic">No email address on file for this order.</div>
+                @endif
+
+                <div class="mt-3">
+                    <a href="{{ route('admin.orders.invoice', $order->id) }}" target="_blank"
+                        class="w-full flex items-center justify-center gap-2 bg-gray-800 text-white py-2 rounded shadow hover:bg-black font-bold transition">
+                        <i class="fas fa-file-pdf"></i> Download Invoice PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Financials -->
             <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="250">
                 <h3 class="text-lg font-bold mb-4 border-b pb-2">Financials</h3>
+                @php
+                    $shippingFee  = $order->shipping_fee ?? 0;
+                    $discountAmt  = $order->discount_amount ?? 0;
+                    $subtotalAmt  = $order->total_amount - $shippingFee + $discountAmt;
+                @endphp
                 <div class="space-y-2 text-sm">
-                    <div class="flex justify-between text-gray-600"><span>Subtotal:</span> <span>₹{{ number_format($order->total_amount, 2) }}</span></div>
-                    <div class="flex justify-between text-gray-600"><span>Shipping:</span> <span>Free</span></div>
-                    <div class="flex justify-between font-bold text-lg text-gray-800 border-t pt-2 mt-2"><span>Total:</span> <span>₹{{ number_format($order->total_amount, 2) }}</span></div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Subtotal:</span>
+                        <span>₹{{ number_format($subtotalAmt, 2) }}</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Shipping:</span>
+                        <span>{{ $shippingFee > 0 ? '₹' . number_format($shippingFee, 2) : 'Free' }}</span>
+                    </div>
+                    @if($discountAmt > 0)
+                    <div class="flex justify-between text-orange-600">
+                        <span>Discount{{ $order->coupon_code ? ' (' . $order->coupon_code . ')' : '' }}:</span>
+                        <span>— ₹{{ number_format($discountAmt, 2) }}</span>
+                    </div>
+                    @endif
+                    <div class="flex justify-between font-bold text-lg text-gray-800 border-t pt-2 mt-2">
+                        <span>Total:</span>
+                        <span>₹{{ number_format($order->total_amount, 2) }}</span>
+                    </div>
                 </div>
             </div>
         </div>

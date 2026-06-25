@@ -177,15 +177,15 @@
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">Image</label>
-        <input type="file" name="image" accept="image/*" class="w-full">
+        <label class="block text-sm font-medium mb-1">Image <span class="text-gray-400 text-xs">(JPG, PNG, WEBP, HEIC, AVIF, TIFF — up to 20MB)</span></label>
+        <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="w-full">
         @error('image') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
 
     @foreach ([2,3,4] as $n)
     <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">Additional Image {{ $n - 1 }}</label>
-        <input type="file" name="image_{{ $n }}" accept="image/*" class="w-full">
+        <label class="block text-sm font-medium mb-1">Additional Image {{ $n - 1 }} <span class="text-gray-400 text-xs">(optional)</span></label>
+        <input type="file" name="image_{{ $n }}" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="w-full">
         @error("image_$n") <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
     @endforeach
@@ -254,29 +254,29 @@
 
 
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Image</label>
+                <label class="block text-sm font-medium mb-1">Image <span class="text-gray-400 text-xs">(JPG, PNG, WEBP, HEIC, AVIF, TIFF — up to 20MB)</span></label>
                 <img id="editImagePreview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
-                <input type="file" name="image" class="w-full">
+                <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="w-full">
             </div>
 
             <!-- Optional: let admin re-upload or skip -->
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Additional Image 2</label>
+                <label class="block text-sm font-medium mb-1">Additional Image 2 <span class="text-gray-400 text-xs">(optional)</span></label>
                 <img id="editImage2Preview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
-                <input type="file" name="image_2" accept="image/*" class="w-full" />
+                <input type="file" name="image_2" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="w-full" />
             </div>
 
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Additional Image 3</label>
+                <label class="block text-sm font-medium mb-1">Additional Image 3 <span class="text-gray-400 text-xs">(optional)</span></label>
                 <img id="editImage3Preview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
-                <input type="file" name="image_3" accept="image/*" class="w-full" />
+                <input type="file" name="image_3" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="w-full" />
             </div>
 
             <!-- Optional: let admin re-upload or skip -->
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Additional Image 4</label>
+                <label class="block text-sm font-medium mb-1">Additional Image 4 <span class="text-gray-400 text-xs">(optional)</span></label>
                 <img id="editImage4Preview" src="" class="w-16 h-16 object-cover mb-2 hidden rounded" />
-                <input type="file" name="image_4" accept="image/*" class="w-full" />
+                <input type="file" name="image_4" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="w-full" />
             </div>
 
 

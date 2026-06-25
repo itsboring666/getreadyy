@@ -123,6 +123,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::put('/orders/{order}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
     Route::post('/orders/{id}/requests/approve', [AdminOrderRequestsController::class, 'approve'])->name('admin.orders.requests.approve');
     Route::post('/orders/{id}/requests/reject', [AdminOrderRequestsController::class, 'reject'])->name('admin.orders.requests.reject');
+    Route::post('/orders/{order}/send-confirmation', [AdminOrderController::class, 'sendConfirmationEmail'])->name('admin.orders.sendConfirmation');
 
     // Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings.index');

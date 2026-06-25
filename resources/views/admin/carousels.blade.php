@@ -87,8 +87,8 @@
 
             {{-- Image --}}
             <div class="mb-4">
-                <label class="block text-sm font-medium">Image <span class="text-red-500">*</span></label>
-                <input type="file" name="image" accept="image/*" required
+                <label class="block text-sm font-medium">Image <span class="text-red-500">*</span> <span class="text-gray-400 text-xs">(JPG, PNG, WEBP, HEIC, AVIF, TIFF)</span></label>
+                <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif" required
                     class="w-full mt-1 @error('image') border-red-500 @enderror">
                 @error('image') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
             </div>
@@ -160,9 +160,9 @@
 
     {{-- Image --}}
     <div class="mb-4">
-        <label class="block text-sm font-medium">Change Image (optional)</label>
+        <label class="block text-sm font-medium">Change Image <span class="text-gray-400 text-xs">(optional — JPG, PNG, WEBP, HEIC, AVIF, TIFF)</span></label>
         <img id="editCarouselImagePreview" src="" class="w-24 h-16 object-cover mb-2 hidden rounded" />
-        <input type="file" name="image" accept="image/*"
+        <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif"
             class="w-full mt-1 @error('image') border-red-500 @enderror">
         @error('image')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

@@ -187,7 +187,7 @@
                 </div>
 
                 <div style="background: var(--bg); border: 1px solid var(--border); padding: 40px;">
-                    <h2 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 20px;">SHIPPING DETS</h2>
+                    <h2 style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 20px;">SHIPPING DETAILS</h2>
                     <div style="font-family: var(--font); font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
                         <span style="display: block; font-weight: 700; color: var(--text); margin-bottom: 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">{{ $order->name }}</span>
                         <span style="display: block;">{{ $order->address }}</span>

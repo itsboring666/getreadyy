@@ -97,9 +97,9 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Change Image (optional)</label>
+                <label class="block text-sm font-medium text-gray-700">Change Image <span class="text-gray-400 text-xs">(JPG, PNG, WEBP, HEIC, AVIF, TIFF — optional)</span></label>
                 <img src="{{ asset('storage/' . $product->image_path) }}" class="w-32 h-24 object-cover mb-2 rounded shadow" />
-                <input type="file" name="image" class="mt-1 block w-full">
+                <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="mt-1 block w-full">
             </div>
 
             <div class="flex justify-end gap-3 mt-6">
@@ -185,8 +185,8 @@
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Image</label>
-        <input type="file" name="image" class="mt-1 block w-full">
+        <label class="block text-sm font-medium text-gray-700">Image <span class="text-gray-400 text-xs">(JPG, PNG, WEBP, HEIC, AVIF, TIFF — up to 20MB)</span></label>
+        <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="mt-1 block w-full">
         @error('image')
             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
         @enderror
