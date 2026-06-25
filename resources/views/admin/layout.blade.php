@@ -95,7 +95,7 @@
             </nav>
         </div>
         <div id="sidebar-footer" class="p-4 text-sm text-center text-gray-400 transition-all">
-            {{ date('Y') }} | Built by Team 818
+            {{ date('Y') }} | GET READY
         </div>
 
     </aside>

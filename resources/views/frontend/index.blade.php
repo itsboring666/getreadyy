@@ -765,21 +765,29 @@
     /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 768px) {
         .gr-hero {
-            grid-template-columns: 1fr !important;
+            display: flex !important;
+            flex-direction: column !important;
             margin: 0 !important;
             padding: 0 !important;
             min-height: auto !important;
-            gap: 4px !important;
+            gap: 0 !important;
         }
         .gr-hero-panel {
-            padding: 36px 24px;
-            box-shadow: none;
+            padding: 40px 24px;
+            box-shadow: none !important;
         }
-        .gr-hero-panel::after { font-size: 160px; }
+        .gr-hero-panel::after { font-size: 140px; bottom: -20px; right: -10px; }
+        .gr-hero-heading { font-size: 48px; }
+        .gr-hero-subtitle { font-size: 13px; max-width: 100%; margin-bottom: 28px; }
+        .gr-hero-btns { flex-direction: column; width: 100%; }
+        .gr-hero-btn-primary, .gr-hero-btn-outline { width: 100%; text-align: center; justify-content: center; }
         .gr-hero-images {
-            min-height: 360px;
+            min-height: 400px;
             grid-template-rows: 1fr 1fr;
+            width: 100%;
         }
+        .gr-hero-meta-strip { gap: 12px; flex-wrap: wrap; justify-content: space-between; }
+        .gr-hero-meta-num { font-size: 24px; }
         .gr-hero-circle-badge { display: none; }
         .gr-trust-grid { grid-template-columns: 1fr 1fr; }
         .gr-trust-card { border-right: none; border-bottom: 1px solid #1e1e1e; }
@@ -795,12 +803,11 @@
         .gr-outfit-cta-inner::before { display: none; }
         .gr-outfit-cta-btn { width: 100%; text-align: center; }
         .gr-insta-grid { grid-template-columns: repeat(3, 1fr); }
-        .gr-hero-meta-strip { gap: 16px; }
         .gr-wardrobe-grid {
             grid-template-columns: 1fr 1fr !important;
         }
         .gr-wardrobe-card-tall {
-            grid-row: 1 !important;
+            grid-row: auto !important;
             grid-column: 1 / -1 !important;
             min-height: 240px !important;
         }
@@ -810,22 +817,22 @@
     {{-- ─── HERO ─────────────────────────────────────────────── --}}
     @php
         $activeCarousels = \App\Models\Carousel::where('is_active', true)->latest()->take(2)->get();
-        $heroImg1 = $activeCarousels->count() > 0 && $activeCarousels[0]->image_path
+        $heroImg1 = $activeCarousels->count() > 0 && !empty($activeCarousels[0]->image_path)
             ? asset('storage/' . $activeCarousels[0]->image_path)
             : asset('assets/images/hero1.jpg');
-        $heroImg2 = $activeCarousels->count() > 1 && $activeCarousels[1]->image_path
+        $heroImg2 = $activeCarousels->count() > 1 && !empty($activeCarousels[1]->image_path)
             ? asset('storage/' . $activeCarousels[1]->image_path)
             : asset('assets/images/hero2.jpg');
-        $heroTitle = $activeCarousels->count() > 0 && $activeCarousels[0]->title
+        $heroTitle = $activeCarousels->count() > 0 && !empty($activeCarousels[0]->title)
             ? $activeCarousels[0]->title
             : "MEN'S<br>CLOTHING<br><em>store</em>";
-        $heroSubtitle = $activeCarousels->count() > 0 && $activeCarousels[0]->description
+        $heroSubtitle = $activeCarousels->count() > 0 && !empty($activeCarousels[0]->description)
             ? $activeCarousels[0]->description
             : "Premium menswear. Made for the road. Heavy fabrics, honest stitching.";
-        $heroBtnText = $activeCarousels->count() > 0 && $activeCarousels[0]->button_text
+        $heroBtnText = $activeCarousels->count() > 0 && !empty($activeCarousels[0]->button_text)
             ? $activeCarousels[0]->button_text
             : "SHOP THE DROP";
-        $heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link
+        $heroBtnLink = $activeCarousels->count() > 0 && !empty($activeCarousels[0]->button_link)
             ? $activeCarousels[0]->button_link
             : route('products.all');
     @endphp
