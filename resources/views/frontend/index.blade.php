@@ -5,54 +5,69 @@
 @section('content')
     <style>
         /* Wishlist heart display on hover */
-        .gr-product-card .o-product-wishlist {
-            opacity: 0;
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 5;
-            background: rgba(10, 10, 10, 0.75);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
         .gr-product-card:hover .o-product-wishlist {
             opacity: 1;
         }
 
-        .gr-product-card .o-product-wishlist:hover {
-            background: var(--white);
-            color: #000;
-            transform: scale(1.05);
-        }
-
         /* ═══════════════════════════════════════════════════════════
-           HERO — Clean Editorial Redesign
+           HERO — "Dispatch" redesign
+           Concept: the hero reads like a printed zine cover / press
+           dispatch — corner stamp, hairline rule under the eyebrow,
+           tightened scanline as print-texture (not noise), and one
+           orchestrated entrance instead of three unrelated ambient
+           loops. Badge becomes a rotating ink stamp, not a generic
+           spinning circle.
            ═══════════════════════════════════════════════════════════ */
 
         .gr-hero {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.06) !important;
-            background-color: #111111 !important;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45) !important;
+            border: 3px solid var(--border) !important;
+            background-color: var(--surface) !important;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px) !important;
+            background-size: 24px 24px !important;
+            box-shadow: 10px 10px 0px var(--primary) !important;
             margin: 40px auto !important;
-            padding: 64px 80px !important;
+            padding: 56px 64px !important;
             box-sizing: border-box !important;
             overflow: hidden;
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 60px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
             align-items: center;
+        }
+
+        /* Corner stamp — registration-mark style, reinforces the
+           "printed dispatch" idea without competing with the heading */
+        .gr-hero::before {
+            content: 'VOL. III';
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            z-index: 3;
+            font-family: var(--font);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 4px 8px;
+            pointer-events: none;
+        }
+
+        /* Scanline kept, but tightened + lowered so it reads as paper
+           texture rather than a layer of noise sitting on top of copy */
+        .gr-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 0, 0, 0.05) 3px,
+                    rgba(0, 0, 0, 0.05) 4px);
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: multiply;
         }
 
         .gr-hero-text,
@@ -61,21 +76,25 @@
             z-index: 2;
         }
 
-        /* Orchestrated Reveal Sequence */
+        /* ─── One orchestrated entrance ───
+           Each element still fades up, but timed as a single sequence
+           (label → rule → heading → subtitle → buttons → images) so it
+           reads as one deliberate reveal, not scattered effects. */
         @keyframes heroReveal {
             from {
                 opacity: 0;
-                transform: translateY(15px);
+                transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .gr-hero-text > *,
+        .gr-hero-text>*,
         .gr-hero-images {
-            animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
 
@@ -85,79 +104,70 @@
             font-family: var(--font);
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
             color: var(--accent);
-            padding-bottom: 8px;
-            margin-bottom: 24px;
-            display: inline-block;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Hairline rule under the eyebrow — a structural device that
+           actually does something: separates "issue metadata" from
+           the headline, like a masthead rule under a dateline */
+        .gr-hero-label::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 64px;
+            height: 2px;
+            background: var(--primary);
         }
 
         .gr-hero-heading {
-            animation-delay: 0.15s;
-            font-family: var(--font-heading);
-            font-size: clamp(48px, 6.5vw, 84px) !important;
-            font-weight: 400;
-            color: var(--text);
-            line-height: 0.95;
-            letter-spacing: 1px;
-            margin-bottom: 24px;
-        }
-
-        .gr-hero-heading em {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-weight: 400;
-            color: var(--accent);
-            font-size: 0.95em;
-            text-transform: lowercase;
+            animation-delay: 0.18s;
         }
 
         .gr-hero-subtitle {
-            animation-delay: 0.25s;
-            font-family: var(--font-serif);
-            font-size: 16px;
-            font-style: italic;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 460px;
+            animation-delay: 0.32s;
         }
 
         .gr-hero-btns {
-            animation-delay: 0.35s;
-            display: flex;
-            gap: 16px;
+            animation-delay: 0.46s;
         }
 
         .gr-hero-images {
             animation-delay: 0.3s;
+        }
+
+        /* ─── Hero image composition ───
+           Two images, deliberately offset, sharing one quiet float
+           instead of two competing independent loops. */
+        .gr-hero-images {
             position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            min-height: 460px;
+            gap: 16px;
+            min-height: 420px;
         }
 
         .gr-hero-img-1,
         .gr-hero-img-2 {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-            background: #151515;
+            border: 2px solid var(--border);
+            box-shadow: 6px 6px 0px rgba(153, 27, 27, 0.35);
         }
 
         .gr-hero-img-1 {
             align-self: start;
-            margin-top: 20px;
+            margin-top: 36px;
             aspect-ratio: 3/4;
         }
 
         .gr-hero-img-2 {
             align-self: end;
-            margin-bottom: 20px;
+            margin-bottom: 36px;
             aspect-ratio: 3/4;
         }
 
@@ -170,61 +180,65 @@
         }
 
         @keyframes heroImageDrift {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
-                transform: translateY(-8px);
+                transform: translateY(-6px);
             }
         }
 
         .gr-hero-img-1 {
-            animation: heroImageDrift 10s ease-in-out infinite;
+            animation: heroImageDrift 8s ease-in-out infinite;
         }
 
         .gr-hero-img-2 {
-            animation: heroImageDrift 10s ease-in-out infinite;
-            animation-delay: 5s;
+            animation: heroImageDrift 8s ease-in-out infinite;
+            animation-delay: 4s;
         }
 
-        /* Badge: Elegant rotating circular emblem */
+        /* ─── Badge: rotating ink stamp ───
+           Replaces the generic spinning circle with a stamp motif that
+           matches the dispatch concept — sits on the seam between the
+           two images, looks pressed rather than floating. */
         .gr-hero-circle-badge {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 4;
-            width: 90px;
-            height: 90px;
+            width: 92px;
+            height: 92px;
             border-radius: 50%;
-            background: rgba(15, 15, 15, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: var(--primary);
+            border: 2px solid var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            animation: spinBadge 24s linear infinite, heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0s, 0.5s;
-            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
+            animation: spinBadge 18s linear infinite, heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0s, 0.6s;
         }
 
         .gr-hero-circle-badge span {
             font-family: var(--font);
             font-size: 8px;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: #fff;
+            color: var(--white);
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         @keyframes spinBadge {
             from {
                 transform: translate(-50%, -50%) rotate(0deg);
             }
+
             to {
                 transform: translate(-50%, -50%) rotate(360deg);
             }
@@ -232,13 +246,13 @@
 
         .gr-hero-circle-badge:hover {
             animation-play-state: paused, running;
-            transform: translate(-50%, -50%) scale(1.08);
-            border-color: var(--accent);
+            transform: translate(-50%, -50%) scale(1.12);
         }
 
         /* Respect reduced-motion preference */
         @media (prefers-reduced-motion: reduce) {
-            .gr-hero-text > *,
+
+            .gr-hero-text>*,
             .gr-hero-images,
             .gr-hero-img-1,
             .gr-hero-img-2,
@@ -249,25 +263,23 @@
             }
         }
 
-        /* ═══════════════════════════════════════════════════════════
-           THE WARDROBE (Category Grid) Redesign
-           ═══════════════════════════════════════════════════════════ */
+        /* ─── Premium Home Page Animations & Styling (unchanged sections below) ─── */
 
+        /* 6. Wardrobe Grid neat catalog borders and offset shadows */
         .gr-wardrobe-card {
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            border: 1px solid var(--border) !important;
+            box-shadow: 3px 3px 0px rgba(153, 27, 27, 0.4) !important;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
             background: var(--surface) !important;
         }
 
         .gr-wardrobe-card:hover {
-            transform: translateY(-4px) !important;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-            border-color: rgba(255, 255, 255, 0.15) !important;
+            transform: translate(-3px, -3px) !important;
+            box-shadow: 7px 7px 0px var(--primary) !important;
         }
 
         .gr-wardrobe-card img {
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
         .gr-wardrobe-card:hover img {
@@ -276,16 +288,13 @@
 
         .gr-wardrobe-title {
             font-family: var(--font-heading) !important;
-            font-size: clamp(18px, 2vw, 26px) !important;
+            font-size: clamp(20px, 2.5vw, 32px) !important;
             color: var(--white) !important;
-            background: rgba(10, 10, 10, 0.75) !important;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.7) !important;
             display: inline-block !important;
-            padding: 6px 16px !important;
+            padding: 4px 12px !important;
             margin-bottom: 8px !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            letter-spacing: 1px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
         }
 
         .gr-wardrobe-link {
@@ -295,10 +304,9 @@
             letter-spacing: 0.1em !important;
             color: var(--white) !important;
             background: var(--primary) !important;
-            padding: 6px 12px !important;
+            padding: 4px 8px !important;
             border: none !important;
             display: inline-block !important;
-            transition: all 0.3s ease !important;
         }
 
         .gr-wardrobe-overlay {
@@ -306,88 +314,85 @@
         }
 
         .gr-wardrobe-card:hover .gr-wardrobe-overlay {
-            background: rgba(10, 10, 10, 0.25);
+            background: rgba(26, 26, 26, 0.4);
+        }
+
+        .gr-wardrobe-link {
+            transition: transform 0.3s ease, letter-spacing 0.3s ease;
+            display: inline-block;
         }
 
         .gr-wardrobe-card:hover .gr-wardrobe-link {
-            transform: translateX(4px);
-            letter-spacing: 0.12em !important;
+            transform: translateX(6px);
+            letter-spacing: 0.08em;
         }
 
-        /* ═══════════════════════════════════════════════════════════
-           PRODUCT CARDS (Modern Minimal Style)
-           ═══════════════════════════════════════════════════════════ */
-
+        /* 5. Product Cards Polaroid styling */
         .gr-product-card {
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            padding: 0px !important; /* Full bleed image layout */
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
-            background: #111111 !important;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            border: 1px solid var(--border) !important;
+            padding: 10px 10px 18px 10px !important;
+            box-shadow: 4px 4px 0px rgba(153, 27, 27, 0.35) !important;
+            background: var(--surface) !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
         .gr-product-card:hover {
-            transform: translateY(-6px) !important;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-            border-color: rgba(255, 255, 255, 0.15) !important;
+            transform: translateY(-4px) !important;
+            box-shadow: 7px 7px 0px rgba(153, 27, 27, 0.5) !important;
+            border-color: var(--primary) !important;
         }
 
         .gr-product-card-img {
             overflow: hidden;
             position: relative;
-            aspect-ratio: 3/4 !important;
-            border: none !important;
-            background: #151515;
+            aspect-ratio: 1/1 !important;
+            border: 2px solid var(--primary) !important;
         }
 
         .gr-product-card-img img {
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .gr-product-card:hover .gr-product-card-img img {
-            transform: scale(1.04) !important;
+            transform: scale(1.04);
         }
 
         .gr-product-view-btn {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translate(-50%, 10px);
-            padding: 8px 20px;
-            font-family: var(--font);
-            font-size: 8px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: rgba(10, 10, 10, 0.85) !important;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            color: #fff !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            z-index: 2;
+            transform: translate(-50%, -30%);
         }
 
         .gr-product-card:hover .gr-product-view-btn {
-            opacity: 1 !important;
-            transform: translate(-50%, 0) !important;
+            opacity: 1;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            color: var(--white);
         }
 
-        .gr-product-view-btn:hover {
-            background: var(--primary) !important;
-            border-color: var(--primary) !important;
-        }
-
-        /* Editorial Float Animations */
+        /* 6. Editorial Float Animations */
         @keyframes floatEditorial1 {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-6px) scale(1.01);
+            }
         }
 
         @keyframes floatEditorial2 {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-8px) scale(0.99);
+            }
         }
 
         .gr-editorial-img-1 {
@@ -399,31 +404,31 @@
             animation-delay: 4s;
         }
 
-        /* Trust footer card styling */
+        /* 7. Hover effects on trust card icons - Retro styling */
         .gr-trust-card {
-            background: #111111 !important;
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            box-shadow: 5px 5px 0px var(--primary);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             z-index: 2;
         }
 
         .gr-trust-card:hover {
-            transform: translateY(-4px) !important;
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35) !important;
-            border-color: rgba(255, 255, 255, 0.15) !important;
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px var(--accent);
+            border-color: var(--border) !important;
         }
 
         .gr-trust-card i {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s ease;
         }
 
         .gr-trust-card:hover i {
-            transform: scale(1.15) rotate(3deg);
+            transform: scale(1.2) rotate(5deg);
         }
 
-        /* Interactive button highlights */
+        /* 8. Interactive button highlights */
         .gr-hero-btn-primary,
         .gr-hero-btn-outline,
         .gr-editorial-btn,
@@ -431,16 +436,19 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: all 0.3s ease;
         }
 
-        /* ═══════════════════════════════════════════════════════════
-           MOBILE BREAKPOINTS & RESPONSIVENESS
-           ═══════════════════════════════════════════════════════════ */
+        .gr-hero-btn-primary:hover,
+        .gr-editorial-btn:hover,
+        .gr-cta-btn:hover {
+            box-shadow: 0 8px 16px rgba(26, 26, 26, 0.15);
+        }
 
+        /* 9. Mobile Responsive Fixes */
         .gr-cta-upgraded {
             display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
+            grid-template-columns: 1fr 300px;
             gap: 48px;
             align-items: center;
         }
@@ -465,29 +473,57 @@
                 box-sizing: border-box !important;
             }
 
-            /* Hero mobile rules */
+            /* ── Hero mobile rules (kept alongside other mobile fixes) ── */
             .gr-hero {
                 grid-template-columns: 1fr;
-                padding: 40px 24px !important;
-                margin: 20px 16px !important;
-                width: calc(100% - 32px) !important;
+                padding: 32px 20px !important;
+                margin: 0 !important;
+                width: 100% !important;
                 box-sizing: border-box !important;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+                box-shadow: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-radius: 0 !important;
+                gap: 24px;
+            }
+
+            .gr-hero::before {
+                font-size: 8px;
+                top: 14px;
+                right: 14px;
+            }
+
+            .gr-cta-upgraded {
+                grid-template-columns: 1fr;
+                padding: 40px 16px !important;
                 gap: 32px;
+                text-align: center;
+                margin: 32px 0 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .gr-cta-upgraded h2 {
+                font-size: clamp(24px, 7vw, 32px) !important;
             }
 
             .gr-hero-heading {
-                font-size: clamp(36px, 10vw, 48px) !important;
+                font-size: clamp(32px, 12vw, 48px) !important;
                 margin-bottom: 16px;
-                letter-spacing: 0.5px;
+                letter-spacing: 1px;
             }
 
             .gr-hero-subtitle {
-                font-size: 14px !important;
-                margin-bottom: 32px !important;
+                font-size: 13px !important;
+                margin-bottom: 24px !important;
             }
 
             .gr-hero-btns {
+                display: flex;
                 flex-direction: column;
                 gap: 12px;
                 width: 100%;
@@ -498,82 +534,29 @@
                 width: 100%;
                 text-align: center;
                 justify-content: center;
-                padding: 14px 20px !important;
+                padding: 16px !important;
             }
 
             .gr-hero-images {
                 min-height: auto;
-                margin-top: 12px;
-                gap: 16px;
+                margin-top: 4px;
+                gap: 12px;
             }
 
             .gr-hero-img-1,
             .gr-hero-img-2 {
                 margin: 0 !important;
-                aspect-ratio: 3/4 !important;
+                aspect-ratio: 4/5 !important;
                 animation: none !important;
             }
 
             .gr-hero-circle-badge {
-                width: 70px;
-                height: 70px;
-                display: none !important; /* Hide badge on mobile to avoid layout overlap */
-            }
-
-            /* Categories Grid on Mobile */
-            .gr-wardrobe-grid {
-                grid-template-columns: 1fr !important;
-                grid-template-rows: auto !important;
-                gap: 16px !important;
-            }
-
-            .gr-wardrobe-card-tall {
-                grid-row: auto !important;
-                min-height: 320px !important;
-            }
-
-            .gr-wardrobe-card-normal {
-                aspect-ratio: 4/3 !important;
-            }
-
-            /* Product Grid on Mobile */
-            .gr-product-grid-3 {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 16px !important;
-                padding: 0 16px !important;
-            }
-
-            /* CTA block on Mobile */
-            .gr-cta-upgraded {
-                grid-template-columns: 1fr !important;
-                padding: 40px 24px !important;
-                margin: 40px 16px !important;
-                width: calc(100% - 32px) !important;
-                gap: 32px;
-                text-align: center;
-            }
-
-            .gr-cta-upgraded h2 {
-                font-size: clamp(24px, 7vw, 32px) !important;
-            }
-
-            .gr-cta-wheel-wrap {
-                margin-top: 12px;
+                display: none !important;
+                /* Hide badge on mobile to avoid clutter */
             }
 
             .gr-editorial-inner {
-                grid-template-columns: 1fr !important;
-                gap: 40px !important;
-                padding: 0 16px !important;
-            }
-
-            .gr-editorial-images {
-                gap: 16px !important;
-            }
-
-            .gr-editorial-img-1,
-            .gr-editorial-img-2 {
-                animation: none !important;
+                flex-direction: column !important;
             }
         }
     </style>
@@ -822,7 +805,7 @@
                         data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy">
                     <span class="gr-product-view-btn">VIEW →</span>
                 </div>
-                <div class="gr-product-card-body">
+                <div class="gr-product-card-body" style="padding: 12px 2px 0 2px;">
                     <div
                         style="font-family: var(--font); font-size: 8px; color: var(--text-light); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; display: flex; justify-content: space-between;">
                         <span>ITEM-0{{ $product->id }}</span>
@@ -895,85 +878,92 @@
     </section>
 
     {{-- ─── SPIN THE OUTFIT WHEEL (CTA) ───────────────────────── --}}
-    <section class="gr-cta-upgraded" style="margin: 80px auto 0 !important; max-width: var(--max-width); box-sizing: border-box;">
+    <section class="gr-cta-upgraded"
+        style="border: 1px solid var(--border); padding: 48px; background: var(--surface); box-shadow: 6px 6px 0px rgba(153,27,27,0.4); margin: 64px auto 0; max-width: var(--max-width); box-sizing: border-box;">
         <!-- Left side info -->
         <div>
             <div
-                style="font-family: var(--font); font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;">
+                style="font-family: var(--font); font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">
                 SYSTEM DEPLOYMENT — VOL. III</div>
             <h2
                 style="font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: var(--text); line-height: 1.1; margin-top: 0; margin-bottom: 16px;">
-                SPIN THE <span style="background: var(--accent); color: var(--white); padding: 2px 8px;">OUTFIT</span> WHEEL.
+                SPIN THE <span style="background: var(--accent); color: var(--white); padding: 2px 8px;">OUTFIT</span>
+                WHEEL.
             </h2>
             <p
-                style="font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 28px;">
+                style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
                 Can't decide? Let algorithm-driven chance dress you. Our interactive Outfit Builder generates a full
                 vintage, editorial combination in 3 seconds.
             </p>
-            <a href="{{ route('outfit-builder') }}" class="gr-cta-btn">TRY THE BUILDER →</a>
+            <a href="{{ route('outfit-builder') }}" class="gr-cta-btn"
+                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 14px 28px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">TRY
+                THE BUILDER →</a>
         </div>
         <!-- Right side physical spinning wheel graphic -->
         <div class="gr-cta-wheel-wrap"
             style="position: relative; display: flex; justify-content: center; align-items: center;">
             <div class="gr-cta-wheel"
-                style="width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); position: relative; background: repeating-conic-gradient(from 0deg, #1a1a1a 0deg 30deg, #111111 30deg 60deg); animation: spinBadge 20s linear infinite; box-shadow: 0 15px 30px rgba(0,0,0,0.4); box-sizing: border-box;">
+                style="width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--primary); position: relative; background: repeating-conic-gradient(from 0deg, #1a1a1a 0deg 30deg, #111111 30deg 60deg); animation: spinBadge 20s linear infinite; box-shadow: 4px 4px 0px rgba(0,0,0,0.5); box-sizing: border-box;">
                 <div
                     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 24px; height: 24px; background: var(--primary); border-radius: 50%; border: 2px solid var(--white); box-sizing: border-box;">
                 </div>
                 <!-- Radial ticks -->
                 <div
-                    style="position: absolute; top: 12%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); letter-spacing: 1px;">
+                    style="position: absolute; top: 10%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light);">
                     TEES</div>
                 <div
-                    style="position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); letter-spacing: 1px;">
+                    style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light);">
                     JEANS</div>
                 <div
-                    style="position: absolute; left: 12%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); writing-mode: vertical-rl; transform-origin: center; letter-spacing: 1px;">
+                    style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); writing-mode: vertical-rl; transform-origin: center;">
                     SHIRTS</div>
                 <div
-                    style="position: absolute; right: 12%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); writing-mode: vertical-rl; transform-origin: center; letter-spacing: 1px;">
+                    style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); writing-mode: vertical-rl; transform-origin: center;">
                     JACKETS</div>
             </div>
             <!-- Wheel pointer -->
             <div
-                style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 18px solid var(--accent); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+                style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid var(--accent); filter: drop-shadow(2px 2px 0px var(--primary));">
             </div>
         </div>
     </section>
 
     {{-- ─── TRUST FOOTER BADGES ───────────────────────────────── --}}
-    <section class="gr-trust-footer" style="margin-top: 80px;">
+    <section class="gr-trust-footer"
+        style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 56px 0; margin-top: 60px;">
         <div class="container"
             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; max-width: var(--max-width); margin: 0 auto; padding: 0 24px;">
-            <div class="gr-trust-card">
+            <div class="gr-trust-card"
+                style="padding: 24px; border-right: 1px solid var(--border-light); text-align: center;">
                 <div
-                    style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                     <i class="fas fa-truck-moving" style="font-size: 18px; color: var(--accent);"></i>
                 </div>
                 <h3
-                    style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text);">
+                    style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
                     FAST METRO DELIVERY</h3>
                 <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Free shipping on orders above
                     ₹999. Orders dispatched within 24 hours.</p>
             </div>
-            <div class="gr-trust-card">
+            <div class="gr-trust-card"
+                style="padding: 24px; border-right: 1px solid var(--border-light); text-align: center;">
                 <div
-                    style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                     <i class="fas fa-recycle" style="font-size: 18px; color: var(--accent);"></i>
                 </div>
                 <h3
-                    style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text);">
+                    style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
                     SMALL BATCH CREATIONS</h3>
                 <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Limited release runs made
                     responsibly with organic, extra-long staple cotton.</p>
             </div>
-            <div class="gr-trust-card">
+            <div class="gr-trust-card" style="padding: 24px; text-align: center;">
                 <div
-                    style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    style="background: var(--cream); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                     <i class="fas fa-undo-alt" style="font-size: 18px; color: var(--accent);"></i>
                 </div>
                 <h3
-                    style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text);">
+                    style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
                     7-DAY EASY RETURNS</h3>
                 <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange within 7 days
                     of purchase. Simplified returns process.</p>
