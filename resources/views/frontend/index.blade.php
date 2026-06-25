@@ -9,7 +9,16 @@
             opacity: 1;
         }
 
-        /* Hero section retro block layout */
+        /* ═══════════════════════════════════════════════════════════
+           HERO — "Dispatch" redesign
+           Concept: the hero reads like a printed zine cover / press
+           dispatch — corner stamp, hairline rule under the eyebrow,
+           tightened scanline as print-texture (not noise), and one
+           orchestrated entrance instead of three unrelated ambient
+           loops. Badge becomes a rotating ink stamp, not a generic
+           spinning circle.
+           ═══════════════════════════════════════════════════════════ */
+
         .gr-hero {
             position: relative;
             border: 3px solid var(--border) !important;
@@ -18,22 +27,47 @@
             background-size: 24px 24px !important;
             box-shadow: 10px 10px 0px var(--primary) !important;
             margin: 40px auto !important;
-            padding: 48px !important;
+            padding: 56px 64px !important;
             box-sizing: border-box !important;
             overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
         }
 
-        /* Retro CRT scanline effect overlay */
+        /* Corner stamp — registration-mark style, reinforces the
+           "printed dispatch" idea without competing with the heading */
+        .gr-hero::before {
+            content: 'VOL. III';
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            z-index: 3;
+            font-family: var(--font);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 4px 8px;
+            pointer-events: none;
+        }
+
+        /* Scanline kept, but tightened + lowered so it reads as paper
+           texture rather than a layer of noise sitting on top of copy */
         .gr-hero::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.15) 2px, rgba(0, 0, 0, 0.15) 4px);
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 0, 0, 0.05) 3px,
+                    rgba(0, 0, 0, 0.05) 4px);
             pointer-events: none;
             z-index: 1;
+            mix-blend-mode: multiply;
         }
 
         .gr-hero-text,
@@ -42,13 +76,14 @@
             z-index: 2;
         }
 
-        /* ─── Premium Home Page Animations & Styling ─── */
-
-        /* 1. Hero Text Reveal Animation */
-        @keyframes fadeInUp {
+        /* ─── One orchestrated entrance ───
+           Each element still fades up, but timed as a single sequence
+           (label → rule → heading → subtitle → buttons → images) so it
+           reads as one deliberate reveal, not scattered effects. */
+        @keyframes heroReveal {
             from {
                 opacity: 0;
-                transform: translateY(24px);
+                transform: translateY(20px);
             }
 
             to {
@@ -57,81 +92,178 @@
             }
         }
 
-        .gr-hero-text>* {
-            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .gr-hero-text>*,
+        .gr-hero-images {
+            animation: heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
 
-        .gr-hero-text>.gr-hero-label {
-            animation-delay: 0.1s;
+        .gr-hero-label {
+            animation-delay: 0.05s;
+            position: relative;
+            font-family: var(--font);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
         }
 
-        .gr-hero-text>.gr-hero-heading {
+        /* Hairline rule under the eyebrow — a structural device that
+           actually does something: separates "issue metadata" from
+           the headline, like a masthead rule under a dateline */
+        .gr-hero-label::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 64px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .gr-hero-heading {
+            animation-delay: 0.18s;
+        }
+
+        .gr-hero-subtitle {
+            animation-delay: 0.32s;
+        }
+
+        .gr-hero-btns {
+            animation-delay: 0.46s;
+        }
+
+        .gr-hero-images {
             animation-delay: 0.3s;
         }
 
-        .gr-hero-text>.gr-hero-subtitle {
-            animation-delay: 0.5s;
+        /* ─── Hero image composition ───
+           Two images, deliberately offset, sharing one quiet float
+           instead of two competing independent loops. */
+        .gr-hero-images {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            min-height: 420px;
         }
 
-        .gr-hero-text>.gr-hero-btns {
-            animation-delay: 0.7s;
+        .gr-hero-img-1,
+        .gr-hero-img-2 {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            box-shadow: 6px 6px 0px rgba(153, 27, 27, 0.35);
         }
 
-        /* 2. Floating Image Effect for Hero Images */
-        @keyframes floatImage1 {
+        .gr-hero-img-1 {
+            align-self: start;
+            margin-top: 36px;
+            aspect-ratio: 3/4;
+        }
+
+        .gr-hero-img-2 {
+            align-self: end;
+            margin-bottom: 36px;
+            aspect-ratio: 3/4;
+        }
+
+        .gr-hero-img-1 img,
+        .gr-hero-img-2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes heroImageDrift {
 
             0%,
             100% {
-                transform: translateY(0px) rotate(-1deg);
+                transform: translateY(0px);
             }
 
             50% {
-                transform: translateY(-8px) rotate(0.5deg);
-            }
-        }
-
-        @keyframes floatImage2 {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(1deg);
-            }
-
-            50% {
-                transform: translateY(-10px) rotate(-0.5deg);
+                transform: translateY(-6px);
             }
         }
 
         .gr-hero-img-1 {
-            animation: floatImage1 7s ease-in-out infinite;
+            animation: heroImageDrift 8s ease-in-out infinite;
         }
 
         .gr-hero-img-2 {
-            animation: floatImage2 7s ease-in-out infinite;
-            animation-delay: 3.5s;
+            animation: heroImageDrift 8s ease-in-out infinite;
+            animation-delay: 4s;
         }
 
-        /* 3. Hero Circle Badge Spin Animation */
+        /* ─── Badge: rotating ink stamp ───
+           Replaces the generic spinning circle with a stamp motif that
+           matches the dispatch concept — sits on the seam between the
+           two images, looks pressed rather than floating. */
+        .gr-hero-circle-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
+            animation: spinBadge 18s linear infinite, heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0s, 0.6s;
+        }
+
+        .gr-hero-circle-badge span {
+            font-family: var(--font);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--white);
+            text-align: center;
+            line-height: 1.5;
+        }
+
         @keyframes spinBadge {
             from {
-                transform: rotate(0deg);
+                transform: translate(-50%, -50%) rotate(0deg);
             }
 
             to {
-                transform: rotate(360deg);
+                transform: translate(-50%, -50%) rotate(360deg);
             }
         }
 
-        .gr-hero-circle-badge {
-            animation: spinBadge 16s linear infinite;
-            transition: transform var(--transition);
+        .gr-hero-circle-badge:hover {
+            animation-play-state: paused, running;
+            transform: translate(-50%, -50%) scale(1.12);
         }
 
-        .gr-hero-circle-badge:hover {
-            animation-play-state: paused;
-            transform: scale(1.15);
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+
+            .gr-hero-text>*,
+            .gr-hero-images,
+            .gr-hero-img-1,
+            .gr-hero-img-2,
+            .gr-hero-circle-badge {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
+
+        /* ─── Premium Home Page Animations & Styling (unchanged sections below) ─── */
 
         /* 6. Wardrobe Grid neat catalog borders and offset shadows */
         .gr-wardrobe-card {
@@ -341,16 +473,24 @@
                 box-sizing: border-box !important;
             }
 
+            /* ── Hero mobile rules (kept alongside other mobile fixes) ── */
             .gr-hero {
-                padding: 32px 16px !important;
+                grid-template-columns: 1fr;
+                padding: 32px 20px !important;
                 margin: 0 !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
                 box-shadow: none !important;
-                /* Remove shadow if it's flush to edges */
                 border-left: none !important;
                 border-right: none !important;
                 border-radius: 0 !important;
+                gap: 24px;
+            }
+
+            .gr-hero::before {
+                font-size: 8px;
+                top: 14px;
+                right: 14px;
             }
 
             .gr-cta-upgraded {
@@ -399,34 +539,15 @@
 
             .gr-hero-images {
                 min-height: auto;
-                margin-top: 16px;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
+                margin-top: 4px;
                 gap: 12px;
             }
 
             .gr-hero-img-1,
             .gr-hero-img-2 {
-                position: relative !important;
-                width: 100% !important;
-                height: 100% !important;
+                margin: 0 !important;
                 aspect-ratio: 4/5 !important;
-                left: 0 !important;
-                right: 0 !important;
-                top: 0 !important;
-                bottom: 0 !important;
-                transform: none !important;
                 animation: none !important;
-                box-shadow: none !important;
-                border-radius: 4px;
-                overflow: hidden;
-            }
-
-            .gr-hero-img-1 img,
-            .gr-hero-img-2 img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
             }
 
             .gr-hero-circle-badge {
@@ -453,8 +574,6 @@
     @endphp
 
     <section class="gr-hero">
-        {{-- Giant outlined background text removed as per request --}}
-
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const slideshows = document.querySelectorAll('.hover-slideshow');
@@ -503,11 +622,8 @@
                 <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary">{{ $heroBtnText }}</a>
                 <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
             </div>
-
-            {{-- Vintage Barcode stamp removed as per request --}}
         </div>
         <div class="gr-hero-images">
-            {{-- Hero tag removed --}}
             <div class="gr-hero-img-1">
                 <img src="{{ $heroImg1 }}" alt="Lifestyle editorial" loading="eager">
             </div>
@@ -562,8 +678,6 @@
             </div>
         </div>
     </div>
-
-
 
     {{-- ─── THE WARDROBE (Category Grid) ──────────────────────── --}}
     @php
@@ -762,8 +876,6 @@
             </div>
         </div>
     </section>
-
-
 
     {{-- ─── SPIN THE OUTFIT WHEEL (CTA) ───────────────────────── --}}
     <section class="gr-cta-upgraded"
