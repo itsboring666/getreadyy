@@ -451,6 +451,13 @@
             grid-template-columns: 1fr 300px;
             gap: 48px;
             align-items: center;
+            border: 1px solid var(--border);
+            padding: 48px;
+            background: var(--surface);
+            box-shadow: 6px 6px 0px rgba(153, 27, 27, 0.4);
+            margin: 64px auto 0;
+            max-width: var(--max-width);
+            box-sizing: border-box;
         }
 
         html,
@@ -618,17 +625,17 @@
             <p class="gr-hero-subtitle">
                 {{ $heroSubtitle }}
             </p>
-            <div class="gr-hero-btns">
-                <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary">{{ $heroBtnText }}</a>
+             <div class="gr-hero-btns">
+                <a href="{{ $heroBtnLink }}" class="gr-hero-btn-primary">{{ str_replace(['LINNEN', 'linnen'], ['LINEN', 'linen'], $heroBtnText) }}</a>
                 <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
             </div>
         </div>
         <div class="gr-hero-images">
             <div class="gr-hero-img-1">
-                <img src="{{ $heroImg1 }}" alt="Lifestyle editorial" loading="eager">
+                <img src="{{ $heroImg1 }}" onerror="this.src='{{ asset('assets/images/hero1.jpg') }}'" alt="Lifestyle editorial" loading="eager">
             </div>
             <div class="gr-hero-img-2">
-                <img src="{{ $heroImg2 }}" alt="Street style fashion" loading="eager">
+                <img src="{{ $heroImg2 }}" onerror="this.src='{{ asset('assets/images/hero2.jpg') }}'" alt="Street style fashion" loading="eager">
             </div>
             <div class="gr-hero-circle-badge">
                 <span>NEW DROP<br>•<br>LIMITED<br>STOCK</span>
@@ -868,7 +875,7 @@
             </div>
             <div class="gr-editorial-images">
                 <div class="gr-editorial-img-1">
-                    <img src="{{ $featImg1 }}" alt="Featured Product" loading="lazy">
+                    <img src="{{ $featImg1 }}" onerror="this.src='{{ asset('assets/images/official-logo.jpg') }}'" alt="Featured Product" loading="lazy">
                 </div>
                 <div class="gr-editorial-img-2">
                     <img src="{{ $featImg2 }}" alt="Vintage clothing rack" loading="lazy">
@@ -878,26 +885,23 @@
     </section>
 
     {{-- ─── SPIN THE OUTFIT WHEEL (CTA) ───────────────────────── --}}
-    <section class="gr-cta-upgraded"
-        style="border: 1px solid var(--border); padding: 48px; background: var(--surface); box-shadow: 6px 6px 0px rgba(153,27,27,0.4); margin: 64px auto 0; max-width: var(--max-width); box-sizing: border-box;">
+    <section class="gr-cta-upgraded">
         <!-- Left side info -->
         <div>
             <div
-                style="font-family: var(--font); font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">
+                style="font-family: var(--font); font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;">
                 SYSTEM DEPLOYMENT — VOL. III</div>
             <h2
                 style="font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: var(--text); line-height: 1.1; margin-top: 0; margin-bottom: 16px;">
-                SPIN THE <span style="background: var(--accent); color: var(--white); padding: 2px 8px;">OUTFIT</span>
-                WHEEL.
+                SPIN THE <span style="background: var(--accent); color: var(--white); padding: 2px 8px;">OUTFIT</span> WHEEL.
             </h2>
             <p
-                style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+                style="font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
                 Can't decide? Let algorithm-driven chance dress you. Our interactive Outfit Builder generates a full
                 vintage, editorial combination in 3 seconds.
             </p>
             <a href="{{ route('outfit-builder') }}" class="gr-cta-btn"
-                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 14px 28px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">TRY
-                THE BUILDER →</a>
+                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 14px 28px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">TRY THE BUILDER →</a>
         </div>
         <!-- Right side physical spinning wheel graphic -->
         <div class="gr-cta-wheel-wrap"
@@ -909,16 +913,16 @@
                 </div>
                 <!-- Radial ticks -->
                 <div
-                    style="position: absolute; top: 10%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light);">
+                    style="position: absolute; top: 12%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: #fff; letter-spacing: 0.5px;">
                     TEES</div>
                 <div
-                    style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light);">
+                    style="position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: #fff; letter-spacing: 0.5px;">
                     JEANS</div>
                 <div
-                    style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); writing-mode: vertical-rl; transform-origin: center;">
+                    style="position: absolute; left: 12%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: #fff; writing-mode: vertical-rl; transform-origin: center; letter-spacing: 0.5px;">
                     SHIRTS</div>
                 <div
-                    style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: var(--text-light); writing-mode: vertical-rl; transform-origin: center;">
+                    style="position: absolute; right: 12%; top: 50%; transform: translateY(-50%); font-family: var(--font); font-size: 8px; font-weight: bold; color: #fff; writing-mode: vertical-rl; transform-origin: center; letter-spacing: 0.5px;">
                     JACKETS</div>
             </div>
             <!-- Wheel pointer -->

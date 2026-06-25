@@ -15,7 +15,7 @@
         <a href="{{ url('/') }}" class="gr-logo" aria-label="GET READY Home"
             style="display: flex; align-items: center; justify-content: center; height: 40px; width: 160px; overflow: hidden; border-radius: 4px;">
             <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;"
+                style="width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease;"
                 onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         </a>
 
