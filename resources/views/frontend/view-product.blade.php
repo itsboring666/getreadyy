@@ -46,7 +46,8 @@
         .o-pdp-main img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background-color: var(--surface, #111);
         }
     }
     
@@ -84,11 +85,15 @@
     @endphp
 
     <div class="o-pdp-gallery">
-        <div class="o-pdp-main">
+        <div class="o-pdp-main" style="position: relative;">
             <img id="mainImg" 
                  src="{{ get_storage_url(($imgs[0] ?? '')) }}" 
                  onerror="this.src='{{ $fb }}'" 
                  alt="{{ $product->name }}">
+            @if(count($imgs) > 1)
+            <button onclick="nextMainImg(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; border-radius:50%; width:44px; height:44px; cursor:pointer; font-size:20px; transition: background 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">❮</button>
+            <button onclick="nextMainImg(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; border-radius:50%; width:44px; height:44px; cursor:pointer; font-size:20px; transition: background 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">❯</button>
+            @endif
         </div>
         @if(count($imgs) > 1)
         <div class="o-pdp-thumbs" role="group" aria-label="Product thumbnails">
@@ -131,7 +136,7 @@
             @endif
         </div>
 
-        <div class="o-pdp-price unset" id="pdpPrice" aria-live="polite">Select a size to see price</div>
+        <div class="o-pdp-price" id="pdpPrice" aria-live="polite">₹{{ number_format($product->sizes->min('price') ?? $product->price ?? 0, 2) }}</div>
 
         <div class="o-trust-badges">
             <div class="o-trust-badge"><i class="fas fa-check" aria-hidden="true"></i> Premium Quality Material</div>
@@ -356,6 +361,14 @@
 </div>
 
 <script>
+let curImgIdx = 0;
+function nextMainImg(dir) {
+    var thumbs = document.querySelectorAll('.o-pdp-thumb');
+    if (thumbs.length === 0) return;
+    curImgIdx = (curImgIdx + dir + thumbs.length) % thumbs.length;
+    thumbs[curImgIdx].click();
+}
+
 function swImg(src, el, fb){
     var m = document.getElementById('mainImg');
     m.style.opacity = '0.5';
@@ -363,7 +376,11 @@ function swImg(src, el, fb){
     m.onerror = function(){ this.src = fb; };
     setTimeout(function(){ m.style.opacity = '1'; }, 200);
     
-    document.querySelectorAll('.o-pdp-thumb').forEach(function(t){ t.classList.remove('active'); });
+    var thumbs = document.querySelectorAll('.o-pdp-thumb');
+    thumbs.forEach(function(t, idx){ 
+        t.classList.remove('active'); 
+        if (t === el) curImgIdx = idx;
+    });
     el.classList.add('active');
 }
 
