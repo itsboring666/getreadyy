@@ -21,6 +21,12 @@ if (!function_exists('get_storage_url')) {
             return $path;
         }
 
-        return Storage::disk('public')->url($path);
+        try {
+            return Storage::disk('public')->url($path);
+        } catch (\Exception $e) {
+            // If the image is not found in Cloudinary (e.g. it was an old local image)
+            // or if there's any API error (like SSL local errors), fallback to local storage
+            return asset('storage/' . $path);
+        }
     }
 }
