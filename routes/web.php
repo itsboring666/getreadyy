@@ -221,5 +221,13 @@ Route::get('/shipping-returns', function () {
 // Outfit Builder
 Route::get('/outfit-builder', [App\Http\Controllers\OutfitBuilderController::class, 'index'])->name('outfit-builder');
 
+// Storage Redirect for Cloudinary
+Route::get('/storage/{path}', function ($path) {
+    if (config('filesystems.disks.public.driver') === 'cloudinary') {
+        return Illuminate\Support\Facades\Redirect::away(Illuminate\Support\Facades\Storage::disk('public')->url($path));
+    }
+    abort(404);
+})->where('path', '.*');
+
 // Dynamic Category Route (must be last)
 Route::get('/{slug}', [CategoryPageController::class, 'show'])->name('category.show');

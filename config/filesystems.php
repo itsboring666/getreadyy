@@ -39,12 +39,16 @@ return [
         ],
 
         'public' => [
-            'driver' => 'local',
+            'driver' => env('PUBLIC_STORAGE_DRIVER', 'local'),
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
+        ],
+
+        'cloudinary' => [
+            'driver' => 'cloudinary',
         ],
 
         's3' => [
