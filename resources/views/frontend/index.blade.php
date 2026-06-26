@@ -15,13 +15,12 @@
 
         .gr-hero {
             position: relative;
-            border: 3px solid var(--border) !important;
-            background-color: var(--surface) !important;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px) !important;
-            background-size: 24px 24px !important;
-            box-shadow: 10px 10px 0px var(--primary) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0,0,0,0.5) !important;
             margin: 40px auto !important;
-            padding: 56px 64px !important;
+            padding: 64px !important;
             box-sizing: border-box !important;
             overflow: visible !important;
         }
