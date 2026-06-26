@@ -95,7 +95,14 @@
                             </button>
                         </form>
                     @endauth
+                    @php
+                        $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
+                        $imageUrls = array_map(function ($img) {
+                            return asset('storage/' . $img);
+                        }, array_values($validImages));
+                    @endphp
                     <img src="{{ asset('storage/' . $product->image) }}" 
+                         data-images='@json($imageUrls)' class="hover-slideshow"
                          onerror="this.src='{{ $phs[$i % 4] }}'" 
                          alt="{{ $product->name }}" loading="lazy">
                 </div>

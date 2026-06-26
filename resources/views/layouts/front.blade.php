@@ -255,6 +255,63 @@
         }
     </style>
 
+    {{-- Global Hover Slideshow Script --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lazy initialization of hover slideshows using event delegation
+            document.addEventListener('mouseover', (e) => {
+                const card = e.target.closest('.gr-product-card, .o-product-card');
+                if (!card) return;
+
+                const img = card.querySelector('.hover-slideshow');
+                if (!img || img.dataset.slideshowInitialized) return;
+
+                // Mark as initialized to prevent double listeners
+                img.dataset.slideshowInitialized = 'true';
+
+                let images = [];
+                try {
+                    images = JSON.parse(img.getAttribute('data-images'));
+                } catch (err) { }
+
+                if (Array.isArray(images) && images.length > 1) {
+                    let interval;
+                    let currentIndex = 0;
+                    let originalSrc = img.src;
+
+                    // Preload images for smooth transition
+                    images.forEach(src => {
+                        const preload = new Image();
+                        preload.src = src;
+                    });
+
+                    const startSlideshow = () => {
+                        if (interval) clearInterval(interval);
+                        // Save original src (in case image loaded / changed via other JS like Outfit Builder)
+                        originalSrc = img.src; 
+                        interval = setInterval(() => {
+                            currentIndex = (currentIndex + 1) % images.length;
+                            img.src = images[currentIndex];
+                        }, 600); // 600ms per slide
+                    };
+
+                    const stopSlideshow = () => {
+                        if (interval) clearInterval(interval);
+                        img.src = originalSrc;
+                        currentIndex = 0;
+                    };
+
+                    card.addEventListener('mouseenter', startSlideshow);
+                    card.addEventListener('mouseleave', stopSlideshow);
+
+                    // Since mouseover triggered this, the mouse is already inside the card.
+                    // Start the slideshow immediately.
+                    startSlideshow();
+                }
+            });
+        });
+    </script>
+
     @yield('scripts')
 </body>
 

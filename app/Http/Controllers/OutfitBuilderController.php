@@ -143,6 +143,9 @@ class OutfitBuilderController extends Controller
                         'id' => $item->id,
                         'name' => $item->name,
                         'image' => asset('storage/' . $item->image),
+                        'images' => array_map(function ($img) {
+                            return asset('storage/' . $img);
+                        }, array_values(array_filter([$item->image, $item->image_2, $item->image_3, $item->image_4]))),
                         'view_url' => route('product.view', $item->id),
                         'category_name' => $item->category->name ?? 'GET READY',
                         'price' => $defaultPrice,

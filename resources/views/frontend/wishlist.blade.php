@@ -33,7 +33,14 @@
 
                 <a href="{{ route('product.view', $product->id) }}" style="text-decoration: none;">
                     <div class="gr-product-card-img" style="aspect-ratio: 3/4;">
+                        @php
+                            $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
+                            $imageUrls = array_map(function ($img) {
+                                return asset('storage/' . $img);
+                            }, array_values($validImages));
+                        @endphp
                         <img src="{{ asset('storage/' . $product->image) }}" 
+                             data-images='@json($imageUrls)' class="hover-slideshow"
                              onerror="this.src='{{ asset('assets/images/logo.png') }}'" 
                              alt="{{ $product->name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
                     </div>

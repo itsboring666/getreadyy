@@ -131,12 +131,19 @@
                         </button>
                     </div>
 
+                    @php
+                        $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
+                        $imageUrls = array_map(function ($img) {
+                            return asset('storage/' . $img);
+                        }, array_values($validImages));
+                    @endphp
                     <div class="gr-product-card-img" style="aspect-ratio: 3/4; position: relative; overflow: hidden; border: 2px solid var(--primary);">
                         <span class="gr-badge gr-badge-new" style="background: var(--text); z-index: 5;">{{ $i === 0 ? 'Outerwear' : ($i === 1 ? 'Top' : 'Bottom') }}</span>
                         <a href="{{ route('product.view', $product->id) }}" class="product-link" style="display: block; width: 100%; height: 100%;">
                             <div class="reel-viewport">
                                 <img src="{{ asset('storage/' . $product->image) }}" 
-                                     class="main-product-img"
+                                     class="main-product-img hover-slideshow"
+                                     data-images='@json($imageUrls)'
                                      onerror="this.src='{{ $phs[$i % 3] }}'" 
                                      alt="{{ $product->name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display: block;">
                             </div>
@@ -396,7 +403,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             const linkElement = card.querySelector('.product-link');
 
                             // Set product values
-                            if (img) img.src = item.image;
+                            if (img) {
+                                img.src = item.image;
+                                img.setAttribute('data-images', JSON.stringify(item.images || [item.image]));
+                                delete img.dataset.slideshowInitialized;
+                            }
                             if (nameLink) {
                                 nameLink.textContent = item.name;
                                 nameLink.href = item.view_url;

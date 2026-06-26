@@ -405,41 +405,6 @@
     @endphp
 
     <section class="gr-hero">
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const slideshows = document.querySelectorAll('.hover-slideshow');
-                slideshows.forEach(img => {
-                    let images = [];
-                    try { images = JSON.parse(img.getAttribute('data-images')); } catch (e) { }
-
-                    if (images.length > 1) {
-                        let interval;
-                        let currentIndex = 0;
-                        let originalSrc = img.src;
-
-                        // Preload images for smooth sliding
-                        images.forEach(src => {
-                            const preload = new Image();
-                            preload.src = src;
-                        });
-
-                        img.closest('.gr-product-card').addEventListener('mouseenter', () => {
-                            originalSrc = img.src; // save original
-                            interval = setInterval(() => {
-                                currentIndex = (currentIndex + 1) % images.length;
-                                img.src = images[currentIndex];
-                            }, 600); // Fast sliding (600ms per image)
-                        });
-
-                        img.closest('.gr-product-card').addEventListener('mouseleave', () => {
-                            clearInterval(interval);
-                            currentIndex = 0;
-                            img.src = originalSrc;
-                        });
-                    }
-                });
-            });
-        </script>
 
         <div class="gr-hero-text">
             <div class="gr-hero-label">FALL / WINTER '28 — VOL. III</div>
