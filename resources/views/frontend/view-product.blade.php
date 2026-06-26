@@ -12,6 +12,65 @@
     </div>
 </div>
 
+<style>
+    /* Premium UI Overrides for Product Page */
+    .o-pdp {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: start;
+        margin-top: 24px;
+    }
+    
+    @media (min-width: 992px) {
+        .o-pdp {
+            grid-template-columns: 1.2fr 1fr;
+            gap: 64px;
+        }
+        
+        .o-pdp-gallery {
+            position: sticky;
+            top: 100px; /* Offset for header */
+            height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .o-pdp-main {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .o-pdp-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    
+    .o-pdp-title {
+        font-family: var(--font-heading, 'Oswald', sans-serif);
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1.1;
+        margin-bottom: 12px;
+    }
+    
+    .o-btn-primary {
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .o-btn-primary:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+</style>
+
 <div class="o-pdp">
     {{-- Gallery --}}
     @php

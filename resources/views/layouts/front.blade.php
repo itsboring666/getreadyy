@@ -266,47 +266,64 @@
                 const img = card.querySelector('.hover-slideshow');
                 if (!img || img.dataset.slideshowInitialized) return;
 
-                // Mark as initialized to prevent double listeners
-                img.dataset.slideshowInitialized = 'true';
-
                 let images = [];
                 try {
                     images = JSON.parse(img.getAttribute('data-images'));
-                } catch (err) { }
+                } catch (err) { return; }
 
                 if (Array.isArray(images) && images.length > 1) {
+                    img.dataset.slideshowInitialized = 'true';
+                    const parent = img.parentElement;
+                    
+                    // Ensure parent is relative so we can absolute-position the crossfade layers
+                    if (window.getComputedStyle(parent).position === 'static') {
+                        parent.style.position = 'relative';
+                    }
+
+                    // Create crossfade layers
+                    const layers = images.map((src, index) => {
+                        const layer = new Image();
+                        layer.src = src;
+                        layer.style.position = 'absolute';
+                        layer.style.top = '0';
+                        layer.style.left = '0';
+                        layer.style.width = '100%';
+                        layer.style.height = '100%';
+                        layer.style.objectFit = 'cover';
+                        layer.style.opacity = index === 0 ? '1' : '0';
+                        layer.style.transition = 'opacity 0.7s ease-in-out';
+                        layer.style.pointerEvents = 'none'; // Prevent hover interference
+                        layer.style.zIndex = '1';
+                        parent.appendChild(layer);
+                        return layer;
+                    });
+
+                    // Hide original image completely to let layers take over
+                    img.style.opacity = '0';
+
                     let interval;
                     let currentIndex = 0;
-                    let originalSrc = img.src;
-
-                    // Preload images for smooth transition
-                    images.forEach(src => {
-                        const preload = new Image();
-                        preload.src = src;
-                    });
 
                     const startSlideshow = () => {
                         if (interval) clearInterval(interval);
-                        // Save original src (in case image loaded / changed via other JS like Outfit Builder)
-                        originalSrc = img.src; 
                         interval = setInterval(() => {
-                            currentIndex = (currentIndex + 1) % images.length;
-                            img.src = images[currentIndex];
-                        }, 600); // 600ms per slide
+                            layers[currentIndex].style.opacity = '0';
+                            currentIndex = (currentIndex + 1) % layers.length;
+                            layers[currentIndex].style.opacity = '1';
+                        }, 1300); // Wait 1.3s before transitioning
                     };
 
                     const stopSlideshow = () => {
                         if (interval) clearInterval(interval);
-                        img.src = originalSrc;
+                        layers.forEach((layer, idx) => {
+                            layer.style.opacity = idx === 0 ? '1' : '0';
+                        });
                         currentIndex = 0;
                     };
 
                     card.addEventListener('mouseenter', startSlideshow);
                     card.addEventListener('mouseleave', stopSlideshow);
-
-                    // Since mouseover triggered this, the mouse is already inside the card.
-                    // Start the slideshow immediately.
-                    startSlideshow();
+                    startSlideshow(); // Trigger immediately on first hover
                 }
             });
         });

@@ -431,15 +431,15 @@ input, select, textarea { font-family: var(--font); }
 }
 .gr-wardrobe-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
 }
 .gr-wardrobe-card {
     position: relative;
     overflow: hidden;
     display: block;
     background: #1a1a1a;
+    aspect-ratio: 4/5;
 }
 .gr-wardrobe-card img {
     width: 100%;
@@ -449,14 +449,6 @@ input, select, textarea { font-family: var(--font); }
     transition: transform var(--transition-slow);
 }
 .gr-wardrobe-card:hover img { transform: scale(1.03); }
-.gr-wardrobe-card-tall {
-    grid-row: 1 / 3;
-    aspect-ratio: auto;
-    min-height: 500px;
-}
-.gr-wardrobe-card-normal {
-    aspect-ratio: 4/3;
-}
 .gr-wardrobe-overlay {
     position: absolute;
     bottom: 0;

@@ -508,44 +508,20 @@
 
     <div class="gr-wardrobe">
         <div class="gr-wardrobe-grid">
-            {{-- Tall card (left, spans 2 rows) --}}
-            @if($categories->count() > 0)
-                <a href="{{ url($categories->first()->slug) }}" class="gr-wardrobe-card gr-wardrobe-card-tall"
-                    aria-label="Shop {{ $categories->first()->name }}">
-                    <img src="{{ get_storage_url($categories->first()->image) }}" onerror="this.src='{{ $wardrobeImgs[0] }}'"
-                        alt="{{ $categories->first()->name }}" loading="lazy">
-                    <div class="gr-wardrobe-overlay">
-                        <div class="gr-wardrobe-title">{{ strtoupper($categories->first()->name) }}</div>
-                        <span class="gr-wardrobe-link">SHOP {{ strtoupper($categories->first()->name) }} →</span>
-                    </div>
-                </a>
-            @endif
-
-            {{-- Top-right 2 cards --}}
-            @foreach($categories->skip(1)->take(2) as $i => $cat)
-                <a href="{{ url($cat->slug) }}" class="gr-wardrobe-card gr-wardrobe-card-normal"
-                    aria-label="Shop {{ $cat->name }}">
-                    <img src="{{ get_storage_url($cat->image) }}" onerror="this.src='{{ $wardrobeImgs[($i + 1) % 5] }}'"
+            @forelse($categories as $i => $cat)
+                <a href="{{ url($cat->slug) }}" class="gr-wardrobe-card" aria-label="Shop {{ $cat->name }}">
+                    <img src="{{ get_storage_url($cat->image) }}" onerror="this.src='{{ $wardrobeImgs[$i % 5] }}'"
                         alt="{{ $cat->name }}" loading="lazy">
                     <div class="gr-wardrobe-overlay">
                         <div class="gr-wardrobe-title">{{ strtoupper($cat->name) }}</div>
                         <span class="gr-wardrobe-link">SHOP {{ strtoupper($cat->name) }} →</span>
                     </div>
                 </a>
-            @endforeach
-
-            {{-- Bottom-right 2 cards --}}
-            @foreach($categories->skip(3)->take(2) as $i => $cat)
-                <a href="{{ url($cat->slug) }}" class="gr-wardrobe-card gr-wardrobe-card-normal"
-                    aria-label="Shop {{ $cat->name }}">
-                    <img src="{{ get_storage_url($cat->image) }}" onerror="this.src='{{ $wardrobeImgs[($i + 3) % 5] }}'"
-                        alt="{{ $cat->name }}" loading="lazy">
-                    <div class="gr-wardrobe-overlay">
-                        <div class="gr-wardrobe-title">{{ strtoupper($cat->name) }}</div>
-                        <span class="gr-wardrobe-link">SHOP {{ strtoupper($cat->name) }} →</span>
-                    </div>
-                </a>
-            @endforeach
+            @empty
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+                    No categories found.
+                </div>
+            @endforelse
         </div>
     </div>
 
