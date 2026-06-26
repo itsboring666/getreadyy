@@ -38,7 +38,15 @@ return [
             'report' => false,
         ],
 
-        'public' => [
+        'public' => env('PUBLIC_STORAGE_DRIVER', 'local') === 'cloudinary' ? [
+            'driver' => 'cloudinary',
+            'key' => env('CLOUDINARY_KEY'),
+            'secret' => env('CLOUDINARY_SECRET'),
+            'cloud' => env('CLOUDINARY_CLOUD_NAME'),
+            'url' => env('CLOUDINARY_URL'),
+            'secure' => (bool) env('CLOUDINARY_SECURE', true),
+            'prefix' => env('CLOUDINARY_PREFIX'),
+        ] : [
             'driver' => env('PUBLIC_STORAGE_DRIVER', 'local'),
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
@@ -49,6 +57,12 @@ return [
 
         'cloudinary' => [
             'driver' => 'cloudinary',
+            'key' => env('CLOUDINARY_KEY'),
+            'secret' => env('CLOUDINARY_SECRET'),
+            'cloud' => env('CLOUDINARY_CLOUD_NAME'),
+            'url' => env('CLOUDINARY_URL'),
+            'secure' => (bool) env('CLOUDINARY_SECURE', true),
+            'prefix' => env('CLOUDINARY_PREFIX'),
         ],
 
         's3' => [

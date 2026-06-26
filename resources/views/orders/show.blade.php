@@ -49,7 +49,7 @@
                 </form>
                 @endif
 
-                <a href="{{ route('orders.invoice', $order->order_id) }}" class="gr-hero-btn-primary" style="background: var(--text); font-size: 12px; padding: 12px 24px;">
+                <a href="{{ route('orders.invoice', $order->order_id) }}" class="gr-hero-btn-primary" style="background: var(--text); color: var(--bg); font-size: 12px; padding: 12px 24px; transition: all 0.2s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff';" onmouseout="this.style.background='var(--text)'; this.style.color='var(--bg)';">
                     <i class="fas fa-file-pdf" style="margin-right: 8px;"></i> INVOICE
                 </a>
             </div>

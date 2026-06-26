@@ -77,8 +77,8 @@
                     </a>
                 </li>
                 <li style="margin-top: 8px;">
-                    <span style="font-size:11px; color: var(--text-muted); line-height:1.6; display:block;">
-                        <i class="fas fa-map-marker-alt" style="margin-right:4px;"></i>
+                    <span style="font-size:11px; color: #ffffff; line-height:1.6; display:block;">
+                        <i class="fas fa-map-marker-alt" style="margin-right:4px; color: #ffffff;"></i>
                         Railnagar, Maramalainagar,<br>Chengalpattu, TN — 603203
                     </span>
                 </li>

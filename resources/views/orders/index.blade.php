@@ -11,7 +11,7 @@
                 <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 700; color: var(--text); margin-bottom: 8px;">DISPATCH LOG</h1>
                 <p style="color: var(--text-secondary); font-family: var(--font); font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">View and manage your past acquisitions.</p>
             </div>
-            <a href="{{ route('products.all') }}" class="gr-hero-btn-primary" style="background: var(--text); font-size: 12px; padding: 12px 24px;">
+            <a href="{{ route('products.all') }}" class="gr-hero-btn-primary" style="background: var(--text); color: var(--bg); font-size: 12px; padding: 12px 24px; transition: all 0.2s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff';" onmouseout="this.style.background='var(--text)'; this.style.color='var(--bg)';">
                 CONTINUE SHOPPING →
             </a>
         </div>
