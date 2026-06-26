@@ -16,9 +16,13 @@
             {{-- Sidebar / Quick Links --}}
             <div style="display: flex; flex-direction: column; gap: 12px;">
                 <div style="background: #161616; border: 1px solid var(--border); padding: 28px; text-align: center;">
-                    <div style="width: 72px; height: 72px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 30px; margin: 0 auto 14px;">
-                        {{ strtoupper(substr($user->name, 0, 1)) }}
-                    </div>
+                    @if($user->profile_picture)
+                        <img src="{{ get_storage_url($user->profile_picture) }}" alt="Profile Picture" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 2px solid var(--primary);">
+                    @else
+                        <div style="width: 72px; height: 72px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 30px; margin: 0 auto 14px;">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </div>
+                    @endif
                     <h3 style="font-family: var(--font-heading); font-size: 20px; margin-bottom: 4px; color: var(--text);">{{ $user->name }}</h3>
                     <p style="font-family: var(--font); font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em;">{{ $user->email }}</p>
                 </div>

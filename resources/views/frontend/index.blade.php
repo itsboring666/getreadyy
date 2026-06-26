@@ -395,8 +395,8 @@
     {{-- ─── LANDING HERO ───────────────────────────────────────── --}}
     @php
         $activeCarousels = \App\Models\Carousel::where('is_active', true)->latest()->take(2)->get();
-        $heroImg1 = $activeCarousels->count() > 0 && $activeCarousels[0]->image_path ? asset('storage/' . $activeCarousels[0]->image_path) : asset('assets/images/hero1.jpg');
-        $heroImg2 = $activeCarousels->count() > 1 && $activeCarousels[1]->image_path ? asset('storage/' . $activeCarousels[1]->image_path) : asset('assets/images/hero2.jpg');
+        $heroImg1 = $activeCarousels->count() > 0 && $activeCarousels[0]->image_path ? get_storage_url($activeCarousels[0]->image_path) : asset('assets/images/hero1.jpg');
+        $heroImg2 = $activeCarousels->count() > 1 && $activeCarousels[1]->image_path ? get_storage_url($activeCarousels[1]->image_path) : asset('assets/images/hero2.jpg');
 
         $heroTitle = $activeCarousels->count() > 0 && $activeCarousels[0]->title ? $activeCarousels[0]->title : "MEN'S<br>CLOTHING<br><em>store</em>";
         $heroSubtitle = $activeCarousels->count() > 0 && $activeCarousels[0]->description ? $activeCarousels[0]->description : "Premium menswear. Made for the road.";
@@ -512,7 +512,7 @@
             @if($categories->count() > 0)
                 <a href="{{ url($categories->first()->slug) }}" class="gr-wardrobe-card gr-wardrobe-card-tall"
                     aria-label="Shop {{ $categories->first()->name }}">
-                    <img src="{{ asset('storage/' . $categories->first()->image) }}" onerror="this.src='{{ $wardrobeImgs[0] }}'"
+                    <img src="{{ get_storage_url($categories->first()->image) }}" onerror="this.src='{{ $wardrobeImgs[0] }}'"
                         alt="{{ $categories->first()->name }}" loading="lazy">
                     <div class="gr-wardrobe-overlay">
                         <div class="gr-wardrobe-title">{{ strtoupper($categories->first()->name) }}</div>
@@ -525,7 +525,7 @@
             @foreach($categories->skip(1)->take(2) as $i => $cat)
                 <a href="{{ url($cat->slug) }}" class="gr-wardrobe-card gr-wardrobe-card-normal"
                     aria-label="Shop {{ $cat->name }}">
-                    <img src="{{ asset('storage/' . $cat->image) }}" onerror="this.src='{{ $wardrobeImgs[($i + 1) % 5] }}'"
+                    <img src="{{ get_storage_url($cat->image) }}" onerror="this.src='{{ $wardrobeImgs[($i + 1) % 5] }}'"
                         alt="{{ $cat->name }}" loading="lazy">
                     <div class="gr-wardrobe-overlay">
                         <div class="gr-wardrobe-title">{{ strtoupper($cat->name) }}</div>
@@ -538,7 +538,7 @@
             @foreach($categories->skip(3)->take(2) as $i => $cat)
                 <a href="{{ url($cat->slug) }}" class="gr-wardrobe-card gr-wardrobe-card-normal"
                     aria-label="Shop {{ $cat->name }}">
-                    <img src="{{ asset('storage/' . $cat->image) }}" onerror="this.src='{{ $wardrobeImgs[($i + 3) % 5] }}'"
+                    <img src="{{ get_storage_url($cat->image) }}" onerror="this.src='{{ $wardrobeImgs[($i + 3) % 5] }}'"
                         alt="{{ $cat->name }}" loading="lazy">
                     <div class="gr-wardrobe-overlay">
                         <div class="gr-wardrobe-title">{{ strtoupper($cat->name) }}</div>
@@ -603,10 +603,10 @@
                     @php
                         $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
                         $imageUrls = array_map(function ($img) {
-                            return asset('storage/' . $img);
+                            return get_storage_url($img);
                         }, array_values($validImages));
                     @endphp
-                    <img src="{{ asset('storage/' . $product->image) }}" onerror="this.src='{{ $phs[$i % 8] }}'"
+                    <img src="{{ get_storage_url($product->image) }}" onerror="this.src='{{ $phs[$i % 8] }}'"
                         data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy">
                     <span class="gr-product-view-btn">VIEW →</span>
                 </div>
@@ -644,7 +644,7 @@
         $featDesc = $featuredProduct->description ?? "We build clothes for men who don't chase trends. Heavy fabrics. Honest stitching. Pieces that earn their fade.\n\nEvery piece in the GET READY catalog is made in small batches, washed twice, and tested by people who actually wear them. That's the whole story.";
         $featBtnText = $featuredProduct->button_text ?? "READ THE MANIFESTO →";
         $featBtnLink = $featuredProduct->button_link ?? route('manifesto');
-        $featImg1 = $featuredProduct && $featuredProduct->image_path ? asset('storage/' . $featuredProduct->image_path) : asset('assets/images/official-logo.jpg');
+        $featImg1 = $featuredProduct && $featuredProduct->image_path ? get_storage_url($featuredProduct->image_path) : asset('assets/images/official-logo.jpg');
         $featImg2 = asset('assets/images/logo.png');
     @endphp
 

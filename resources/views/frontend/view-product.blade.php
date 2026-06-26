@@ -27,7 +27,7 @@
     <div class="o-pdp-gallery">
         <div class="o-pdp-main">
             <img id="mainImg" 
-                 src="{{ asset('storage/' . ($imgs[0] ?? '')) }}" 
+                 src="{{ get_storage_url(($imgs[0] ?? '')) }}" 
                  onerror="this.src='{{ $fb }}'" 
                  alt="{{ $product->name }}">
         </div>
@@ -35,9 +35,9 @@
         <div class="o-pdp-thumbs" role="group" aria-label="Product thumbnails">
             @foreach($imgs as $idx => $im)
             <button class="o-pdp-thumb {{ $idx === 0 ? 'active' : '' }}" 
-                 onclick="swImg('{{ asset('storage/' . $im) }}', this, '{{ $fb }}')"
+                 onclick="swImg('{{ get_storage_url($im) }}', this, '{{ $fb }}')"
                  aria-label="View image {{ $idx + 1 }}">
-                <img src="{{ asset('storage/' . $im) }}" 
+                <img src="{{ get_storage_url($im) }}" 
                      onerror="this.src='{{ $fb }}'" 
                      alt="">
             </button>

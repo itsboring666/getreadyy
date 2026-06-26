@@ -12,7 +12,7 @@
 
     @foreach ($carousels as $carousel)
     <div class="bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-        <img src="{{ asset('storage/' . $carousel->image_path) }}" alt="Carousel Image" class="w-full h-48 object-cover rounded-t-xl">
+        <img src="{{ get_storage_url($carousel->image_path) }}" alt="Carousel Image" class="w-full h-48 object-cover rounded-t-xl">
         <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800">{{ $carousel->title }}</h2>
             <p class="text-gray-600 text-sm mt-1">{{ $carousel->description }}</p>

@@ -134,14 +134,14 @@
                     @php
                         $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
                         $imageUrls = array_map(function ($img) {
-                            return asset('storage/' . $img);
+                            return get_storage_url($img);
                         }, array_values($validImages));
                     @endphp
                     <div class="gr-product-card-img" style="aspect-ratio: 3/4; position: relative; overflow: hidden; border: 2px solid var(--primary);">
                         <span class="gr-badge gr-badge-new" style="background: var(--text); z-index: 5;">{{ $i === 0 ? 'Outerwear' : ($i === 1 ? 'Top' : 'Bottom') }}</span>
                         <a href="{{ route('product.view', $product->id) }}" class="product-link" style="display: block; width: 100%; height: 100%;">
                             <div class="reel-viewport">
-                                <img src="{{ asset('storage/' . $product->image) }}" 
+                                <img src="{{ get_storage_url($product->image) }}" 
                                      class="main-product-img hover-slideshow"
                                      data-images='@json($imageUrls)'
                                      onerror="this.src='{{ $phs[$i % 3] }}'" 

@@ -160,7 +160,7 @@
                     @endphp
                     <div style="display:flex; gap:12px; margin-bottom:16px;">
                         <div style="width:60px; height:80px; position:relative; border:1px solid var(--border); border-radius:4px; overflow:hidden;">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="width:100%; height:100%; object-fit:cover;">
+                            <img src="{{ get_storage_url($product->image) }}" alt="{{ $product->name }}" style="width:100%; height:100%; object-fit:cover;">
                             <span style="position:absolute; top:-6px; right:-6px; background:var(--primary); color:var(--white); font-size:11px; width:20px; height:20px; display:flex; align-items:center; justify-content:center; text-align:center; border-radius:50%; font-weight:bold;">{{ $item->quantity }}</span>
                         </div>
                         <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">

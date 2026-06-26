@@ -39,7 +39,7 @@
                 <tr>
                     <td>
                         <div class="o-cart-product-info">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ get_storage_url($product->image) }}" alt="{{ $product->name }}">
                             <div>
                                 <a href="{{ route('product.view', $product->id) }}" class="o-cart-product-name">{{ $product->name }}</a>
                                 <div class="o-cart-product-meta">Size: <strong>{{ $item->size }}</strong></div>

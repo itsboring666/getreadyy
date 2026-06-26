@@ -16,7 +16,7 @@
     </div>
     <div class="gr-hero-images" style="min-height: 250px;">
         <div class="gr-hero-img-1" style="width: 100%; height: 100%; top: 0;">
-            <img src="{{ asset('storage/' . $category->image) }}" 
+            <img src="{{ get_storage_url($category->image) }}" 
                  alt="{{ $category->name }}" loading="eager">
         </div>
     </div>
@@ -98,10 +98,10 @@
                     @php
                         $validImages = array_filter([$product->image, $product->image_2, $product->image_3, $product->image_4]);
                         $imageUrls = array_map(function ($img) {
-                            return asset('storage/' . $img);
+                            return get_storage_url($img);
                         }, array_values($validImages));
                     @endphp
-                    <img src="{{ asset('storage/' . $product->image) }}" 
+                    <img src="{{ get_storage_url($product->image) }}" 
                          data-images='@json($imageUrls)' class="hover-slideshow"
                          onerror="this.src='{{ $phs[$i % 4] }}'" 
                          alt="{{ $product->name }}" loading="lazy">

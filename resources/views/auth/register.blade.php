@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('register') }}" class="o-form">
+            <form method="POST" action="{{ route('register') }}" class="o-form" enctype="multipart/form-data">
                 @csrf
 
                 <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -50,6 +50,12 @@
                         <label for="phone" class="o-form-label">Phone Number (10 Digits) <span style="color:var(--danger);">*</span></label>
                         <input type="tel" id="phone" name="phone" class="o-form-input @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required placeholder="e.g. 9876543210" pattern="[0-9]{10}" title="Must be exactly 10 digits">
                         @error('phone') <div style="color:var(--danger); font-size:12px; margin-top:4px;">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="o-form-group">
+                        <label for="profile_picture" class="o-form-label">Profile Picture <span style="color:var(--text-secondary); font-size:9px; font-weight:normal;">(Optional)</span></label>
+                        <input type="file" id="profile_picture" name="profile_picture" class="o-form-input @error('profile_picture') is-invalid @enderror" accept="image/*" style="padding: 11px 16px;">
+                        @error('profile_picture') <div style="color:var(--danger); font-size:12px; margin-top:4px;">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="o-form-group">

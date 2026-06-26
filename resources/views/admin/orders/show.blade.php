@@ -31,7 +31,7 @@
                         @php $product = $item->product; @endphp
                         <div class="flex gap-4 items-center border-b pb-4 last:border-0 last:pb-0">
                             @if($product)
-                            <img src="{{ asset('storage/' . $product->image) }}" class="w-16 h-20 object-cover rounded shadow-sm">
+                            <img src="{{ get_storage_url($product->image) }}" class="w-16 h-20 object-cover rounded shadow-sm">
                             @else
                             <div class="w-16 h-20 bg-gray-100 rounded flex items-center justify-center"><i class="fas fa-image text-gray-400"></i></div>
                             @endif

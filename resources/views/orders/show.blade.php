@@ -122,7 +122,7 @@
                     <div style="display: flex; gap: 24px; align-items: center;">
                         @if($product)
                         <a href="{{ route('product.view', $product->id) }}" style="width: 100px; height: 130px; background: var(--bg); flex-shrink: 0; display: block;">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $item->product_name }}" style="width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply;">
+                            <img src="{{ get_storage_url($product->image) }}" alt="{{ $item->product_name }}" style="width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply;">
                         </a>
                         @else
                         <div style="width: 100px; height: 130px; background: var(--bg); display: flex; align-items: center; justify-content: center; color: var(--border); flex-shrink: 0;">

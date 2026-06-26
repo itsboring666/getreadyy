@@ -18,7 +18,7 @@
         </div>
 
         <div style="background: #161616; border: 1px solid var(--border); padding: 40px;">
-            <form method="POST" action="{{ route('profile.update') }}">
+            <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
@@ -67,10 +67,20 @@
                     </div>
 
                     {{-- Address --}}
-                    <div style="grid-column: 1 / -1;">
+                    <div>
                         <label for="address" style="display: block; font-family: var(--font); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 8px; font-weight: 700;">Shipping Address</label>
                         <textarea id="address" name="address" rows="3" style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-light); border-radius: 0; background: var(--bg); font-family: var(--font); font-size: 14px; outline: none; transition: border-color 0.2s; resize: vertical;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--border-light)'">{{ old('address', $user->address) }}</textarea>
                         @error('address') <div style="color: var(--danger); font-size: 12px; margin-top: 4px;">{{ $message }}</div> @enderror
+                    </div>
+
+                    {{-- Profile Picture --}}
+                    <div>
+                        <label for="profile_picture" style="display: block; font-family: var(--font); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 8px; font-weight: 700;">Profile Picture <span style="color: var(--text-secondary); font-size: 9px; font-weight: normal;">(Optional)</span></label>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" style="width: 100%; padding: 11px 16px; border: 1px solid var(--border-light); border-radius: 0; background: var(--bg); font-family: var(--font); font-size: 14px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--border-light)'">
+                        @error('profile_picture') <div style="color: var(--danger); font-size: 12px; margin-top: 4px;">{{ $message }}</div> @enderror
+                        @if($user->profile_picture)
+                            <div style="margin-top: 8px; font-size: 11px; color: var(--text-secondary);">Current: <a href="{{ get_storage_url($user->profile_picture) }}" target="_blank" style="color: var(--primary);">View Image</a></div>
+                        @endif
                     </div>
 
                 </div>

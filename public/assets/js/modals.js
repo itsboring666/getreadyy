@@ -26,7 +26,7 @@ const CarouselModal = {
         const previewEl = document.getElementById('editCarouselImagePreview');
         if (previewEl) {
             if (carousel.image_path) {
-                previewEl.src = "/storage/" + carousel.image_path;
+                previewEl.src = carousel.image_path.startsWith('http') ? carousel.image_path : "/storage/" + carousel.image_path;
                 previewEl.classList.remove('hidden');
             } else {
                 previewEl.classList.add('hidden');
@@ -137,7 +137,7 @@ const ProductModal = {
             const previewEl = document.getElementById(previewId);
             if (previewEl) {
                 if (product[key]) {
-                    previewEl.src = baseStorageUrl + product[key];
+                    previewEl.src = product[key].startsWith('http') ? product[key] : baseStorageUrl + product[key];
                     previewEl.classList.remove('hidden');
                 } else {
                     previewEl.classList.add('hidden');

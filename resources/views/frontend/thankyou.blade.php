@@ -37,7 +37,7 @@
                 @php $product = $item->product; @endphp
                 <div style="display:flex; gap:20px; align-items:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid rgba(0,0,0,0.05);">
                     <div style="width:80px; height:100px; position:relative; border:1px solid var(--border); border-radius:4px; overflow:hidden; background:#1a1a1a; flex-shrink:0;">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $item->product_name }}" style="width:100%; height:100%; object-fit:cover;">
+                        <img src="{{ get_storage_url($product->image) }}" alt="{{ $item->product_name }}" style="width:100%; height:100%; object-fit:cover;">
                         <span style="position:absolute; top:0; right:0; background:var(--text); color:var(--white); font-size:11px; padding:2px 6px; border-bottom-left-radius:4px; font-weight:bold;">{{ $item->quantity }}</span>
                     </div>
                     <div style="flex:1;">

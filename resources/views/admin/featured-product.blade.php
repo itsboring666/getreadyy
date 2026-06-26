@@ -10,7 +10,7 @@
 <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row" data-aos="zoom-in-up">
     <!-- Product Image -->
     <div class="md:w-1/2 h-64 md:h-auto" data-aos="fade-right" data-aos-delay="100">
-        <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->title }}" class="w-full h-full object-cover">
+        <img src="{{ get_storage_url($product->image_path) }}" alt="{{ $product->title }}" class="w-full h-full object-cover">
     </div>
 
     <!-- Product Details -->
@@ -98,7 +98,7 @@
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Change Image <span class="text-gray-400 text-xs">(JPG, PNG, WEBP, HEIC, AVIF, TIFF — optional)</span></label>
-                <img src="{{ asset('storage/' . $product->image_path) }}" class="w-32 h-24 object-cover mb-2 rounded shadow" />
+                <img src="{{ get_storage_url($product->image_path) }}" class="w-32 h-24 object-cover mb-2 rounded shadow" />
                 <input type="file" name="image" accept="image/*,.heic,.heif,.avif,.tiff,.tif" class="mt-1 block w-full">
             </div>
 

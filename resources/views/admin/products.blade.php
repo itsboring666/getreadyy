@@ -76,7 +76,7 @@
             <tr class="border-b hover:bg-gray-50 transition duration-200" data-aos="zoom-in">
                 <td class="py-3 px-6">{{ $index + 1 }}</td>
                 <td class="py-3 px-6">
-                    <img src="{{ asset('storage/' . $product->image) }}" class="w-10 h-10 object-cover rounded" />
+                    <img src="{{ get_storage_url($product->image) }}" class="w-10 h-10 object-cover rounded" />
                 </td>
                 <td class="py-3 px-6">{{ $product->name }}</td>
                 <td class="py-3 px-6">{{ $product->category->name ?? 'N/A' }}</td>

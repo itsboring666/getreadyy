@@ -27,7 +27,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="150">
         @forelse ($arrivals as $arrival)
         <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden" data-aos="zoom-in-up" data-aos-delay="{{ ($loop->index + 1) * 100 }}">
-            <img src="{{ asset('storage/' . $arrival->image) }}"
+            <img src="{{ get_storage_url($arrival->image) }}"
                 alt="{{ $arrival->name }}"
                 class="w-full h-48 object-cover rounded-t-xl">
 
@@ -41,7 +41,7 @@
                     </span>
                     <div class="space-x-2">
                         <button
-                            onclick="NewArrivalModal.openEdit('{{ $arrival->id }}', '{{ $arrival->name }}', `{{ $arrival->description }}`, '{{ asset('storage/' . $arrival->image) }}', '{{ $arrival->status }}', '{{ $arrival->price }}')"
+                            onclick="NewArrivalModal.openEdit('{{ $arrival->id }}', '{{ $arrival->name }}', `{{ $arrival->description }}`, '{{ get_storage_url($arrival->image) }}', '{{ $arrival->status }}', '{{ $arrival->price }}')"
                             class="bg-[#536451] text-[#f3e9d5] hover:bg-[#f3e9d5] hover:text-[#536451] hover:scale-105 transition-transform duration-200 px-4 py-2 rounded hover:underline text-sm">
                             Edit
                         </button>
