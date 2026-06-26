@@ -224,7 +224,16 @@ Route::get('/outfit-builder', [App\Http\Controllers\OutfitBuilderController::cla
 // Storage Redirect for Cloudinary
 Route::get('/storage/{path}', function ($path) {
     if (config('filesystems.disks.public.driver') === 'cloudinary') {
-        return Illuminate\Support\Facades\Redirect::away(Illuminate\Support\Facades\Storage::disk('public')->url($path));
+        $info = pathinfo($path);
+        $dirname = str_replace('\\', '/', $info['dirname']);
+        $id = ($dirname === '.' ? '' : $dirname . '/') . $info['filename'];
+        
+        try {
+            $cloudinary = resolve(Cloudinary\Cloudinary::class);
+            return Illuminate\Support\Facades\Redirect::away($cloudinary->image($id)->toUrl());
+        } catch (\Exception $e) {
+            return Illuminate\Support\Facades\Redirect::away(Illuminate\Support\Facades\Storage::disk('public')->url($path));
+        }
     }
     abort(404);
 })->where('path', '.*');
