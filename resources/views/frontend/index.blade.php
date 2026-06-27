@@ -408,13 +408,10 @@
         <div class="gr-hero-text">
             <div class="gr-hero-label">FALL / WINTER '28 — VOL. III</div>
             <h1 class="gr-hero-heading">
-                BUILT<br>
-                FOR THE<br>
-                <em>long</em>&nbsp;&nbsp;HAUL.
+                MEN'S<br>
+                OUTFIT<br>
+                <em>bar.</em>
             </h1>
-            <p class="gr-hero-subtitle">
-                Heavyweight tees, raw selvage denim, and trucker jackets cut for the road less marketed.
-            </p>
             <div class="gr-hero-btns">
                 <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
                 <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline">OUTFIT BUILDER</a>
