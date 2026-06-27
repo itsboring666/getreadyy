@@ -98,7 +98,7 @@
         <img src="{{ $logoBase64 }}" alt="GET READY">
     </div>
     <div class="header-sub">
-        <strong>GET READY</strong> &nbsp;|&nbsp; Coimbatore, Tamil Nadu &nbsp;|&nbsp; Ph: +91 9080253885 &nbsp;|&nbsp; @_getreadyyyy
+        <strong>GET READY</strong> &nbsp;|&nbsp; Chengalpattu, Tamil Nadu &nbsp;|&nbsp; Ph: +91 9080253885 &nbsp;|&nbsp; @_getreadyyyy
     </div>
 
     {{-- ── BODY ── --}}
