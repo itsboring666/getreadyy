@@ -1550,7 +1550,8 @@ input, select, textarea { font-family: var(--font); }
     .gr-cta { padding: 60px 20px; }
     .gr-footer-inner { grid-template-columns: 1fr; gap: 32px; }
     .gr-hero { padding: 24px 20px 20px; }
-    .gr-hero-heading { font-size: clamp(40px, 10vw, 64px); }
+    .gr-hero-heading { font-size: clamp(40px, 10vw, 64px); margin-bottom: 16px; }
+    .gr-hero-barcode { display: none !important; }
     .gr-hero-images { min-height: 420px; height: 420px; }
     .gr-hero-circle-badge { width: 64px; height: 64px; }
     .gr-hero-circle-badge span { font-size: 6px; }
