@@ -423,7 +423,7 @@
             {{-- Vintage Barcode stamp --}}
             <div class="gr-hero-barcode" style="margin-top: 40px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: var(--text-light); z-index: 3;">
                 <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
-                <div style="font-family: var(--font); font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">SPEC-818 // LOT-OUTFIT</div>
+
             </div>
         </div>
         <div class="gr-hero-images">
@@ -469,7 +469,7 @@
                 <span class="gr-marquee-dot">✦</span>
                 <span class="gr-marquee-item">casuals</span>
                 <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">formulas</span>
+                <span class="gr-marquee-item">formals</span>
                 <span class="gr-marquee-dot">✦</span>
                 <span class="gr-marquee-item">Street wear</span>
                 <span class="gr-marquee-dot">✦</span>
@@ -477,7 +477,7 @@
                 <span class="gr-marquee-dot">✦</span>
                 <span class="gr-marquee-item">casuals</span>
                 <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">formulas</span>
+                <span class="gr-marquee-item">formals</span>
                 <span class="gr-marquee-dot">✦</span>
             </div>
         </div>

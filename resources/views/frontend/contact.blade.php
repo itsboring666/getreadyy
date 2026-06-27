@@ -27,8 +27,8 @@
             </div>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px;">
-            <img src="{{ asset('assets/images/carousel_1.jpg') }}" alt="Store" style="width:100%; aspect-ratio:1; object-fit:cover; filter:grayscale(80%);">
-            <img src="{{ asset('assets/images/carousel_3.jpg') }}" alt="Store" style="width:100%; aspect-ratio:1; object-fit:cover; filter:grayscale(80%); margin-top: 30px;">
+            <img src="{{ asset('assets/images/store-exterior.jpg') }}" onerror="this.src='{{ asset('assets/images/carousel_1.jpg') }}'" alt="Store Exterior" style="width:100%; aspect-ratio:1; object-fit:cover; filter:grayscale(80%);">
+            <img src="{{ asset('assets/images/store-interior.jpg') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="Store Interior" style="width:100%; aspect-ratio:1; object-fit:cover; filter:grayscale(80%); margin-top: 30px;">
         </div>
     </div>
 </section>

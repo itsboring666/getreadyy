@@ -4,8 +4,8 @@
         {{-- Brand --}}
         <div>
             <div style="margin-bottom: 20px; display: inline-block; position: relative;">
-                <img src="{{ asset('assets/images/official-logo.jpg') }}" alt="GET READY"
-                    style="width: 140px; height: auto; object-fit: contain; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.45); border: 1.5px solid rgba(255,255,255,0.25); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="GET READY"
+                    style="width: 200px; max-width: 100%; height: auto; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';">
             </div>
             <p class="gr-footer-tagline" style="max-width: 180px; line-height: 1.6;">Premium Men's Clothing.
                 Chengalpattu, Tamil Nadu.</p>
