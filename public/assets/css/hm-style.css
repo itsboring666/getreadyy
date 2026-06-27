@@ -1551,7 +1551,7 @@ input, select, textarea { font-family: var(--font); }
     .gr-footer-inner { grid-template-columns: 1fr; gap: 32px; }
     .gr-hero { padding: 24px 20px 20px; }
     .gr-hero-heading { font-size: clamp(40px, 10vw, 64px); }
-    .gr-hero-images { min-height: 320px; }
+    .gr-hero-images { min-height: 420px; height: 420px; }
     .gr-hero-circle-badge { width: 64px; height: 64px; }
     .gr-hero-circle-badge span { font-size: 6px; }
     .gr-wardrobe-grid { grid-template-columns: 1fr; }
@@ -1569,9 +1569,9 @@ input, select, textarea { font-family: var(--font); }
     .gr-footer-inner { grid-template-columns: 1fr 1fr; }
     .gr-hero-btns { flex-direction: column; align-items: stretch; }
     .gr-hero-btn-primary, .gr-hero-btn-outline { justify-content: center; }
-    .gr-hero-images { min-height: 260px; }
-    .gr-hero-img-1 { width: 60%; height: 55%; }
-    .gr-hero-img-2 { width: 60%; height: 52%; }
+    .gr-hero-images { min-height: 360px; height: 360px; }
+    .gr-hero-img-1 { width: 70%; height: 65%; top: 0; }
+    .gr-hero-img-2 { width: 70%; height: 60%; left: 0; bottom: 10px; }
     .gr-editorial-images { height: 250px; }
     .gr-editorial-img-1 { width: 65%; left: 10%; }
     .gr-editorial-img-2 { width: 55%; }
