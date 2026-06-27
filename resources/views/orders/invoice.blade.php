@@ -311,13 +311,11 @@
             <tbody>
                 @foreach ($order->items as $item)
                 <tr>
-                    <td>
-                        <div class="item-name">{{ strtoupper($item->product_name) }}</div>
-                    </td>
+                    <td><div class="item-name">{{ strtoupper($item->product_name) }}</div></td>
                     <td class="text-center">{{ $item->size }}</td>
                     <td class="text-center">{{ $item->quantity }}</td>
-                    <td class="text-right">₹{{ number_format($item->price, 2) }}</td>
-                    <td class="text-right">₹{{ number_format($item->price * $item->quantity, 2) }}</td>
+                    <td class="text-right">Rs. {{ number_format($item->price, 2) }}</td>
+                    <td class="text-right">Rs. {{ number_format($item->price * $item->quantity, 2) }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -332,21 +330,21 @@
         <div class="totals-wrap">
             <div class="totals-row">
                 <div class="totals-label">Subtotal</div>
-                <div class="totals-value">₹{{ number_format($subtotal, 2) }}</div>
+                <div class="totals-value">Rs. {{ number_format($subtotal, 2) }}</div>
             </div>
             <div class="totals-row">
                 <div class="totals-label">Shipping</div>
-                <div class="totals-value">{{ $shipping > 0 ? '₹' . number_format($shipping, 2) : 'Free' }}</div>
+                <div class="totals-value">{{ $shipping > 0 ? 'Rs. ' . number_format($shipping, 2) : 'FREE' }}</div>
             </div>
             @if($discount > 0)
             <div class="totals-row discount">
                 <div class="totals-label">Discount{{ $order->coupon_code ? ' (' . $order->coupon_code . ')' : '' }}</div>
-                <div class="totals-value">— ₹{{ number_format($discount, 2) }}</div>
+                <div class="totals-value">— Rs. {{ number_format($discount, 2) }}</div>
             </div>
             @endif
             <div class="grand-total-row">
                 <div class="grand-total-label">Grand Total</div>
-                <div class="grand-total-value">₹{{ number_format($order->total_amount, 2) }}</div>
+                <div class="grand-total-value">Rs. {{ number_format($order->total_amount, 2) }}</div>
             </div>
         </div>
 

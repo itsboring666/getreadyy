@@ -611,51 +611,7 @@
         @endforelse
     </div>
 
-    {{-- ─── CUT FROM HONEST CLOTH (Editorial / Featured Product) ─── --}}
-    @php
-        $featuredProduct = \App\Models\FeaturedProduct::where('is_active', true)->latest()->first();
-        $featTagline = $featuredProduct->tagline ?? "FIELD NOTES — VOL. III";
-        $featTitle = $featuredProduct->title ?? "CUT FROM<br><em>honest</em> CLOTH.";
-        $featDesc = $featuredProduct->description ?? "We build clothes for men who don't chase trends. Heavy fabrics. Honest stitching. Pieces that earn their fade.\n\nEvery piece in the GET READY catalog is made in small batches, washed twice, and tested by people who actually wear them. That's the whole story.";
-        $featBtnText = $featuredProduct->button_text ?? "READ THE MANIFESTO →";
-        $featBtnLink = $featuredProduct->button_link ?? route('manifesto');
-        $featImg1 = $featuredProduct && $featuredProduct->image_path ? get_storage_url($featuredProduct->image_path) : asset('assets/images/official-logo.jpg');
-        $featImg2 = asset('assets/images/logo.png');
-    @endphp
 
-    <section class="gr-editorial">
-        <div class="gr-editorial-inner">
-            <div class="gr-editorial-text">
-                <div class="gr-editorial-label">{{ $featTagline }}</div>
-                <h2 class="gr-editorial-heading">
-                    {!! $featTitle !!}
-                </h2>
-                <div class="gr-editorial-body" style="white-space: pre-line;">
-                    {{ $featDesc }}
-                </div>
-
-                @if($featuredProduct && $featuredProduct->discounted_price > 0)
-                    <div style="margin-top: 16px; margin-bottom: 24px;">
-                        <span
-                            style="font-family: var(--font-heading); font-size: 24px; color: var(--accent);">₹{{ number_format($featuredProduct->discounted_price) }}</span>
-                        @if($featuredProduct->original_price > $featuredProduct->discounted_price)
-                            <span
-                                style="text-decoration: line-through; color: var(--text-muted); font-size: 14px; margin-left: 8px;">₹{{ number_format($featuredProduct->original_price) }}</span>
-                        @endif
-                    </div>
-                @endif
-
-            </div>
-            <div class="gr-editorial-images">
-                <div class="gr-editorial-img-1">
-                    <img src="{{ $featImg1 }}" onerror="this.src='{{ asset('assets/images/official-logo.jpg') }}'" alt="Featured Product" loading="lazy">
-                </div>
-                <div class="gr-editorial-img-2">
-                    <img src="{{ $featImg2 }}" alt="Vintage clothing rack" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
 
     {{-- ─── SPIN THE OUTFIT WHEEL (CTA) ───────────────────────── --}}
     <section class="gr-cta-upgraded">
@@ -741,9 +697,8 @@
                 </div>
                 <h3
                     style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
-                    7-DAY EASY RETURNS</h3>
-                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange within 7 days
-                    of purchase. Simplified returns process.</p>
+                    EASY RETURNS</h3>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange eligible items. Simplified returns process.</p>
             </div>
         </div>
     </section>

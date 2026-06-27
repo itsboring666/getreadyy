@@ -24,16 +24,21 @@
                 <h2 style="font-family: var(--font-heading); font-size: 28px; color: var(--text); margin: 0;">DELIVERY</h2>
             </div>
             <div style="border-left: 3px solid var(--accent); padding-left: 24px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
                     <div style="background: var(--white); padding: 20px; border: 1px solid var(--border);">
-                        <div style="font-family:var(--font-heading); font-size:14px; margin-bottom:8px; color:var(--text);">FREE SHIPPING</div>
-                        <div style="font-family:var(--font); font-size:28px; font-weight:700; color:var(--accent); margin-bottom:4px;">₹999+</div>
-                        <div style="font-family:var(--font); font-size:12px; color:var(--text-muted);">Free standard delivery on all orders above ₹999</div>
+                        <div style="font-family:var(--font-heading); font-size:14px; margin-bottom:8px; color:var(--text);">CHENGALPATTU DISTRICT</div>
+                        <div style="font-family:var(--font); font-size:28px; font-weight:700; color:var(--text); margin-bottom:4px;">₹60</div>
+                        <div style="font-family:var(--font); font-size:12px; color:var(--text-muted);">Standard delivery fee</div>
                     </div>
                     <div style="background: var(--white); padding: 20px; border: 1px solid var(--border);">
-                        <div style="font-family:var(--font-heading); font-size:14px; margin-bottom:8px; color:var(--text);">STANDARD FEE</div>
-                        <div style="font-family:var(--font); font-size:28px; font-weight:700; color:var(--text); margin-bottom:4px;">₹99</div>
-                        <div style="font-family:var(--font); font-size:12px; color:var(--text-muted);">Flat fee for orders below ₹999</div>
+                        <div style="font-family:var(--font-heading); font-size:14px; margin-bottom:8px; color:var(--text);">REST OF TAMIL NADU</div>
+                        <div style="font-family:var(--font); font-size:28px; font-weight:700; color:var(--text); margin-bottom:4px;">₹90</div>
+                        <div style="font-family:var(--font); font-size:12px; color:var(--text-muted);">Standard delivery fee</div>
+                    </div>
+                    <div style="background: var(--white); padding: 20px; border: 1px solid var(--border);">
+                        <div style="font-family:var(--font-heading); font-size:14px; margin-bottom:8px; color:var(--text);">OTHER STATES</div>
+                        <div style="font-family:var(--font); font-size:28px; font-weight:700; color:var(--text); margin-bottom:4px;">₹120</div>
+                        <div style="font-family:var(--font); font-size:12px; color:var(--text-muted);">Standard delivery fee</div>
                     </div>
                 </div>
                 <p style="font-family: var(--font); color: var(--text-secondary); line-height: 1.8; font-size: 14px;">
@@ -52,14 +57,14 @@
             </div>
             <div style="border-left: 3px solid var(--accent); padding-left: 24px;">
                 <div style="background: var(--white); border: 1px solid var(--border); padding: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 20px;">
-                    <div style="font-family: var(--font-heading); font-size: 48px; font-weight: 900; color: var(--accent); line-height: 1;">7</div>
+                    <div style="font-family: var(--font-heading); font-size: 48px; font-weight: 900; color: var(--accent); line-height: 1;"><i class="fas fa-box-open"></i></div>
                     <div>
-                        <div style="font-family: var(--font-heading); font-size: 16px; color: var(--text); margin-bottom: 4px;">DAY RETURN WINDOW</div>
-                        <div style="font-family: var(--font); font-size: 13px; color: var(--text-muted);">From the date of delivery</div>
+                        <div style="font-family: var(--font-heading); font-size: 16px; color: var(--text); margin-bottom: 4px;">EASY RETURNS</div>
+                        <div style="font-family: var(--font); font-size: 13px; color: var(--text-muted);">Hassle-free process</div>
                     </div>
                 </div>
                 <p style="font-family: var(--font); color: var(--text-secondary); line-height: 1.8; font-size: 14px; margin-bottom: 16px;">
-                    We accept returns on <strong>unworn, unwashed items with original tags attached</strong> within <strong>7 days</strong> of delivery.
+                    We accept returns on <strong>unworn, unwashed items with original tags attached</strong>.
                 </p>
                 <p style="font-family: var(--font); color: var(--text-secondary); line-height: 1.8; font-size: 14px;">
                     To initiate a return, contact us via WhatsApp or email with your order number. A return shipping fee of ₹150 will be deducted from your refund.
