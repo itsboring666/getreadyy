@@ -440,6 +440,7 @@
     {{-- ─── MARQUEE TICKER ─────────────────────────────────────── --}}
     <div class="gr-marquee">
         <div class="gr-marquee-track">
+            @for($i=0; $i<8; $i++)
             <div class="gr-marquee-content">
                 <span class="gr-marquee-item">Street wear</span>
                 <span class="gr-marquee-dot">✦</span>
@@ -449,34 +450,8 @@
                 <span class="gr-marquee-dot">✦</span>
                 <span class="gr-marquee-item">formals</span>
                 <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">Street wear</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">vintage style</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">casuals</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">formals</span>
-                <span class="gr-marquee-dot">✦</span>
             </div>
-            {{-- Duplicate for seamless loop --}}
-            <div class="gr-marquee-content">
-                <span class="gr-marquee-item">Street wear</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">vintage style</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">casuals</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">formals</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">Street wear</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">vintage style</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">casuals</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">formals</span>
-                <span class="gr-marquee-dot">✦</span>
-            </div>
+            @endfor
         </div>
     </div>
 

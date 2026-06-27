@@ -50,6 +50,7 @@
                 <li><a href="{{ route('manifesto') }}">Our Manifesto</a></li>
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 <li><a href="{{ route('shipping') }}">Shipping & Returns</a></li>
+                <li><a href="{{ route('developer') }}">Meet the Developer</a></li>
             </ul>
         </div>
 

@@ -50,6 +50,11 @@ Route::get('/contact', function () {
 })->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+// Meet the Developer Page
+Route::get('/developer', function () {
+    return view('frontend.developer');
+})->name('developer');
+
 
 // Logout
 Route::post('/logout', function () {

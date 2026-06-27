@@ -230,7 +230,7 @@
                 </defs>
                 <text font-family="'Space Mono', monospace" font-size="10.5" font-weight="bold" fill="#ffffff" letter-spacing="3.5">
                     <textPath href="#circlePath" startOffset="0%">
-                        GET READY • PREMIUM MENSWEAR • 
+                        GET READY &nbsp;•&nbsp; PREMIUM MENSWEAR &nbsp;•&nbsp;
                     </textPath>
                 </text>
             </svg>
