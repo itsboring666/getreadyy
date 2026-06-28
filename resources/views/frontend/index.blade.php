@@ -440,10 +440,14 @@
     <div style="position: relative; width: 100%; overflow: hidden; z-index: 1;">
         {{-- Outer Continuous Background Image --}}
         <div style="position: absolute; inset: 0; z-index: 1;">
-            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.4;">
+            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.15;">
         </div>
 
-        <section class="gr-hero gr-hero-custom" style="position: relative; z-index: 2; overflow: hidden; border-radius: 20px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);">
+        <section class="gr-hero gr-hero-custom" style="position: relative; z-index: 2; overflow: hidden; border-radius: 20px; background: rgba(0, 0, 0, 0.7);">
+            {{-- Inner Background Image --}}
+            <div style="position: absolute; inset: 0; z-index: 1;">
+                <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Inner Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.35;">
+            </div>
 
             <div class="gr-hero-text" style="position: relative; z-index: 3; padding: 0;">
                 <div class="gr-hero-label" style="color: #ccc;">FALL / WINTER '28 — VOL. III</div>
