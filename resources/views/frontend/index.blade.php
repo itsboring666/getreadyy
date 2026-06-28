@@ -406,8 +406,8 @@
     <style>
         .gr-hero-custom {
             margin: 40px auto !important;
-            width: calc(100% - 40px);
-            max-width: 1200px;
+            width: calc(100% - 48px);
+            max-width: var(--max-width);
             padding: 60px 40px 60px 40px !important;
             min-height: 500px !important;
             display: flex !important;
@@ -436,7 +436,7 @@
                 <em><strong>B</strong>ar.</em>
             </h1>
             <div class="gr-hero-btns" style="max-width: 300px;">
-                <a href="{{ route('products.all') }}" class="gr-hero-btn-primary" style="background: #fff; color: #000;">SHOP THE DROP →</a>
+                <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
                 <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT BUILDER</a>
             </div>
 
