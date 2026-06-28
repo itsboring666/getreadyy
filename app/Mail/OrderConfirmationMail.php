@@ -31,7 +31,12 @@ class OrderConfirmationMail extends Mailable
      */
     public function build()
     {
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('orders.invoice', ['order' => $this->order]);
+
         return $this->subject('Order Confirmation: ' . $this->order->order_id . ' | GET READY')
-                    ->view('emails.order-confirmation');
+                    ->view('emails.order-confirmation')
+                    ->attachData($pdf->output(), 'invoice_' . $this->order->order_id . '.pdf', [
+                        'mime' => 'application/pdf',
+                    ]);
     }
 }

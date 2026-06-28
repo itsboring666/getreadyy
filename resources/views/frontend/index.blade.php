@@ -410,7 +410,7 @@
             <h1 class="gr-hero-heading">
                 MEN'S<br>
                 OUTFIT<br>
-                <em><b>b</b>ar.</em>
+                <em><strong>B</strong>ar.</em>
             </h1>
             <div class="gr-hero-btns">
                 <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
@@ -647,8 +647,7 @@
                 <h3
                     style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
                     FAST METRO DELIVERY</h3>
-                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Free shipping on orders above
-                    ₹999. Orders dispatched within 24 hours.</p>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Delivery rates applied at checkout based on district. Orders dispatched within 24 hours.</p>
             </div>
             <div class="gr-trust-card"
                 style="padding: 24px; border-right: 1px solid var(--border-light); text-align: center;">
