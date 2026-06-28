@@ -410,7 +410,7 @@
             <h1 class="gr-hero-heading">
                 MEN'S<br>
                 OUTFIT<br>
-                <em>bar.</em>
+                <em><b>b</b>ar.</em>
             </h1>
             <div class="gr-hero-btns">
                 <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>

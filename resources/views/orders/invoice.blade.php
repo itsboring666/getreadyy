@@ -385,11 +385,9 @@
         <div class="contact-line">CONTACT US &nbsp;|&nbsp; +91 9080253885 &nbsp;|&nbsp; @_getreadyyyy</div>
         <table class="footer-row">
             <tr>
-                <td style="width: 90px;">
-                    <img class="qr-img"
-                         src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.instagram.com/_getreadyyyy"
-                         alt="Instagram QR">
-                    <div class="qr-handle">@_getreadyyyy</div>
+                <td style="width: 140px; text-align: left;">
+                    <div style="font-size: 10px; font-weight: 800; color: #1a1a1a; letter-spacing: 1px;">INSTAGRAM</div>
+                    <div class="qr-handle" style="font-size: 11px; margin-top: 4px; text-align: left;">@_getreadyyyy</div>
                 </td>
                 <td style="padding: 0 24px;">
                     <div class="thankyou">

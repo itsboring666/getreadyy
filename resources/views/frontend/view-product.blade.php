@@ -232,7 +232,11 @@
                 </button>
                 <div class="o-acc-body" id="shipContent">
                     <div class="o-acc-body-inner">
-                        Free shipping on orders over ₹999. Standard delivery takes 3-5 business days. Not happy with your purchase? Return it within 30 days for a full refund or exchange.
+                        <strong>Delivery Rates:</strong><br>
+                        • Chengalpattu District: Rs. 60<br>
+                        • Across Tamil Nadu: Rs. 90<br>
+                        • Other States: Rs. 120<br><br>
+                        Standard delivery takes 3-5 business days. Not happy with your purchase? Return or exchange it hassle-free.
                     </div>
                 </div>
             </div>
