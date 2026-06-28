@@ -22,18 +22,15 @@ if (!function_exists('get_storage_url')) {
         }
 
         if (env('PUBLIC_STORAGE_DRIVER', 'local') === 'cloudinary' || env('CLOUDINARY_URL')) {
-            try {
-                // Cloudinary package often makes slow API calls on ->url(). 
-                // We use the direct helper to build the URL instantly without network requests.
-                return cloudinary()->getUrl($path);
-            } catch (\Exception $e) {
-                // Fallback string building if helper fails
-                $cloudName = env('CLOUDINARY_CLOUD_NAME');
-                if (!$cloudName && env('CLOUDINARY_URL')) {
-                    $parts = parse_url(env('CLOUDINARY_URL'));
-                    $cloudName = $parts['host'] ?? '';
-                }
-                return 'https://res.cloudinary.com/' . $cloudName . '/image/upload/' . $path;
+            $cloudName = env('CLOUDINARY_CLOUD_NAME');
+            if (!$cloudName && env('CLOUDINARY_URL')) {
+                $parts = parse_url(env('CLOUDINARY_URL'));
+                $cloudName = $parts['host'] ?? '';
+            }
+            if ($cloudName) {
+                // Ensure no double slashes if path has leading slash
+                $cleanPath = ltrim($path, '/');
+                return 'https://res.cloudinary.com/' . $cloudName . '/image/upload/' . $cleanPath;
             }
         }
 
