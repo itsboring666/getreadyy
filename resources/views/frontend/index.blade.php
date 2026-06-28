@@ -438,11 +438,7 @@
     </style>
     
     <div style="position: relative; width: 100%; overflow: hidden; z-index: 1;">
-        {{-- Outer Continuous Background Image --}}
-        <div style="position: absolute; inset: 0; z-index: 1;">
-            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.15;">
-        </div>
-
+        
         <section class="gr-hero gr-hero-custom" style="position: relative; z-index: 2; overflow: hidden; border-radius: 20px; background: rgba(0, 0, 0, 0.7);">
             {{-- Inner Background Image --}}
             <div style="position: absolute; inset: 0; z-index: 1;">
