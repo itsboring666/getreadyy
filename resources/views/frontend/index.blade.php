@@ -412,6 +412,7 @@
             min-height: 500px !important;
             display: flex !important;
             align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         @media (max-width: 900px) {
             .gr-hero-custom {
@@ -419,33 +420,54 @@
                 width: calc(100% - 32px);
                 padding: 40px 24px !important;
                 min-height: 400px !important;
+                justify-content: center;
+            }
+            .gr-hero-custom .gr-hero-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .gr-hero-custom .gr-hero-label::before {
+                display: none;
+            }
+            .gr-hero-custom .gr-hero-btns {
+                margin: 0 auto;
             }
         }
     </style>
-    <section class="gr-hero gr-hero-custom" style="position: relative; overflow: hidden; border-radius: 20px; background: #0a0a0a;">
-        {{-- Background Image Confined to the Box --}}
-        <div style="position: absolute; inset: 0; z-index: 1;">
-            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) opacity(0.35);">
+    
+    <div style="position: relative; width: 100%; overflow: hidden;">
+        {{-- Outer Background Image --}}
+        <div style="position: absolute; inset: 0; z-index: -1;">
+            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Outer Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) opacity(0.1);">
         </div>
 
-        <div class="gr-hero-text" style="position: relative; z-index: 2; padding: 0;">
-            <div class="gr-hero-label" style="color: #ccc;">FALL / WINTER '28 — VOL. III</div>
-            <h1 class="gr-hero-heading" style="color: #fff; margin-bottom: 30px;">
-                MEN'S<br>
-                OUTFIT<br>
-                <em><strong>B</strong>ar.</em>
-            </h1>
-            <div class="gr-hero-btns" style="max-width: 300px;">
-                <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
-                <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT BUILDER</a>
+        <section class="gr-hero gr-hero-custom" style="position: relative; overflow: hidden; border-radius: 20px; background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+            {{-- Inner Background Image --}}
+            <div style="position: absolute; inset: 0; z-index: 1;">
+                <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Inner Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) opacity(0.25);">
             </div>
 
-            {{-- Vintage Barcode stamp --}}
-            <div class="gr-hero-barcode" style="margin-top: 50px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: #999; z-index: 3;">
-                <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
+            <div class="gr-hero-text" style="position: relative; z-index: 2; padding: 0;">
+                <div class="gr-hero-label" style="color: #ccc;">FALL / WINTER '28 — VOL. III</div>
+                <h1 class="gr-hero-heading" style="color: #fff; margin-bottom: 30px;">
+                    MEN'S<br>
+                    OUTFIT<br>
+                    <em><strong>B</strong>ar.</em>
+                </h1>
+                <div class="gr-hero-btns" style="max-width: 300px; width: 100%;">
+                    <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
+                    <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT BUILDER</a>
+                </div>
+
+                {{-- Vintage Barcode stamp --}}
+                <div class="gr-hero-barcode" style="margin-top: 50px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: #999; z-index: 3;">
+                    <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     {{-- ─── MARQUEE TICKER ─────────────────────────────────────── --}}
     <div class="gr-marquee">
