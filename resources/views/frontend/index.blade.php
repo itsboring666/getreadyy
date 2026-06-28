@@ -403,40 +403,46 @@
         $heroBtnLink = $activeCarousels->count() > 0 && $activeCarousels[0]->button_link ? $activeCarousels[0]->button_link : route('products.all');
     @endphp
 
-    <section class="gr-hero" style="position: relative; overflow: hidden; border-radius: 20px; margin-top: 40px; margin-bottom: 40px; background: #0a0a0a;">
+    <style>
+        .gr-hero-custom {
+            margin: 40px auto !important;
+            width: calc(100% - 40px);
+            max-width: 1200px;
+            padding: 60px 40px 60px 40px !important;
+            min-height: 500px !important;
+            display: flex !important;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .gr-hero-custom {
+                margin: 20px auto !important;
+                width: calc(100% - 32px);
+                padding: 40px 24px !important;
+                min-height: 400px !important;
+            }
+        }
+    </style>
+    <section class="gr-hero gr-hero-custom" style="position: relative; overflow: hidden; border-radius: 20px; background: #0a0a0a;">
         {{-- Background Image Confined to the Box --}}
         <div style="position: absolute; inset: 0; z-index: 1;">
-            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) opacity(0.25);">
+            <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) opacity(0.35);">
         </div>
 
-        <div class="gr-hero-text" style="position: relative; z-index: 2; padding-left: 20px;">
-            <div class="gr-hero-label" style="color: #aaa;">FALL / WINTER '28 — VOL. III</div>
-            <h1 class="gr-hero-heading" style="color: #fff;">
+        <div class="gr-hero-text" style="position: relative; z-index: 2; padding: 0;">
+            <div class="gr-hero-label" style="color: #ccc;">FALL / WINTER '28 — VOL. III</div>
+            <h1 class="gr-hero-heading" style="color: #fff; margin-bottom: 30px;">
                 MEN'S<br>
                 OUTFIT<br>
                 <em><strong>B</strong>ar.</em>
             </h1>
-            <div class="gr-hero-btns">
+            <div class="gr-hero-btns" style="max-width: 300px;">
                 <a href="{{ route('products.all') }}" class="gr-hero-btn-primary" style="background: #fff; color: #000;">SHOP THE DROP →</a>
-                <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="border-color: rgba(255,255,255,0.3); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT BUILDER</a>
+                <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT BUILDER</a>
             </div>
 
             {{-- Vintage Barcode stamp --}}
-            <div class="gr-hero-barcode" style="margin-top: 40px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: #888; z-index: 3;">
+            <div class="gr-hero-barcode" style="margin-top: 50px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: #999; z-index: 3;">
                 <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
-            </div>
-        </div>
-        
-        <div class="gr-hero-images" style="position: relative; z-index: 2;">
-            <div class="gr-hero-tag" style="background: rgba(0,0,0,0.7); color: #fff; border-color: #333;">NO. 847</div>
-            <div class="gr-hero-img-1" style="box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                <img src="{{ $heroImg1 }}" onerror="this.src='{{ asset('assets/images/hero1.jpg') }}'" alt="Lifestyle editorial" loading="eager">
-            </div>
-            <div class="gr-hero-img-2" style="box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                <img src="{{ $heroImg2 }}" onerror="this.src='{{ asset('assets/images/hero2.jpg') }}'" alt="Street style fashion" loading="eager">
-            </div>
-            <div class="gr-hero-circle-badge" style="background: #111; color: #fff; border-color: #333;">
-                <span>STOCK<br>LIMITED<br>•<br>RVR DROP</span>
             </div>
         </div>
     </section>
