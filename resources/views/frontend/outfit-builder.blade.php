@@ -395,6 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 setTimeout(() => {
                     data.outfit.forEach((item, index) => {
+                        if (!item) return; // Prevent crashes if backend fallback failed
                         const slotName = index === 0 ? 'outerwear' : (index === 1 ? 'top' : 'bottom');
                         const lockBtn = document.querySelector(`.lock-toggle-btn[data-slot="${slotName}"]`);
                         if (lockBtn && lockBtn.dataset.locked !== 'true') {

@@ -184,6 +184,12 @@
             position: absolute;
             top: 50%;
             left: 50%;
+            padding: 12px 24px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+            white-space: nowrap;
+            z-index: 10;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
             transform: translate(-50%, -30%);
