@@ -188,6 +188,9 @@
             font-size: 13px;
             font-weight: bold;
             display: inline-block;
+            width: fit-content !important;
+            height: fit-content !important;
+            line-height: 1;
             white-space: nowrap;
             z-index: 10;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);

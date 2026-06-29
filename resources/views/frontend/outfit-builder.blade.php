@@ -13,14 +13,14 @@
     overflow: hidden;
 }
 .reel-viewport.spinning .main-product-img {
-    filter: blur(4px) grayscale(50%);
-    opacity: 0.8;
-    animation: slotSpin 0.15s linear infinite;
+    filter: blur(4px) grayscale(50%) !important;
+    opacity: 0.8 !important;
+    animation: slotSpin 0.15s linear infinite !important;
 }
 @keyframes slotSpin {
-    0% { transform: scale(0.95) translateY(-20px); opacity: 0.6; }
-    50% { transform: scale(0.95) translateY(20px); opacity: 0.9; }
-    100% { transform: scale(0.95) translateY(-20px); opacity: 0.6; }
+    0% { transform: scale(0.95) translateY(-20px) !important; opacity: 0.6 !important; }
+    50% { transform: scale(0.95) translateY(20px) !important; opacity: 0.9 !important; }
+    100% { transform: scale(0.95) translateY(-20px) !important; opacity: 0.6 !important; }
 }
 .reel-viewport::after {
     content: '';
