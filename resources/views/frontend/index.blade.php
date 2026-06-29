@@ -217,6 +217,11 @@
                 transform: translateY(-6px) scale(1.01);
             }
         }
+        
+        @keyframes spinBadge {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
         @keyframes floatEditorial2 {
 
