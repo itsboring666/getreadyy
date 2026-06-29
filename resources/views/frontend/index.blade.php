@@ -168,7 +168,7 @@
         .gr-product-card-img {
             overflow: hidden;
             position: relative;
-            aspect-ratio: 1/1 !important;
+            aspect-ratio: 3/4 !important;
             border: 2px solid var(--primary) !important;
         }
 

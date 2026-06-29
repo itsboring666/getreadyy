@@ -92,7 +92,7 @@
 
 {{-- ─── OUTFIT DISPLAY ───────────────────────────────────────── --}}
 <div class="gr-wardrobe" style="padding: 40px 24px 80px;">
-    @if($outfit->count() > 0)
+    @if($outfit->filter()->count() > 0)
     <form action="{{ route('cart.add-multiple') }}" method="POST" id="outfit-form">
         @csrf
         <div class="gr-product-grid gr-product-grid-3">
@@ -105,6 +105,7 @@
             @endphp
 
             @foreach($outfit as $i => $product)
+            @if(!$product) @continue @endif
             @php
                 $availableSizes = $product->sizes->where('stock', '>', 0);
                 $hasStock = $availableSizes->count() > 0;

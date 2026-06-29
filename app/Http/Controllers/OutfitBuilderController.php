@@ -38,14 +38,14 @@ class OutfitBuilderController extends Controller
 
         // Outerwear Slot
         if (!$outerwear) {
-            $query = Product::where('status', 'active');
+            $query = Product::with(['sizes', 'category'])->where('status', 'active');
             if (!empty($usedIds)) $query->whereNotIn('id', $usedIds);
             if ($selectedCategoryId) $query->where('category_id', $selectedCategoryId);
             
             $outerwear = $query->inRandomOrder()->first();
 
-            if (!$outerwear) { // Fallback if selected category has no items left
-                $fb = Product::where('status', 'active');
+            if (!$outerwear) {
+                $fb = Product::with(['sizes', 'category'])->where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
                 $outerwear = $fb->inRandomOrder()->first();
             }
@@ -54,14 +54,14 @@ class OutfitBuilderController extends Controller
 
         // Top Slot
         if (!$top) {
-            $query = Product::where('status', 'active');
+            $query = Product::with(['sizes', 'category'])->where('status', 'active');
             if (!empty($usedIds)) $query->whereNotIn('id', $usedIds);
             if ($selectedCategoryId) $query->where('category_id', $selectedCategoryId);
             
             $top = $query->inRandomOrder()->first();
 
-            if (!$top) { // Fallback if selected category has no items left
-                $fb = Product::where('status', 'active');
+            if (!$top) {
+                $fb = Product::with(['sizes', 'category'])->where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
                 $top = $fb->inRandomOrder()->first();
             }
@@ -70,24 +70,24 @@ class OutfitBuilderController extends Controller
 
         // Bottom Slot
         if (!$bottom) {
-            $query = Product::where('status', 'active');
+            $query = Product::with(['sizes', 'category'])->where('status', 'active');
             if (!empty($usedIds)) $query->whereNotIn('id', $usedIds);
             if ($selectedCategoryId) $query->where('category_id', $selectedCategoryId);
             
             $bottom = $query->inRandomOrder()->first();
 
-            if (!$bottom) { // Fallback if selected category has no items left
-                $fb = Product::where('status', 'active');
+            if (!$bottom) {
+                $fb = Product::with(['sizes', 'category'])->where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
                 $bottom = $fb->inRandomOrder()->first();
             }
             if ($bottom) $usedIds[] = $bottom->id;
         }
 
-        $outfit = collect([$outerwear, $top, $bottom])->filter();
+        $outfit = collect([$outerwear, $top, $bottom]);
 
         // Calculate total price
-        $totalPrice = $outfit->sum(function($item) {
+        $totalPrice = $outfit->filter()->sum(function($item) {
             return $item->sizes->min('price') ?? $item->price ?? 0;
         });
 
@@ -98,13 +98,17 @@ class OutfitBuilderController extends Controller
                     $availableSizes = $item->sizes->where('stock', '>', 0);
                     $hasStock = $availableSizes->count() > 0;
                     $defaultPrice = $hasStock ? $availableSizes->min('price') : ($item->price ?? 0);
+                    
+                    $validImages = array_filter([$item->image, $item->image_2, $item->image_3, $item->image_4]);
+                    $imageUrls = array_map(function ($img) {
+                        return get_storage_url($img);
+                    }, array_values($validImages));
+                    
                     return [
                         'id' => $item->id,
                         'name' => $item->name,
-                        'image' => asset('storage/' . $item->image),
-                        'images' => array_map(function ($img) {
-                            return asset('storage/' . $img);
-                        }, array_values(array_filter([$item->image, $item->image_2, $item->image_3, $item->image_4]))),
+                        'image' => get_storage_url($item->image),
+                        'images' => $imageUrls,
                         'view_url' => route('product.view', $item->id),
                         'category_name' => $item->category->name ?? 'GET READY',
                         'price' => $defaultPrice,
