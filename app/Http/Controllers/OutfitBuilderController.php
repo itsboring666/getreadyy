@@ -61,17 +61,24 @@ class OutfitBuilderController extends Controller
         if (!$outerwear) {
             $outerwearQuery = Product::where('status', 'active');
             if (!empty($usedIds)) $outerwearQuery->whereNotIn('id', $usedIds);
-            if ($selectedCategoryId) $outerwearQuery->where('category_id', $selectedCategoryId);
-            if ($outerwearCategories->isNotEmpty()) $outerwearQuery->whereIn('category_id', $outerwearCategories);
+            
+            if ($selectedCategoryId && $outerwearCategories->contains($selectedCategoryId)) {
+                $outerwearQuery->where('category_id', $selectedCategoryId);
+            } elseif ($outerwearCategories->isNotEmpty()) {
+                $outerwearQuery->whereIn('category_id', $outerwearCategories);
+            }
             
             $outerwear = $outerwearQuery->inRandomOrder()->first();
 
-            if (!$outerwear) { // Fallback to any available product (drop category filter)
+            if (!$outerwear && $outerwearCategories->isNotEmpty()) { // Fallback to slot categories
                 $fb = Product::where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
+                $fb->whereIn('category_id', $outerwearCategories);
                 $outerwear = $fb->inRandomOrder()->first();
             }
-            if (!$outerwear) $outerwear = Product::where('status', 'active')->inRandomOrder()->first(); // Absolute fallback
+            if (!$outerwear) {
+                $outerwear = Product::where('status', 'active')->inRandomOrder()->first();
+            }
             if ($outerwear) $usedIds[] = $outerwear->id;
         }
 
@@ -79,17 +86,24 @@ class OutfitBuilderController extends Controller
         if (!$top) {
             $topQuery = Product::where('status', 'active');
             if (!empty($usedIds)) $topQuery->whereNotIn('id', $usedIds);
-            if ($selectedCategoryId) $topQuery->where('category_id', $selectedCategoryId);
-            if ($topCategories->isNotEmpty()) $topQuery->whereIn('category_id', $topCategories);
+            
+            if ($selectedCategoryId && $topCategories->contains($selectedCategoryId)) {
+                $topQuery->where('category_id', $selectedCategoryId);
+            } elseif ($topCategories->isNotEmpty()) {
+                $topQuery->whereIn('category_id', $topCategories);
+            }
             
             $top = $topQuery->inRandomOrder()->first();
 
-            if (!$top) { // Fallback (drop category filter)
+            if (!$top && $topCategories->isNotEmpty()) { // Fallback to slot categories
                 $fb = Product::where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
+                $fb->whereIn('category_id', $topCategories);
                 $top = $fb->inRandomOrder()->first();
             }
-            if (!$top) $top = Product::where('status', 'active')->inRandomOrder()->first(); // Absolute fallback
+            if (!$top) {
+                $top = Product::where('status', 'active')->inRandomOrder()->first();
+            }
             if ($top) $usedIds[] = $top->id;
         }
 
@@ -97,17 +111,24 @@ class OutfitBuilderController extends Controller
         if (!$bottom) {
             $bottomQuery = Product::where('status', 'active');
             if (!empty($usedIds)) $bottomQuery->whereNotIn('id', $usedIds);
-            if ($selectedCategoryId) $bottomQuery->where('category_id', $selectedCategoryId);
-            if ($bottomCategories->isNotEmpty()) $bottomQuery->whereIn('category_id', $bottomCategories);
+            
+            if ($selectedCategoryId && $bottomCategories->contains($selectedCategoryId)) {
+                $bottomQuery->where('category_id', $selectedCategoryId);
+            } elseif ($bottomCategories->isNotEmpty()) {
+                $bottomQuery->whereIn('category_id', $bottomCategories);
+            }
             
             $bottom = $bottomQuery->inRandomOrder()->first();
 
-            if (!$bottom) { // Fallback (drop category filter)
+            if (!$bottom && $bottomCategories->isNotEmpty()) { // Fallback to slot categories
                 $fb = Product::where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
+                $fb->whereIn('category_id', $bottomCategories);
                 $bottom = $fb->inRandomOrder()->first();
             }
-            if (!$bottom) $bottom = Product::where('status', 'active')->inRandomOrder()->first(); // Absolute fallback
+            if (!$bottom) {
+                $bottom = Product::where('status', 'active')->inRandomOrder()->first();
+            }
             if ($bottom) $usedIds[] = $bottom->id;
         }
 
