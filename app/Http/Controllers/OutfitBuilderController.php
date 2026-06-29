@@ -66,12 +66,12 @@ class OutfitBuilderController extends Controller
             
             $outerwear = $outerwearQuery->inRandomOrder()->first();
 
-            if (!$outerwear) { // Fallback to any available product
+            if (!$outerwear) { // Fallback to any available product (drop category filter)
                 $fb = Product::where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
-                if ($selectedCategoryId) $fb->where('category_id', $selectedCategoryId);
                 $outerwear = $fb->inRandomOrder()->first();
             }
+            if (!$outerwear) $outerwear = Product::where('status', 'active')->inRandomOrder()->first(); // Absolute fallback
             if ($outerwear) $usedIds[] = $outerwear->id;
         }
 
@@ -84,12 +84,12 @@ class OutfitBuilderController extends Controller
             
             $top = $topQuery->inRandomOrder()->first();
 
-            if (!$top) { // Fallback
+            if (!$top) { // Fallback (drop category filter)
                 $fb = Product::where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
-                if ($selectedCategoryId) $fb->where('category_id', $selectedCategoryId);
                 $top = $fb->inRandomOrder()->first();
             }
+            if (!$top) $top = Product::where('status', 'active')->inRandomOrder()->first(); // Absolute fallback
             if ($top) $usedIds[] = $top->id;
         }
 
@@ -102,12 +102,12 @@ class OutfitBuilderController extends Controller
             
             $bottom = $bottomQuery->inRandomOrder()->first();
 
-            if (!$bottom) { // Fallback
+            if (!$bottom) { // Fallback (drop category filter)
                 $fb = Product::where('status', 'active');
                 if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
-                if ($selectedCategoryId) $fb->where('category_id', $selectedCategoryId);
                 $bottom = $fb->inRandomOrder()->first();
             }
+            if (!$bottom) $bottom = Product::where('status', 'active')->inRandomOrder()->first(); // Absolute fallback
             if ($bottom) $usedIds[] = $bottom->id;
         }
 

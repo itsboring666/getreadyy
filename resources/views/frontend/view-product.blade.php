@@ -140,7 +140,7 @@
 
         <div class="o-trust-badges">
             <div class="o-trust-badge"><i class="fas fa-check" aria-hidden="true"></i> Premium Quality Material</div>
-            <div class="o-trust-badge"><i class="fas fa-check" aria-hidden="true"></i> Fast & Affordable Delivery Across Tamil Nadu</div>
+            <div class="o-trust-badge"><i class="fas fa-check" aria-hidden="true"></i> Fast & Affordable Delivery</div>
             <div class="o-trust-badge"><i class="fas fa-check" aria-hidden="true"></i> Easy Hassle-Free Returns</div>
         </div>
 
