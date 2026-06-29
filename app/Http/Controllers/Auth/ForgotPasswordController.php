@@ -49,9 +49,15 @@ class ForgotPasswordController extends Controller
             ]
         );
 
-        // Send custom reset email
-        Mail::to($user->email)->send(new CustomPasswordResetMail($token, $user));
-
-        return back()->with('success', 'We have emailed your password reset link!');
+        try {
+            // Send custom reset email
+            Mail::to($user->email)->send(new CustomPasswordResetMail($token, $user));
+            return back()->with('success', 'We have emailed your password reset link!');
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Password reset email failed: ' . $e->getMessage());
+            return back()->withErrors([
+                'email' => 'Failed to send email. Resend domain might not be verified.'
+            ]);
+        }
     }
 }
