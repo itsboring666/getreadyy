@@ -147,7 +147,7 @@
                                 <img src="{{ get_storage_url($product->image) ?: 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE' }}" 
                                      class="main-product-img hover-slideshow"
                                      data-images='@json($imageUrls)'
-                                     onerror="this.src='https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE'" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE';" 
                                      alt="{{ $product->name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display: block;">
                             </div>
                         </a>
@@ -410,6 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (img) {
                                 img.src = item.image || 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE';
                                 img.onerror = function() {
+                                    this.onerror = null;
                                     this.src = 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE';
                                 };
                                 img.setAttribute('data-images', JSON.stringify(item.images || [item.image || 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE']));
