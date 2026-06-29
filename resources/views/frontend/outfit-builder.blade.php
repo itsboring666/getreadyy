@@ -141,14 +141,13 @@
                             return get_storage_url($img);
                         }, array_values($validImages));
                     @endphp
-                    <div class="gr-product-card-img" style="aspect-ratio: 3/4; position: relative; overflow: hidden; border: 2px solid var(--primary);">
-                        <span class="gr-badge gr-badge-new" style="background: var(--text); z-index: 5;">{{ $i === 0 ? 'Outerwear' : ($i === 1 ? 'Top' : 'Bottom') }}</span>
+                    <div class="gr-product-card-img" style="aspect-ratio: 3/4; position: relative; overflow: hidden; border: 2px solid var(--primary); background: #111;">
                         <a href="{{ route('product.view', $product->id) }}" class="product-link" style="display: block; width: 100%; height: 100%;">
                             <div class="reel-viewport">
-                                <img src="{{ get_storage_url($product->image) }}" 
+                                <img src="{{ get_storage_url($product->image) ?: 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE' }}" 
                                      class="main-product-img hover-slideshow"
                                      data-images='@json($imageUrls)'
-                                     onerror="this.src='{{ $phs[$i % 3] }}'" 
+                                     onerror="this.src='https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE'" 
                                      alt="{{ $product->name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display: block;">
                             </div>
                         </a>
@@ -409,8 +408,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             // Set product values
                             if (img) {
-                                img.src = item.image;
-                                img.setAttribute('data-images', JSON.stringify(item.images || [item.image]));
+                                img.src = item.image || 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE';
+                                img.onerror = function() {
+                                    this.src = 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE';
+                                };
+                                img.setAttribute('data-images', JSON.stringify(item.images || [item.image || 'https://placehold.co/400x600/111111/e8e8e8?text=NO+IMAGE']));
                                 delete img.dataset.slideshowInitialized;
                             }
                             if (nameLink) {
