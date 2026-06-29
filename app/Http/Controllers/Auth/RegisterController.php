@@ -42,13 +42,9 @@ class RegisterController extends Controller
         'password' => [
             'required',
             'string',
-            'min:8',
+            'min:6',
             'max:255',
             'confirmed',
-            'regex:/[a-z]/',      // At least one lowercase letter
-            'regex:/[A-Z]/',      // At least one uppercase letter
-            'regex:/[0-9]/',      // At least one digit
-            // 'regex:/[@$!%*#?&]/' // Optional: at least one special character
         ],
     ], [
         'email.unique' => 'An account with this email already exists.',
@@ -56,7 +52,7 @@ class RegisterController extends Controller
         'phone.regex' => 'Phone must be 10 digits.',
         'dob.before' => 'Date of birth must be before today.',
         'password.confirmed' => 'Passwords do not match.',
-        'password.regex' => 'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.',
+        'password.min' => 'Password must be at least 6 characters.',
     ]);
 
 
