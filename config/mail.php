@@ -42,8 +42,8 @@ return [
             'scheme' => env('MAIL_SCHEME'),
             'url' => env('MAIL_URL'),
             'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-            'port' => env('MAIL_PORT', 465),
-            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+            'port' => 465, // Forced to 465 to bypass Render firewall timeouts
+            'encryption' => 'ssl', // Forced to SSL
             'username' => env('MAIL_USERNAME', 'tamilkumaran1672@gmail.com'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
