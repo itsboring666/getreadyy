@@ -60,14 +60,24 @@
 
                     <div class="o-form-group">
                         <label for="password" class="o-form-label">Password <span style="color:var(--danger);">*</span></label>
-                        <input type="password" id="password" name="password" class="o-form-input @error('password') is-invalid @enderror" required placeholder="••••••••">
+                        <div style="position: relative;">
+                            <input type="password" id="password" name="password" class="o-form-input @error('password') is-invalid @enderror" required placeholder="••••••••" style="padding-right: 40px;">
+                            <button type="button" onclick="const p = document.getElementById('password'); const i = this.querySelector('i'); if(p.type === 'password'){ p.type = 'text'; i.classList.replace('fa-eye', 'fa-eye-slash'); } else { p.type = 'password'; i.classList.replace('fa-eye-slash', 'fa-eye'); }" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0;">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
                         @error('password') <div style="color:var(--danger); font-size:12px; margin-top:4px;">{{ $message }}</div> @enderror
                         <div style="font-size:11px; color:var(--text-secondary); margin-top:6px; font-family: monospace;">Min 8 chars. Must contain 1 uppercase, 1 lowercase, 1 number.</div>
                     </div>
 
                     <div class="o-form-group">
                         <label for="password_confirmation" class="o-form-label">Confirm Password <span style="color:var(--danger);">*</span></label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" class="o-form-input" required placeholder="••••••••">
+                        <div style="position: relative;">
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="o-form-input" required placeholder="••••••••" style="padding-right: 40px;">
+                            <button type="button" onclick="const p = document.getElementById('password_confirmation'); const i = this.querySelector('i'); if(p.type === 'password'){ p.type = 'text'; i.classList.replace('fa-eye', 'fa-eye-slash'); } else { p.type = 'password'; i.classList.replace('fa-eye-slash', 'fa-eye'); }" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0;">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
                 </div>

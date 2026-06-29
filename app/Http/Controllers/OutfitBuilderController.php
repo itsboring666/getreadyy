@@ -52,77 +52,63 @@ class OutfitBuilderController extends Controller
                   ->orWhere('name', 'like', '%Outerwear%');
         })->pluck('id');
 
+        $usedIds = [];
+        if ($outerwear) $usedIds[] = $outerwear->id;
+        if ($top) $usedIds[] = $top->id;
+        if ($bottom) $usedIds[] = $bottom->id;
+
+        // Outerwear Slot
         if (!$outerwear) {
             $outerwearQuery = Product::where('status', 'active');
-            if ($selectedCategoryId) {
-                $outerwearQuery->where('category_id', $selectedCategoryId);
-            }
-            if ($outerwearCategories->isNotEmpty()) {
-                $outerwearQuery->whereIn('category_id', $outerwearCategories);
-            }
+            if (!empty($usedIds)) $outerwearQuery->whereNotIn('id', $usedIds);
+            if ($selectedCategoryId) $outerwearQuery->where('category_id', $selectedCategoryId);
+            if ($outerwearCategories->isNotEmpty()) $outerwearQuery->whereIn('category_id', $outerwearCategories);
+            
             $outerwear = $outerwearQuery->inRandomOrder()->first();
 
-            // Fallback if no matching item
-            if (!$outerwear) {
-                $outerwearFallbackQuery = Product::where('status', 'active');
-                if ($selectedCategoryId) {
-                    $outerwearFallbackQuery->where('category_id', $selectedCategoryId);
-                }
-                $outerwear = $outerwearFallbackQuery->inRandomOrder()->first();
+            if (!$outerwear) { // Fallback to any available product
+                $fb = Product::where('status', 'active');
+                if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
+                if ($selectedCategoryId) $fb->where('category_id', $selectedCategoryId);
+                $outerwear = $fb->inRandomOrder()->first();
             }
+            if ($outerwear) $usedIds[] = $outerwear->id;
         }
 
+        // Top Slot
         if (!$top) {
             $topQuery = Product::where('status', 'active');
-            if ($selectedCategoryId) {
-                $topQuery->where('category_id', $selectedCategoryId);
-            }
-            if ($topCategories->isNotEmpty()) {
-                $topQuery->whereIn('category_id', $topCategories);
-            }
-            if ($outerwear) {
-                $topQuery->where('id', '!=', $outerwear->id);
-            }
+            if (!empty($usedIds)) $topQuery->whereNotIn('id', $usedIds);
+            if ($selectedCategoryId) $topQuery->where('category_id', $selectedCategoryId);
+            if ($topCategories->isNotEmpty()) $topQuery->whereIn('category_id', $topCategories);
+            
             $top = $topQuery->inRandomOrder()->first();
 
-            // Fallback
-            if (!$top) {
-                $topFallbackQuery = Product::where('status', 'active');
-                if ($selectedCategoryId) {
-                    $topFallbackQuery->where('category_id', $selectedCategoryId);
-                }
-                if ($outerwear) {
-                    $topFallbackQuery->where('id', '!=', $outerwear->id);
-                }
-                $top = $topFallbackQuery->inRandomOrder()->first();
+            if (!$top) { // Fallback
+                $fb = Product::where('status', 'active');
+                if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
+                if ($selectedCategoryId) $fb->where('category_id', $selectedCategoryId);
+                $top = $fb->inRandomOrder()->first();
             }
+            if ($top) $usedIds[] = $top->id;
         }
 
+        // Bottom Slot
         if (!$bottom) {
             $bottomQuery = Product::where('status', 'active');
-            if ($selectedCategoryId) {
-                $bottomQuery->where('category_id', $selectedCategoryId);
-            }
-            if ($bottomCategories->isNotEmpty()) {
-                $bottomQuery->whereIn('category_id', $bottomCategories);
-            }
-            $excludeIds = collect([$outerwear?->id, $top?->id])->filter()->toArray();
-            if (!empty($excludeIds)) {
-                $bottomQuery->whereNotIn('id', $excludeIds);
-            }
+            if (!empty($usedIds)) $bottomQuery->whereNotIn('id', $usedIds);
+            if ($selectedCategoryId) $bottomQuery->where('category_id', $selectedCategoryId);
+            if ($bottomCategories->isNotEmpty()) $bottomQuery->whereIn('category_id', $bottomCategories);
+            
             $bottom = $bottomQuery->inRandomOrder()->first();
 
-            // Fallback
-            if (!$bottom) {
-                $bottomFallbackQuery = Product::where('status', 'active');
-                if ($selectedCategoryId) {
-                    $bottomFallbackQuery->where('category_id', $selectedCategoryId);
-                }
-                if (!empty($excludeIds)) {
-                    $bottomFallbackQuery->whereNotIn('id', $excludeIds);
-                }
-                $bottom = $bottomFallbackQuery->inRandomOrder()->first();
+            if (!$bottom) { // Fallback
+                $fb = Product::where('status', 'active');
+                if (!empty($usedIds)) $fb->whereNotIn('id', $usedIds);
+                if ($selectedCategoryId) $fb->where('category_id', $selectedCategoryId);
+                $bottom = $fb->inRandomOrder()->first();
             }
+            if ($bottom) $usedIds[] = $bottom->id;
         }
 
         $outfit = collect([$outerwear, $top, $bottom])->filter();

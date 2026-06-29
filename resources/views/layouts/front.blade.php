@@ -228,11 +228,11 @@
                 <defs>
                     <path id="circlePath" d="M 50, 50 m -44, 0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" />
                 </defs>
-                <text font-family="'Space Mono', monospace" font-size="10.5" font-weight="bold" fill="#ffffff" letter-spacing="3.5">
-                    <textPath href="#circlePath" startOffset="0%">
-                        GET READY &nbsp;•&nbsp; PREMIUM MENSWEAR &nbsp;•&nbsp;
-                    </textPath>
-                </text>
+            <text font-family="'Space Mono', monospace" font-size="10.5" font-weight="bold" fill="#ffffff" letter-spacing="3.5">
+                <textPath href="#circlePath" startOffset="0%">
+                    GET READY • PREMIUM MENSWEAR • 
+                </textPath>
+            </text>
             </svg>
         </div>
     </div>

@@ -13,10 +13,14 @@
     overflow: hidden;
 }
 .reel-viewport.spinning .main-product-img {
-    filter: blur(3px) grayscale(40%);
-    transform: scale(0.95);
-    opacity: 0.7;
-    transition: all 0.2s;
+    filter: blur(4px) grayscale(50%);
+    opacity: 0.8;
+    animation: slotSpin 0.15s linear infinite;
+}
+@keyframes slotSpin {
+    0% { transform: scale(0.95) translateY(-20px); opacity: 0.6; }
+    50% { transform: scale(0.95) translateY(20px); opacity: 0.9; }
+    100% { transform: scale(0.95) translateY(-20px); opacity: 0.6; }
 }
 .reel-viewport::after {
     content: '';

@@ -181,6 +181,9 @@
         }
 
         .gr-product-view-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
             transform: translate(-50%, -30%);
@@ -582,7 +585,7 @@
                         }, array_values($validImages));
                     @endphp
                     <img src="{{ get_storage_url($product->image) }}" onerror="this.src='{{ $phs[$i % 8] }}'"
-                        data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy">
+                        data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     <span class="gr-product-view-btn">VIEW →</span>
                 </div>
                 <div class="gr-product-card-body" style="padding: 12px 2px 0 2px;">
