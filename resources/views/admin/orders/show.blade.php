@@ -29,23 +29,48 @@
                 <div class="space-y-4">
                     @foreach($order->items as $item)
                         @php $product = $item->product; @endphp
-                        <div class="flex gap-4 items-center border-b pb-4 last:border-0 last:pb-0">
-                            @if($product)
-                            <img src="{{ get_storage_url($product->image) }}" class="w-16 h-20 object-cover rounded shadow-sm">
+                        <div class="flex gap-5 items-start border-b pb-5 last:border-0 last:pb-0">
+                            {{-- Product Image --}}
+                            @if($product && $product->image)
+                            <a href="{{ $product ? route('products.show', $product->id) : '#' }}" target="_blank" class="flex-shrink-0">
+                                <img src="{{ get_storage_url($product->image) }}"
+                                     class="w-28 h-36 object-cover rounded-lg shadow border border-gray-100"
+                                     alt="{{ $item->product_name }}">
+                            </a>
                             @else
-                            <div class="w-16 h-20 bg-gray-100 rounded flex items-center justify-center"><i class="fas fa-image text-gray-400"></i></div>
-                            @endif
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800">{{ $item->product_name }}</h4>
-                                <p class="text-sm text-gray-600">Size: {{ $item->size }} &nbsp;|&nbsp; Qty: {{ $item->quantity }}</p>
-                                <p class="text-sm text-gray-500 mt-1">Unit Price: ₹{{ number_format($item->price, 2) }}</p>
+                            <div class="w-28 h-36 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 border">
+                                <i class="fas fa-image text-gray-300 text-3xl"></i>
                             </div>
-                            <div class="font-bold text-gray-800">
-                                ₹{{ number_format($item->price * $item->quantity, 2) }}
+                            @endif
+
+                            {{-- Product Details --}}
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-bold text-gray-900 text-base leading-tight mb-1">{{ $item->product_name }}</h4>
+                                <div class="flex flex-wrap gap-3 mt-2">
+                                    <span class="inline-flex items-center gap-1 bg-gray-100 text-gray-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                                        <i class="fas fa-ruler text-gray-400"></i> Size: {{ $item->size }}
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                                        <i class="fas fa-hashtag text-blue-400"></i> Qty: {{ $item->quantity }}
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-3">Unit Price: <span class="font-semibold text-gray-700">₹{{ number_format($item->price, 2) }}</span></p>
+                                @if($product)
+                                <p class="text-xs text-gray-400 mt-1">SKU / Product ID: {{ $product->id }}</p>
+                                @endif
+                            </div>
+
+                            {{-- Line Total --}}
+                            <div class="text-right flex-shrink-0">
+                                <p class="text-lg font-bold text-gray-900">₹{{ number_format($item->price * $item->quantity, 2) }}</p>
+                                @if($item->quantity > 1)
+                                <p class="text-xs text-gray-400 mt-1">{{ $item->quantity }} × ₹{{ number_format($item->price, 2) }}</p>
+                                @endif
                             </div>
                         </div>
                     @endforeach
                 </div>
+
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow" data-aos="fade-up" data-aos-delay="150">

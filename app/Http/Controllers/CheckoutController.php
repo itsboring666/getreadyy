@@ -434,7 +434,7 @@ class CheckoutController extends Controller
 
     public function razorpayProcess(Request $request, $orderId)
     {
-        $order = Order::where('order_id', $orderId)
+        $order = Order::with(['items.product.sizes'])->where('order_id', $orderId)
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
@@ -487,8 +487,8 @@ class CheckoutController extends Controller
         // Deduct inventory
         foreach ($order->items as $item) {
             if ($item->product) {
-                $productSize = $item->product->sizes->firstWhere('size', $item->size);
-                if ($productSize) {
+                $productSize = $item->product->sizes()->where('size', $item->size)->first();
+                if ($productSize && $productSize->stock > 0) {
                     $productSize->stock = max(0, $productSize->stock - $item->quantity);
                     $productSize->save();
                 }

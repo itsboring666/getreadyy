@@ -18,7 +18,7 @@ class AdminOrderController extends Controller
 
     public function show($orderId)
     {
-        $order = Order::with('items', 'user')->where('order_id', $orderId)->firstOrFail();
+        $order = Order::with(['items.product', 'user'])->where('order_id', $orderId)->firstOrFail();
         return view('admin.orders.show', compact('order'));
     }
 
