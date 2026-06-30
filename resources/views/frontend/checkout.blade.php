@@ -94,6 +94,7 @@
                     <div class="o-form-group">
                         <label class="o-form-label" for="city">City <span style="color:var(--danger);">*</span></label>
                         <input type="text" id="city" name="city" class="o-form-input @error('city') border-red-500 @enderror" value="{{ old('city') }}" required>
+                        <div style="font-size:11px; color:var(--text-secondary); margin-top:4px; font-family:monospace;">Chennai/Chengalpattu: ₹60 &nbsp;|&nbsp; Tamil Nadu: ₹75 &nbsp;|&nbsp; Other states: ₹140</div>
                         @error('city') <div style="color:var(--danger); font-size:12px; margin-top:4px;">{{ $message }}</div> @enderror
                     </div>
                     
@@ -198,7 +199,7 @@
             
             <div class="o-summary-row">
                 <span>Shipping</span>
-                <span>{{ $shipping > 0 ? '₹' . number_format($shipping, 2) : 'Free' }}</span>
+                <span id="shipping-display">{{ $shipping > 0 ? '₹' . number_format($shipping, 2) : 'Free' }}</span>
             </div>
 
             @if($discountAmount > 0)
@@ -212,7 +213,7 @@
             
             <div class="o-summary-row total" style="margin-bottom:24px;">
                 <span>Total</span>
-                <span style="color:var(--accent); font-size:24px;">₹{{ number_format($grandTotal, 2) }}</span>
+                <span id="grand-total-display" style="color:var(--accent); font-size:24px;">₹{{ number_format($grandTotal, 2) }}</span>
             </div>
             
             <button type="submit" class="o-btn o-btn-primary o-btn-full o-btn-lg">
@@ -338,7 +339,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
-</script>
+
+    // ── Live Shipping Fee Calculation ──────────────────────────────────
+    const subtotal        = {{ $subtotal }};
+    const discountAmount  = {{ $discountAmount }};
+    const shippingDisplay = document.getElementById('shipping-display');
+    const grandTotalEl    = document.getElementById('grand-total-display');
+
+    const localCities     = ['chennai', 'chengalpattu', 'chengalpet', 'chengalpatu'];
+    const tamilNaduNames  = ['tamil nadu', 'tamilnadu', 'tn'];
+
+    function calcShipping(city, state) {
+        city  = (city  || '').trim().toLowerCase();
+        state = (state || '').trim().toLowerCase();
+        if (localCities.includes(city))    return 60;
+        if (tamilNaduNames.includes(state)) return 75;
+        if (state !== '')                   return 140;
+        return 75; // default before state is typed
+    }
+
+    function refreshShippingUI() {
+        const city  = cityInput  ? cityInput.value  : '';
+        const state = stateInput ? stateInput.value : '';
+        const fee   = calcShipping(city, state);
+        const grand = Math.max(0, subtotal + fee - discountAmount);
+        if (shippingDisplay) shippingDisplay.textContent = '₹' + fee.toFixed(2);
+        if (grandTotalEl)    grandTotalEl.textContent    = '₹' + grand.toFixed(2);
+    }
+
+    if (cityInput)  cityInput.addEventListener('input',  refreshShippingUI);
+    if (stateInput) stateInput.addEventListener('input',  refreshShippingUI);
+
+    // Also trigger when a saved address is selected
+    const origHandleAutofill = handleAddressAutofill;
+    if (savedAddressSelect) {
+        savedAddressSelect.addEventListener('change', function() { setTimeout(refreshShippingUI, 50); });
+    }
+
+    refreshShippingUI(); // run once on load
+});</script>
 
 @endsection

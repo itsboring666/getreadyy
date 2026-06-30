@@ -30,9 +30,9 @@ class CheckoutController extends Controller
             return $item->unit_price * $item->quantity;
         });
 
-        $shipping_fee = \App\Models\Setting::get('shipping_fee', 99.00);
-        $free_shipping_threshold = \App\Models\Setting::get('free_shipping_threshold', 999.00);
-        $shipping = $subtotal >= $free_shipping_threshold ? 0.00 : (float)$shipping_fee;
+        // Location-based shipping fee (calculated on page load with default ₹75 until city/state filled)
+        $shipping_fee_base = 75.00; // default (Tamil Nadu, non-Chennai)
+        $shipping = $shipping_fee_base;
 
         $discountAmount = 0.00;
         $couponCode = null;
@@ -118,9 +118,20 @@ class CheckoutController extends Controller
             return $sizePrice * $item->quantity;
         });
 
-        $shipping_fee = \App\Models\Setting::get('shipping_fee', 99.00);
-        $free_shipping_threshold = \App\Models\Setting::get('free_shipping_threshold', 999.00);
-        $shipping = $subtotal >= $free_shipping_threshold ? 0.00 : (float)$shipping_fee;
+        // Location-based shipping fee
+        $city  = strtolower(trim($validated['city']));
+        $state = strtolower(trim($validated['state']));
+
+        $localCities = ['chennai', 'chengalpattu', 'chengalpet', 'chengalpatu'];
+        $tamilNaduVariants = ['tamil nadu', 'tamilnadu', 'tn'];
+
+        if (in_array($city, $localCities)) {
+            $shipping = 60.00; // Chennai / Chengalpattu
+        } elseif (in_array($state, $tamilNaduVariants)) {
+            $shipping = 75.00; // Rest of Tamil Nadu
+        } else {
+            $shipping = 140.00; // Other states
+        }
 
         $discountAmount = 0.00;
         $couponCode = null;
