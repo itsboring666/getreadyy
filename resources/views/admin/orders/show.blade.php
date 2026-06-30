@@ -32,7 +32,7 @@
                         <div class="flex gap-5 items-start border-b pb-5 last:border-0 last:pb-0">
                             {{-- Product Image --}}
                             @if($product && $product->image)
-                            <a href="{{ $product ? route('products.show', $product->id) : '#' }}" target="_blank" class="flex-shrink-0">
+                            <a href="{{ $product ? route('product.view', $product->id) : '#' }}" target="_blank" class="flex-shrink-0">
                                 <img src="{{ get_storage_url($product->image) }}"
                                      class="w-28 h-36 object-cover rounded-lg shadow border border-gray-100"
                                      alt="{{ $item->product_name }}">
