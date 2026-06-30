@@ -67,7 +67,7 @@
                             </button>
                         </div>
                         @error('password') <div style="color:var(--danger); font-size:12px; margin-top:4px;">{{ $message }}</div> @enderror
-                        <div style="font-size:11px; color:var(--text-secondary); margin-top:6px; font-family: monospace;">Min 8 chars. Must contain 1 uppercase, 1 lowercase, 1 number.</div>
+                        <div style="font-size:11px; color:var(--text-secondary); margin-top:6px; font-family: monospace;">Min 6 characters.</div>
                     </div>
 
                     <div class="o-form-group">

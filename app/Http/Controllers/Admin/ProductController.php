@@ -92,13 +92,17 @@ class ProductController extends Controller
         $data = $request->only(['name', 'category_id', 'description', 'status']);
 
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($product->image);
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
             $data['image'] = $request->file('image')->store('products', 'public');
         }
 
         foreach (['image_2', 'image_3', 'image_4'] as $img) {
             if ($request->hasFile($img)) {
-                Storage::disk('public')->delete($product->$img);
+                if ($product->$img) {
+                    Storage::disk('public')->delete($product->$img);
+                }
                 $data[$img] = $request->file($img)->store('products', 'public');
             }
         }
