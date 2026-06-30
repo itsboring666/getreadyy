@@ -63,7 +63,7 @@ class CheckoutController extends Controller
             'state'          => ['required', 'string', 'max:50'],
             'zip'            => ['required', 'regex:/^\d{5,6}$/'],
             'address'        => ['required', 'string', 'min:10', 'max:255'],
-            'payment_method' => ['required', 'in:razorpay,cod'],
+            'payment_method' => ['required', 'in:razorpay'],
             'save_address'   => ['nullable', 'boolean'],
             'address_name'   => ['nullable', 'string', 'max:255'],
         ], [
@@ -202,36 +202,6 @@ class CheckoutController extends Controller
         // 🟢 IF RAZORPAY PAYMENTS
         if ($validated['payment_method'] === 'razorpay') {
             return redirect()->route('checkout.razorpay', ['orderId' => $orderId]);
-        }
-
-        // 🟢 IF CASH ON DELIVERY (COD)
-        if ($validated['payment_method'] === 'cod') {
-            $order->status = 'paid'; // Or 'processing' if you prefer, treating it as completed for now
-            $order->save();
-
-            // Deduct stock
-            foreach ($items as $item) {
-                $productSize = $item->product->sizes->firstWhere('size', $item->size);
-                if ($productSize) {
-                    $productSize->stock = max(0, $productSize->stock - $item->quantity);
-                    $productSize->save();
-                }
-            }
-
-            // Clear Cart
-            CartItem::where('user_id', $userId)->delete();
-
-            // Send Email
-            try {
-                Mail::to($order->email)->send(new OrderConfirmationMail($order));
-            } catch (\Exception $e) {
-                Log::error('Order Confirmation Email Failed: ' . $e->getMessage());
-            }
-
-            // Send WhatsApp Invoice
-            (new WhatsAppService())->sendUpdateWithInvoice($order);
-
-            return redirect()->route('checkout.thankyou', ['orderId' => $orderId])->with('success', 'Order placed successfully via Cash on Delivery.');
         }
 
         // 🟢 MOCK ONLINE PAYMENT FOR LOCAL TESTING (If dummy keys are used)

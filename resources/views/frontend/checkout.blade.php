@@ -126,21 +126,14 @@
             <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:32px;">
                 <h2 style="font-family:var(--font-heading); font-size:20px; font-weight:600; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:12px;">Payment Method</h2>
                 
-                <label style="display:flex; align-items:center; gap:12px; padding:16px; border:1px solid var(--primary); border-radius:var(--radius); background:rgba(0,0,0,0.02); cursor:pointer; margin-bottom:12px;">
+                <label style="display:flex; align-items:center; gap:12px; padding:16px; border:1px solid var(--primary); border-radius:var(--radius); background:rgba(0,0,0,0.02); cursor:pointer;">
                     <input type="radio" name="payment_method" value="razorpay" checked style="accent-color:var(--primary); width:18px; height:18px;">
                     <div style="display:flex; flex-direction:column;">
                         <span style="font-weight:600; color:var(--text);">Secure Online Payment (Razorpay)</span>
                         <span style="font-size:13px; color:var(--text-secondary);">Pay securely via UPI, Credit/Debit Card, NetBanking, or Wallets.</span>
                     </div>
                 </label>
-
-                <label style="display:flex; align-items:center; gap:12px; padding:16px; border:1px solid var(--border); border-radius:var(--radius); cursor:pointer;">
-                    <input type="radio" name="payment_method" value="cod" style="accent-color:var(--primary); width:18px; height:18px;">
-                    <div style="display:flex; flex-direction:column;">
-                        <span style="font-weight:600; color:var(--text);">Cash on Delivery (COD)</span>
-                        <span style="font-size:13px; color:var(--text-secondary);">Pay with cash upon delivery of your order.</span>
-                    </div>
-                </label>
+                <input type="hidden" name="payment_method" value="razorpay">
                 @error('payment_method') <div style="color:var(--danger); font-size:12px; margin-top:8px;">{{ $message }}</div> @enderror
             </div>
         </div>
@@ -258,25 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const labels = document.querySelectorAll('label:has(input[name="payment_method"])');
 
     function updatePaymentUI() {
-        radios.forEach(function(radio) {
-            const label = radio.closest('label');
-            if (radio.checked) {
-                label.style.borderColor = 'var(--primary)';
-                label.style.background = 'rgba(83,100,81,0.04)';
-            } else {
-                label.style.borderColor = 'var(--border)';
-                label.style.background = 'transparent';
-            }
-        });
-
-        const selected = document.querySelector('input[name="payment_method"]:checked');
-        if (submitBtn && selected) {
-            if (selected.value === 'cod') {
-                submitBtn.innerHTML = '<i class="fas fa-truck" aria-hidden="true" style="margin-right:8px;"></i> Place Order (COD)';
-            } else {
-                submitBtn.innerHTML = '<i class="fas fa-lock" aria-hidden="true" style="margin-right:8px;"></i> Pay Now';
-            }
-        }
+        // Only razorpay now — nothing to toggle
     }
 
     radios.forEach(function(radio) {
