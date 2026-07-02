@@ -34,9 +34,10 @@ class ProductController extends Controller
             'image_3'     => 'nullable|file|max:30720|mimes:jpg,jpeg,png,gif,webp,bmp,tiff,tif,heic,heif,avif',
             'image_4'     => 'nullable|file|max:30720|mimes:jpg,jpeg,png,gif,webp,bmp,tiff,tif,heic,heif,avif',
 
-            // Sizes validation including stock
+            // Sizes validation including stock and original_price
             'sizes'         => 'required|array',
-            'sizes.*.size'  => 'required|in:S,M,L,XL',
+            'sizes.*.size'  => 'required|string|max:50',
+            'sizes.*.original_price' => 'nullable|numeric|min:0',
             'sizes.*.price' => 'required|numeric|min:0',
             'sizes.*.stock' => 'required|integer|min:0',
         ]);
@@ -61,6 +62,7 @@ class ProductController extends Controller
             ProductSize::create([
                 'product_id' => $product->id,
                 'size'       => $sizeData['size'],
+                'original_price' => $sizeData['original_price'] ?? null,
                 'price'      => $sizeData['price'],
                 'stock'      => $sizeData['stock'],  // ✅ store stock
             ]);
@@ -84,7 +86,8 @@ class ProductController extends Controller
             'image_4'     => 'nullable|file|max:30720|mimes:jpg,jpeg,png,gif,webp,bmp,tiff,tif,heic,heif,avif',
 
             'sizes'         => 'required|array',
-            'sizes.*.size'  => 'required|in:S,M,L,XL',
+            'sizes.*.size'  => 'required|string|max:50',
+            'sizes.*.original_price' => 'nullable|numeric|min:0',
             'sizes.*.price' => 'required|numeric|min:0',
             'sizes.*.stock' => 'required|integer|min:0',
         ]);
@@ -115,6 +118,7 @@ class ProductController extends Controller
             ProductSize::create([
                 'product_id' => $product->id,
                 'size'       => $sizeData['size'],
+                'original_price' => $sizeData['original_price'] ?? null,
                 'price'      => $sizeData['price'],
                 'stock'      => $sizeData['stock'],  // ✅ store updated stock
             ]);

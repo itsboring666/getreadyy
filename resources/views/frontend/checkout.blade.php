@@ -94,7 +94,7 @@
                     <div class="o-form-group">
                         <label class="o-form-label" for="city">City <span style="color:var(--danger);">*</span></label>
                         <input type="text" id="city" name="city" class="o-form-input @error('city') border-red-500 @enderror" value="{{ old('city') }}" required>
-                        <div style="font-size:11px; color:var(--text-secondary); margin-top:4px; font-family:monospace;">Chennai/Chengalpattu: ₹60 &nbsp;|&nbsp; Tamil Nadu: ₹75 &nbsp;|&nbsp; Other states: ₹140</div>
+                        <div style="font-size:11px; color:var(--text-secondary); margin-top:4px; font-family:monospace;">Chennai/Chengalpattu: ₹60 &nbsp;|&nbsp; Tamil Nadu: ₹75 &nbsp;|&nbsp; Other states: ₹120</div>
                         @error('city') <div style="color:var(--danger); font-size:12px; margin-top:4px;">{{ $message }}</div> @enderror
                     </div>
                     
@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
         state = (state || '').trim().toLowerCase();
         if (localCities.includes(city))    return 60;
         if (tamilNaduNames.includes(state)) return 75;
-        if (state !== '')                   return 140;
+        if (state !== '')                   return 120;
         return 75; // default before state is typed
     }
 

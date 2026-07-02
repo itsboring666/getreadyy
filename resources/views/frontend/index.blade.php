@@ -10,15 +10,15 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
-           HERO — Classic overlap box styling
-           ═══════════════════════════════════════════════════════════ */
+               HERO — Classic overlap box styling
+               ═══════════════════════════════════════════════════════════ */
 
         .gr-hero {
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
             border-radius: 12px !important;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0,0,0,0.5) !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.5) !important;
             margin: 40px auto !important;
             padding: 64px !important;
             box-sizing: border-box !important;
@@ -37,33 +37,67 @@
                 opacity: 0;
                 transform: translateY(24px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        .gr-hero-text > * {
+
+        .gr-hero-text>* {
             animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
-        .gr-hero-text > .gr-hero-label { animation-delay: 0.1s; }
-        .gr-hero-text > .gr-hero-heading { animation-delay: 0.3s; }
-        .gr-hero-text > .gr-hero-subtitle { animation-delay: 0.5s; }
-        .gr-hero-text > .gr-hero-btns { animation-delay: 0.7s; }
-        .gr-hero-text > .gr-hero-barcode { animation-delay: 0.9s; }
+
+        .gr-hero-text>.gr-hero-label {
+            animation-delay: 0.1s;
+        }
+
+        .gr-hero-text>.gr-hero-heading {
+            animation-delay: 0.3s;
+        }
+
+        .gr-hero-text>.gr-hero-subtitle {
+            animation-delay: 0.5s;
+        }
+
+        .gr-hero-text>.gr-hero-btns {
+            animation-delay: 0.7s;
+        }
+
+        .gr-hero-text>.gr-hero-barcode {
+            animation-delay: 0.9s;
+        }
 
         /* 2. Floating Image Effect for Hero Images */
         @keyframes floatImage1 {
-            0%, 100% { transform: translateY(0px) rotate(-1deg); }
-            50% { transform: translateY(-8px) rotate(0.5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-1deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(0.5deg);
+            }
         }
+
         @keyframes floatImage2 {
-            0%, 100% { transform: translateY(0px) rotate(1deg); }
-            50% { transform: translateY(-10px) rotate(-0.5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(1deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(-0.5deg);
+            }
         }
+
         .gr-hero-img-1 {
             animation: floatImage1 7s ease-in-out infinite;
         }
+
         .gr-hero-img-2 {
             animation: floatImage2 7s ease-in-out infinite;
             animation-delay: 3.5s;
@@ -76,6 +110,7 @@
 
         /* Respect reduced-motion preference */
         @media (prefers-reduced-motion: reduce) {
+
             .gr-hero-text>*,
             .gr-hero-img-1,
             .gr-hero-img-2,
@@ -217,10 +252,15 @@
                 transform: translateY(-6px) scale(1.01);
             }
         }
-        
+
         @keyframes spinBadge {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes floatEditorial2 {
@@ -431,6 +471,7 @@
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         @media (max-width: 900px) {
             .gr-hero-custom {
                 margin: 20px auto !important;
@@ -439,27 +480,33 @@
                 min-height: 400px !important;
                 justify-content: center;
             }
+
             .gr-hero-custom .gr-hero-text {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
+
             .gr-hero-custom .gr-hero-label::before {
                 display: none;
             }
+
             .gr-hero-custom .gr-hero-btns {
                 margin: 0 auto;
             }
         }
     </style>
-    
+
     <div style="position: relative; width: 100%; overflow: hidden; z-index: 1;">
-        
-        <section class="gr-hero gr-hero-custom" style="position: relative; z-index: 2; overflow: hidden; border-radius: 20px; background: rgba(0, 0, 0, 0.7);">
+
+        <section class="gr-hero gr-hero-custom"
+            style="position: relative; z-index: 2; overflow: hidden; border-radius: 20px; background: rgba(0, 0, 0, 0.7);">
             {{-- Inner Background Image --}}
             <div style="position: absolute; inset: 0; z-index: 1;">
-                <img src="{{ asset('assets/images/shopic2.png') }}" onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Inner Background" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.35;">
+                <img src="{{ asset('assets/images/shopic2.png') }}"
+                    onerror="this.src='{{ asset('assets/images/carousel_3.jpg') }}'" alt="GET READY Inner Background"
+                    style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.35;">
             </div>
 
             <div class="gr-hero-text" style="position: relative; z-index: 3; padding: 0;">
@@ -471,12 +518,17 @@
                 </h1>
                 <div class="gr-hero-btns" style="max-width: 300px; width: 100%;">
                     <a href="{{ route('products.all') }}" class="gr-hero-btn-primary">SHOP THE DROP →</a>
-                    <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT BUILDER</a>
+                    <a href="{{ route('outfit-builder') }}" class="gr-hero-btn-outline"
+                        style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.05);">OUTFIT
+                        BUILDER</a>
                 </div>
 
                 {{-- Vintage Barcode stamp --}}
-                <div class="gr-hero-barcode" style="margin-top: 50px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: #aaa; z-index: 4;">
-                    <div style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">||||| | |||| || | ||||</div>
+                <div class="gr-hero-barcode"
+                    style="margin-top: 50px; display: flex; flex-direction: column; gap: 4px; font-family: var(--font); font-size: 8px; line-height: 1; color: #aaa; z-index: 4;">
+                    <div
+                        style="letter-spacing: 2px; font-size: 13px; font-weight: bold; font-family: 'Courier New', monospace; filter: contrast(150%);">
+                        ||||| | |||| || | ||||</div>
                 </div>
             </div>
         </section>
@@ -485,17 +537,17 @@
     {{-- ─── MARQUEE TICKER ─────────────────────────────────────── --}}
     <div class="gr-marquee">
         <div class="gr-marquee-track">
-            @for($i=0; $i<8; $i++)
-            <div class="gr-marquee-content">
-                <span class="gr-marquee-item">Street wear</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">vintage style</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">casuals</span>
-                <span class="gr-marquee-dot">✦</span>
-                <span class="gr-marquee-item">formals</span>
-                <span class="gr-marquee-dot">✦</span>
-            </div>
+            @for($i = 0; $i < 8; $i++)
+                <div class="gr-marquee-content">
+                    <span class="gr-marquee-item">Street wear</span>
+                    <span class="gr-marquee-dot">✦</span>
+                    <span class="gr-marquee-item">vintage style</span>
+                    <span class="gr-marquee-dot">✦</span>
+                    <span class="gr-marquee-item">casuals</span>
+                    <span class="gr-marquee-dot">✦</span>
+                    <span class="gr-marquee-item">formals</span>
+                    <span class="gr-marquee-dot">✦</span>
+                </div>
             @endfor
         </div>
     </div>
@@ -599,7 +651,8 @@
                         }, array_values($validImages));
                     @endphp
                     <img src="{{ get_storage_url($product->image) }}" onerror="this.src='{{ $phs[$i % 8] }}'"
-                        data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                        data-images='@json($imageUrls)' class="hover-slideshow" alt="{{ $product->name }}" loading="lazy"
+                        style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="gr-product-card-body" style="padding: 12px 2px 0 2px;">
                     <div
@@ -638,7 +691,8 @@
                 SYSTEM DEPLOYMENT — VOL. III</div>
             <h2
                 style="font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: var(--text); line-height: 1.1; margin-top: 0; margin-bottom: 16px;">
-                SPIN THE <span style="background: var(--accent); color: var(--white); padding: 2px 8px;">OUTFIT</span> WHEEL.
+                SPIN THE <span style="background: var(--accent); color: var(--white); padding: 2px 8px;">OUTFIT</span>
+                WHEEL.
             </h2>
             <p
                 style="font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
@@ -646,7 +700,8 @@
                 vintage, editorial combination in 3 seconds.
             </p>
             <a href="{{ route('outfit-builder') }}" class="gr-cta-btn"
-                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 14px 28px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">TRY THE BUILDER →</a>
+                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 14px 28px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">TRY
+                THE BUILDER →</a>
         </div>
         <!-- Right side physical spinning wheel graphic -->
         <div class="gr-cta-wheel-wrap"
@@ -691,7 +746,8 @@
                 <h3
                     style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
                     FAST METRO DELIVERY</h3>
-                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Delivery rates applied at checkout based on district. Orders dispatched within 24 hours.</p>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Delivery rates applied at
+                    checkout based on district. Orders dispatched within 24 hours.</p>
             </div>
             <div class="gr-trust-card"
                 style="padding: 24px; border-right: 1px solid var(--border-light); text-align: center;">
@@ -713,7 +769,8 @@
                 <h3
                     style="font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
                     EASY RETURNS</h3>
-                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange eligible items. Simplified returns process.</p>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">Return or exchange eligible
+                    items. Simplified returns process.</p>
             </div>
         </div>
     </section>

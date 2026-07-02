@@ -136,7 +136,17 @@
             @endif
         </div>
 
-        <div class="o-pdp-price" id="pdpPrice" aria-live="polite">₹{{ number_format($product->sizes->min('price') ?? $product->price ?? 0, 2) }}</div>
+        <div class="o-pdp-price" id="pdpPrice" aria-live="polite">
+            @php
+                $minSize = $product->sizes->sortBy('price')->first();
+                $displayPrice = $minSize->price ?? $product->price ?? 0;
+                $displayOrig = $minSize->original_price ?? null;
+            @endphp
+            @if($displayOrig)
+                <del style="color: var(--text-muted); font-size: 0.65em; margin-right: 8px;">₹{{ number_format($displayOrig, 2) }}</del>
+            @endif
+            <span id="pdpCurrentPrice">₹{{ number_format($displayPrice, 2) }}</span>
+        </div>
 
         <div class="o-trust-badges">
             <div class="o-trust-badge"><i class="fas fa-check" aria-hidden="true"></i> Premium Quality Material</div>
@@ -162,6 +172,7 @@
                             class="o-size {{ $sz->stock == 0 ? 'oos' : '' }}" 
                             data-size="{{ $sz->size }}" 
                             data-price="{{ $sz->price }}" 
+                            data-orig-price="{{ $sz->original_price }}"
                             data-stock="{{ $sz->stock }}"
                             onclick="{{ $sz->stock > 0 ? 'pickSz(this)' : 'void(0)' }}"
                             {{ $sz->stock == 0 ? 'disabled aria-disabled="true"' : '' }}
@@ -394,7 +405,15 @@ function pickSz(btn){
     document.getElementById('hiddenSz').value = btn.dataset.size;
     
     var p = document.getElementById('pdpPrice');
-    p.textContent = '₹' + parseFloat(btn.dataset.price).toLocaleString('en-IN', {minimumFractionDigits:2});
+    var orig = btn.dataset.origPrice;
+    var priceFormat = '₹' + parseFloat(btn.dataset.price).toLocaleString('en-IN', {minimumFractionDigits:2});
+    
+    if (orig && orig !== "null" && orig !== "") {
+        p.innerHTML = '<del style="color: var(--text-muted); font-size: 0.65em; margin-right: 8px;">₹' + parseFloat(orig).toLocaleString('en-IN', {minimumFractionDigits:2}) + '</del><span id="pdpCurrentPrice">' + priceFormat + '</span>';
+    } else {
+        p.innerHTML = '<span id="pdpCurrentPrice">' + priceFormat + '</span>';
+    }
+    
     p.classList.remove('unset');
     p.classList.add('sale-price-active');
     

@@ -130,7 +130,7 @@ class CheckoutController extends Controller
         } elseif (in_array($state, $tamilNaduVariants)) {
             $shipping = 75.00; // Rest of Tamil Nadu
         } else {
-            $shipping = 140.00; // Other states
+            $shipping = 120.00; // Other states
         }
 
         $discountAmount = 0.00;
@@ -239,7 +239,11 @@ class CheckoutController extends Controller
             }
 
             // Send WhatsApp Invoice
-            (new WhatsAppService())->sendUpdateWithInvoice($order);
+            try {
+                (new WhatsAppService())->sendUpdateWithInvoice($order);
+            } catch (\Exception $e) {
+                Log::error('WhatsApp Invoice Failed: ' . $e->getMessage());
+            }
 
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])
                              ->with('success', 'Payment successful (Simulated for testing).');
@@ -324,7 +328,11 @@ class CheckoutController extends Controller
                 }
 
                 // Send WhatsApp Invoice
-                (new WhatsAppService())->sendUpdateWithInvoice($order);
+                try {
+                    (new WhatsAppService())->sendUpdateWithInvoice($order);
+                } catch (\Exception $e) {
+                    Log::error('WhatsApp Invoice Failed: ' . $e->getMessage());
+                }
             }
             return redirect()->route('checkout.thankyou', ['orderId' => $orderId])->with('success', 'Payment successful and order placed.');
         }
@@ -421,7 +429,10 @@ class CheckoutController extends Controller
             $razorpayOrder = $api->order->create([
                 'receipt' => $order->order_id,
                 'amount' => round($order->total_amount * 100), // in paise
-                'currency' => 'INR'
+                'currency' => 'INR',
+                'notes' => [
+                    'receipt' => $order->order_id
+                ]
             ]);
             $razorpayOrderId = $razorpayOrder['id'];
         } catch (\Exception $e) {
@@ -516,7 +527,11 @@ class CheckoutController extends Controller
         }
 
         // Send WhatsApp Invoice
-        (new WhatsAppService())->sendUpdateWithInvoice($order);
+        try {
+            (new WhatsAppService())->sendUpdateWithInvoice($order);
+        } catch (\Exception $e) {
+            Log::error('WhatsApp Invoice Failed: ' . $e->getMessage());
+        }
 
         return redirect()->route('checkout.thankyou', ['orderId' => $orderId])
             ->with('success', $isMock ? 'Razorpay sandbox payment successful!' : 'Razorpay payment successful!');

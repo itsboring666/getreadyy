@@ -102,7 +102,15 @@
                     <span class="o-product-cat">{{ $product->category->name ?? 'Category' }}</span>
                     <h3 class="o-product-name">{{ $product->name }}</h3>
                     <div class="o-product-price">
-                        <span class="from">₹</span>{{ number_format($product->sizes->min('price') ?? $product->price ?? 0, 2) }}
+                        @php
+                            $minSize = $product->sizes->sortBy('price')->first();
+                            $displayPrice = $minSize->price ?? $product->price ?? 0;
+                            $displayOrig = $minSize->original_price ?? null;
+                        @endphp
+                        @if($displayOrig)
+                            <del style="color: var(--text-muted); font-size: 0.7em; margin-right: 4px;">₹{{ number_format($displayOrig, 2) }}</del>
+                        @endif
+                        <span class="from">₹</span>{{ number_format($displayPrice, 2) }}
                     </div>
                 </div>
             </a>

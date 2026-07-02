@@ -5,10 +5,9 @@ $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
 try {
-    Mail::raw('Test email', function($msg) {
-        $msg->to('kathirkim2006@gmail.com')->subject('Test');
-    });
-    echo "Mail sent successfully.\n";
+    $url = Storage::disk('public')->url('test.jpg');
+    echo "URL: " . $url . "\n";
 } catch (\Exception $e) {
     echo "ERROR: " . $e->getMessage() . "\n";
+    echo $e->getTraceAsString();
 }

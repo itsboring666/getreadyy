@@ -82,8 +82,12 @@
                 <td class="py-3 px-6">{{ $product->category->name ?? 'N/A' }}</td>
                 <td class="py-3">
                     @forelse ($product->sizes as $size)
-                    <div class="text-xs">
-                        <strong>{{ $size->size }}:</strong> ₹{{ number_format($size->price, 2) }}
+                    <div class="text-xs mb-1">
+                        <strong>{{ $size->size }}:</strong>
+                        @if($size->original_price)
+                            <del class="text-gray-400 mr-1">₹{{ number_format($size->original_price, 2) }}</del>
+                        @endif
+                        <span class="text-green-600 font-semibold">₹{{ number_format($size->price, 2) }}</span>
                     </div>
                     @empty
                     <span class="text-gray-400 text-xs">No sizes</span>
@@ -156,17 +160,13 @@
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium mb-1">Sizes, Prices (₹), & Stock</label>
-        @foreach(['S' => 'Small (S)', 'M' => 'Medium (M)', 'L' => 'Large (L)', 'XL' => 'Extra Large (XL)'] as $code => $label)
-        <div class="flex items-center gap-2 mb-2">
-            <input type="hidden" name="sizes[{{ $loop->index }}][size]" value="{{ $code }}">
-            <label class="w-1/4 text-sm font-medium">{{ $label }}</label>
-            <input type="number" step="0.01" name="sizes[{{ $loop->index }}][price]"
-                class="w-1/4 border px-3 py-2 rounded" placeholder="Price" value="{{ old("sizes.$loop->index.price") }}">
-            <input type="number" name="sizes[{{ $loop->index }}][stock]" min="0"
-                class="w-1/4 border px-3 py-2 rounded" placeholder="Stock" value="{{ old("sizes.$loop->index.stock") }}">
+        <div class="flex justify-between items-center mb-2">
+            <label class="block text-sm font-medium">Sizes, Prices (₹), & Stock</label>
+            <button type="button" onclick="addSizeRow('addSizeContainer')" class="text-xs bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded">+ Add Size</button>
         </div>
-        @endforeach
+        <div id="addSizeContainer" class="space-y-2">
+            <!-- Populated by JS -->
+        </div>
         @error('sizes') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
 
@@ -233,18 +233,14 @@
             </div>
 
             <!-- Size-based Pricing -->
-            <div class="mb-4" id="editSizePrices">
-                <label class="block text-sm font-medium mb-1">Sizes, Prices (₹), & Stock</label>
-                @foreach(['S' => 'Small (S)', 'M' => 'Medium (M)', 'L' => 'Large (L)', 'XL' => 'Extra Large (XL)'] as $code => $label)
-                <div class="flex items-center gap-2 mb-2">
-                    <input type="hidden" name="sizes[{{ $loop->index }}][size]" value="{{ $code }}">
-                    <label class="w-1/4 text-sm font-medium">{{ $label }}</label>
-                    <input type="number" step="0.01" class="w-1/4 border px-3 py-2 rounded"
-                        name="sizes[{{ $loop->index }}][price]" id="editSize_{{ $code }}_price" required>
-                    <input type="number" min="0" class="w-1/4 border px-3 py-2 rounded"
-                        name="sizes[{{ $loop->index }}][stock]" id="editSize_{{ $code }}_stock" required>
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="block text-sm font-medium">Sizes, Prices (₹), & Stock</label>
+                    <button type="button" onclick="addSizeRow('editSizeContainer')" class="text-xs bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded">+ Add Size</button>
                 </div>
-                @endforeach
+                <div id="editSizeContainer" class="space-y-2">
+                    <!-- Populated by JS -->
+                </div>
             </div>
 
             <div class="mb-4">

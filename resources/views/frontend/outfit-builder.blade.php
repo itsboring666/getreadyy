@@ -110,6 +110,7 @@
                 $availableSizes = $product->sizes->where('stock', '>', 0);
                 $hasStock = $availableSizes->count() > 0;
                 $defaultPrice = $hasStock ? $availableSizes->min('price') : ($product->price ?? 0);
+                $defaultOrigPrice = $hasStock ? ($availableSizes->sortBy('price')->first()->original_price ?? null) : null;
                 $slotName = $i === 0 ? 'outerwear' : ($i === 1 ? 'top' : 'bottom');
                 $isLocked = request('lock_' . $slotName) == $product->id;
             @endphp
@@ -162,9 +163,14 @@
                         </div>
                         <div class="gr-product-meta" style="margin-top: 8px;">
                             <span class="gr-product-cat">{{ $product->category->name ?? 'GET READY' }}</span>
-                            <span class="gr-product-price" id="price-display-{{ $i }}" style="font-weight: bold;" data-base-price="{{ $defaultPrice }}">
-                                ₹{{ number_format($defaultPrice, 2) }}
-                            </span>
+                            <div style="display: flex; align-items: baseline; gap: 6px;">
+                                @if($defaultOrigPrice)
+                                    <del style="color: var(--text-muted); font-size: 0.75em;">₹{{ number_format($defaultOrigPrice, 2) }}</del>
+                                @endif
+                                <span class="gr-product-price" id="price-display-{{ $i }}" style="font-weight: bold;" data-base-price="{{ $defaultPrice }}">
+                                    ₹{{ number_format($defaultPrice, 2) }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

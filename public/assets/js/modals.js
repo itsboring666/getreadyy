@@ -101,16 +101,40 @@ const NewArrivalModal = {
 };
 
 /** Product Modals */
+let sizeIndex = 0;
+
+function addSizeRow(containerId, size = '', origPrice = '', price = '', stock = '') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const div = document.createElement('div');
+    div.className = 'flex items-center gap-2 mb-2 size-row';
+    div.innerHTML = `
+        <input type="text" name="sizes[${sizeIndex}][size]" value="${size}" class="w-1/4 border px-2 py-1 rounded text-sm" placeholder="Size (e.g. 32, M)" required>
+        <input type="number" step="0.01" name="sizes[${sizeIndex}][original_price]" value="${origPrice}" class="w-1/4 border px-2 py-1 rounded text-sm" placeholder="Orig Price">
+        <input type="number" step="0.01" name="sizes[${sizeIndex}][price]" value="${price}" class="w-1/4 border px-2 py-1 rounded text-sm" placeholder="Disc Price" required>
+        <input type="number" name="sizes[${sizeIndex}][stock]" min="0" value="${stock}" class="w-1/5 border px-2 py-1 rounded text-sm" placeholder="Stock" required>
+        <button type="button" onclick="this.parentElement.remove()" class="text-red-500 font-bold px-2">&times;</button>
+    `;
+    container.appendChild(div);
+    sizeIndex++;
+}
+
 const ProductModal = {
     openAdd() {
         document.getElementById('addProductModal').classList.remove('hidden');
+        const container = document.getElementById('addSizeContainer');
+        if (container && container.innerHTML.trim() === '') {
+            sizeIndex = 0;
+            addSizeRow('addSizeContainer'); // add one empty row by default
+        }
     },
     closeAdd() {
         document.getElementById('addProductModal').classList.add('hidden');
     },
     openEdit(button) {
         const product = JSON.parse(button.getAttribute('data-product'));
-        console.log("Parsed product:", product); // ✅ Add this
+        console.log("Parsed product:", product);
 
         document.getElementById('editProductModal').classList.remove('hidden');
         document.getElementById('editProductForm').action = `${baseUpdateUrl.products}/${product.id}`;
@@ -120,14 +144,17 @@ const ProductModal = {
         document.getElementById('description').value = product.description;
         document.getElementById('editStatus').value = product.status;
 
-        const sizePrices = { S: '', M: '', L: '', XL: '' };
-        const sizeStocks = { S: '', M: '', L: '', XL: '' };
-
-        if (product.sizes) {
-            product.sizes.forEach(s => {
-                sizePrices[s.size] = s.price;
-                sizeStocks[s.size] = s.stock;
-            });
+        const container = document.getElementById('editSizeContainer');
+        if (container) {
+            container.innerHTML = '';
+            sizeIndex = 0;
+            if (product.sizes && product.sizes.length > 0) {
+                product.sizes.forEach(s => {
+                    addSizeRow('editSizeContainer', s.size, s.original_price || '', s.price, s.stock);
+                });
+            } else {
+                addSizeRow('editSizeContainer');
+            }
         }
 
         const baseStorageUrl = "/storage/";
@@ -145,13 +172,6 @@ const ProductModal = {
                 }
             }
         });
-
-        ['S', 'M', 'L', 'XL'].forEach(size => {
-            const priceInput = document.getElementById(`editSize_${size}_price`);
-            const stockInput = document.getElementById(`editSize_${size}_stock`);
-            if (priceInput) priceInput.value = sizePrices[size];
-            if (stockInput) stockInput.value = sizeStocks[size];
-        });        
     },
     closeEdit() {
         document.getElementById('editProductModal').classList.add('hidden');
